@@ -3,7 +3,7 @@
 #modern version? - What would be something for a modern version? Like a road-trip?
 #Yes, like a road trip that keeps going wrong or something along those lines
 
-#if we do a modern version here is a good van we could use
+#if we do a modern version here is a good van we could use and a wagon
 ascii_art = """
         ████████████████████████████████████████████████████████████████
       ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒████                    
@@ -43,3 +43,18 @@ ascii_art = """
                   ██▒▒▓▓▓▓▒▒██                                    ██▒▒▓▓▓▓▒▒██                  
 """
 print(ascii_art)
+
+ascii_art = """
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣤⡀⠀⠀⠀
+⠀⠀⠀⢀⣤⠀⢤⣀⣀⣀⣀⣴⠀⣶⣦⣤⣤⣤⣶⠀⣾⣿⣿⣿⣿⡿⠁⠀⠀⠀
+⠀⠘⣿⣿⣿⡇⢸⣿⣿⣿⣿⣿⠀⣿⣿⣿⣿⣿⡇⢰⣿⣿⣿⣿⡿⠁⠀⠀⠀⠀
+⠀⠀⢹⣿⣿⣷⠀⣿⣿⣿⣿⣿⠀⣿⣿⣿⣿⣿⡇⣼⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀
+⠀⠀⠀⣿⣿⣿⠀⢿⣿⣿⣿⣿⠀⣿⣿⣿⣿⣿⠃⣿⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⣿⣿⣿⡄⢸⣿⣿⣿⣿⠀⣿⣿⣿⣿⣿⠀⣿⣿⣿⣿⠁⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⣿⣿⣿⡇⢸⣿⣿⣿⣿⠀⣿⣿⣿⣿⣿⠀⣿⣿⣿⣿⠀⣶⠀⠀⠀⠀⠀
+⠀⠀⠘⠛⠛⠛⠃⠘⠛⠛⠛⠛⠀⠛⠛⠛⠛⠛⠀⠛⠛⠛⠛⠀⠛⠛⢿⠀⠀⠀
+⠀⠀⣿⠏⡀⠲⡇⢸⠖⢀⠙⣿⣿⣿⡟⢁⠐⢾⠀⠗⢀⠙⢿⣿⣿⣧⣤⣤⡄⠀
+⠀⠀⠋⠀⠛⠂⠀⠀⠐⠛⠀⠘⠛⠛⠀⠚⠓⠀⠀⠀⠛⠃⠘⠛⠛⠁⠀⠀⠀⠀
+⠀⠀⠀⠀⠛⢁⡄⢰⣌⠛⠀⠀⠀⠀⠀⠙⢁⣤⠀⣄⠙⠁⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠁⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+"""
