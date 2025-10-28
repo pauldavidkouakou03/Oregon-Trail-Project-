@@ -13,9 +13,10 @@ __        __   _                            _
 | | | | '__/ _ \/ _` |/ _ \| '_ \    | || '__/ _` | | | |                        
 | |_| | | |  __/ (_| | (_) | | | |   | || | | (_| | | |_|                        
  \___/|_|  \___|\__, |\___/|_| |_|   |_||_|  \__,_|_|_(_)                        
-                |___/                                                                                                                                                                                   
+                |___/                                                                                                                       
 """
 print(ascii_art1)
+ready = input("Ready to continue? (please enter y or n): ")
 ascii_art2 = """
                             ▒▒░░  ░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒░░
                             ▒▒  ░░  ▒▒    ▒▒    ▒▒    ░░  ░░  ░░                                  
@@ -40,9 +41,10 @@ ascii_art2 = """
                     ██▓▓▓▓▓▓▓▓██                                              ██▓▓▓▓▓▓▓▓██        
                       ████████                                                  ████████          
 """
-print(ascii_art2)
-driver = input("Enter first name of wagon leader: ")
-passenger1 = input("Enter first name of first passenger: ")
-passenger2 = input("Enter first name of second passenger: ")
-passenger3 = input("Enter first name of third passenger: ")
+if ready == 'y':
+  print(ascii_art2)
+  driver = input("Enter first name of wagon leader: ")
+  passenger1 = input("Enter first name of first passenger: ")
+  passenger2 = input("Enter first name of second passenger: ")
+  passenger3 = input("Enter first name of third passenger: ")
 
