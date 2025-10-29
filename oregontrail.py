@@ -1,5 +1,5 @@
 #Here is our code for amazing Oregon Trail Game
-events_list = ['car sick', 'ran out of snacks', 'lost their phone']
+events_list = ['car sick', 'ran out of snacks', 'phone died']
 ascii_art1 = """
 __        __   _                            _                                    
 \ \      / /__| | ___ ___  _ __ ___   ___  | |_ ___                              
@@ -18,6 +18,17 @@ __        __   _                            _
 """
 print(ascii_art1)
 ready = input("Ready to continue? (please enter y or n): ")
+def find_passengers():
+  print(ascii_art2)
+  passenger1 = input("Enter first name of wagon leader: ")
+  passenger_list.append(passenger1)
+  passenger2 = input("Enter first name of first passenger: ")
+  passenger_list.append(passenger2)
+  passenger3 = input("Enter first name of second passenger: ")
+  passenger_list.append(passenger3)
+  passenger4 = input("Enter first name of third passenger: ")
+  passenger_list.append(passenger4)
+  return passenger_list
 ascii_art2 = """
                             ▒▒░░  ░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒░░
                             ▒▒  ░░  ▒▒    ▒▒    ▒▒    ░░  ░░  ░░                                  
@@ -44,12 +55,21 @@ ascii_art2 = """
 """
 passenger_list = []
 if ready == 'y':
-  print(ascii_art2)
-  passenger1 = input("Enter first name of wagon leader: ")
-  passenger_list.append(passenger1)
-  passenger2 = input("Enter first name of first passenger: ")
-  passenger_list.append(passenger2)
-  passenger3 = input("Enter first name of second passenger: ")
-  passenger_list.append(passenger3)
-  passenger4 = input("Enter first name of third passenger: ")
-  passenger_list.append(passenger4)
+  find_passengers()
+print(passenger_list)
+
+ascii_art3 = """
+ _____ _                  _          _                _       _ 
+|_   _(_)_ __ ___   ___  | |_ ___   | |__   ___  __ _(_)_ __ | |
+  | | | | '_ ` _ \ / _ \ | __/ _ \  | '_ \ / _ \/ _` | | '_ \| |
+  | | | | | | | | |  __/ | || (_) | | |_) |  __/ (_| | | | | |_|
+  |_| |_|_| |_| |_|\___|  \__\___/  |_.__/ \___|\__, |_|_| |_(_)
+                                                |___/           
+"""
+correct = input("Is this correct? (please enter y or n) ")
+done = False
+while correct != 'y':
+    find_passengers()
+    correct = input("Is this correct? (please enter y or n) ")
+
+print(ascii_art3)
