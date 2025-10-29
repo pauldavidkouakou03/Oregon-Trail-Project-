@@ -1,4 +1,5 @@
 #Here is our code for amazing Oregon Trail Game
+events_list = ['car sick', 'ran out of snacks', 'lost their phone']
 ascii_art1 = """
 __        __   _                            _                                    
 \ \      / /__| | ___ ___  _ __ ___   ___  | |_ ___                              
@@ -41,10 +42,14 @@ ascii_art2 = """
                     ██▓▓▓▓▓▓▓▓██                                              ██▓▓▓▓▓▓▓▓██        
                       ████████                                                  ████████          
 """
+passenger_list = []
 if ready == 'y':
   print(ascii_art2)
-  driver = input("Enter first name of wagon leader: ")
-  passenger1 = input("Enter first name of first passenger: ")
-  passenger2 = input("Enter first name of second passenger: ")
-  passenger3 = input("Enter first name of third passenger: ")
-
+  passenger1 = input("Enter first name of wagon leader: ")
+  passenger_list.append(passenger1)
+  passenger2 = input("Enter first name of first passenger: ")
+  passenger_list.append(passenger2)
+  passenger3 = input("Enter first name of second passenger: ")
+  passenger_list.append(passenger3)
+  passenger4 = input("Enter first name of third passenger: ")
+  passenger_list.append(passenger4)
