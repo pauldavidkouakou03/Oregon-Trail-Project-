@@ -66,9 +66,9 @@ ascii_art3 = """
   |_| |_|_| |_| |_|\___|  \__\___/  |_.__/ \___|\__, |_|_| |_(_)
                                                 |___/           
 """
-correct = input("Is this correct? (please enter y or n) ")
+correct = input("Is this correct? (please enter y or n): ")
 while correct != 'y':
     find_passengers()
-    correct = input("Is this correct? (please enter y or n) ")
+    correct = input("Is this correct? (please enter y or n): ")
 
 print(ascii_art3)
