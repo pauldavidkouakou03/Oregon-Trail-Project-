@@ -1,5 +1,6 @@
 #Here is our code for amazing Oregon Trail Game
 events_list = ['car sick', 'ran out of snacks', 'phone died']
+#Intro
 ascii_art1 = """
 __        __   _                            _                                    
 \ \      / /__| | ___ ___  _ __ ___   ___  | |_ ___                              
@@ -18,6 +19,7 @@ __        __   _                            _
 """
 print(ascii_art1)
 ready = input("Ready to continue? (please enter y or n): ")
+#Find and check passengers
 def find_passengers():
   print(ascii_art2)
   passenger1 = input("Enter first name of wagon leader: ")
@@ -58,6 +60,11 @@ if ready == 'y':
   find_passengers()
 print(passenger_list)
 
+correct = input("Is this correct? (please enter y or n): ")
+while correct != 'y':
+    find_passengers()
+    correct = input("Is this correct? (please enter y or n): ")
+#
 ascii_art3 = """
  _____ _                  _          _                _       _ 
 |_   _(_)_ __ ___   ___  | |_ ___   | |__   ___  __ _(_)_ __ | |
@@ -66,9 +73,4 @@ ascii_art3 = """
   |_| |_|_| |_| |_|\___|  \__\___/  |_.__/ \___|\__, |_|_| |_(_)
                                                 |___/           
 """
-correct = input("Is this correct? (please enter y or n): ")
-while correct != 'y':
-    find_passengers()
-    correct = input("Is this correct? (please enter y or n): ")
-
 print(ascii_art3)
