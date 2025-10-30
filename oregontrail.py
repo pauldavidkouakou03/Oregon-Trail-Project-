@@ -1,4 +1,10 @@
 #Here is our code for amazing Oregon Trail Game
+#Slow Print Function
+def slow_print(ascii_art,speed):
+   for line in ascii_art.strip().split('\n'):
+    print(line)
+    time.sleep(speed)
+
 events_list = ['car sick', 'ran out of snacks', 'phone died']
 #Intro
 import sys
@@ -19,17 +25,11 @@ __        __   _                            _
  \___/|_|  \___|\__, |\___/|_| |_|   |_||_|  \__,_|_|_(_)                        
                 |___/                                                                                                                       
 """
-for line in ascii_art_intro.strip().split('\n'):
-    print(line)
-    time.sleep(0.08)
-#print(ascii_art_intro)
+slow_print(ascii_art_intro, 0.08)
 ready = input("Ready to continue? (please enter y or n): ")
 #Find and check passengers
 def find_passengers():
-  for line in ascii_art_car.strip().split('\n'):
-    print(line)
-    time.sleep(0.05)
-  #print(ascii_art_car)
+  slow_print(ascii_art_car, 0.05)
   passenger1 = input("Enter first name of wagon leader: ")
   passenger_list.append(passenger1)
   passenger2 = input("Enter first name of first passenger: ")
@@ -93,7 +93,4 @@ __________________ _______  _______   _________ _______    ______   _______  ___
    | |   ___) (___| )   ( || (____/\     | |   | (___) |  | )___) )| (____/\| (___) |___) (___| )  \  | _ 
    )_(   \_______/|/     \|(_______/     )_(   (_______)  |/ \___/ (_______/(_______)\_______/|/    )_)(_)
 """
-for line in ascii_art_begin2.strip().split('\n'):
-    print(line)
-    time.sleep(0.08)
-#print(ascii_art_begin2)
+slow_print(ascii_art_begin2, 0.08)
