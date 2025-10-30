@@ -26,7 +26,10 @@ for line in ascii_art_intro.strip().split('\n'):
 ready = input("Ready to continue? (please enter y or n): ")
 #Find and check passengers
 def find_passengers():
-  print(ascii_art_car)
+  for line in ascii_art_car.strip().split('\n'):
+    print(line)
+    time.sleep(0.05)
+  #print(ascii_art_car)
   passenger1 = input("Enter first name of wagon leader: ")
   passenger_list.append(passenger1)
   passenger2 = input("Enter first name of first passenger: ")
@@ -37,6 +40,8 @@ def find_passengers():
   passenger_list.append(passenger4)
   return passenger_list
 ascii_art_car = """
+Here is your car!
+
                             ▒▒░░  ░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒░░
                             ▒▒  ░░  ▒▒    ▒▒    ▒▒    ░░  ░░  ░░                                  
                               ▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒░░                                    
@@ -88,4 +93,7 @@ __________________ _______  _______   _________ _______    ______   _______  ___
    | |   ___) (___| )   ( || (____/\     | |   | (___) |  | )___) )| (____/\| (___) |___) (___| )  \  | _ 
    )_(   \_______/|/     \|(_______/     )_(   (_______)  |/ \___/ (_______/(_______)\_______/|/    )_)(_)
 """
-print(ascii_art_begin2)
+for line in ascii_art_begin2.strip().split('\n'):
+    print(line)
+    time.sleep(0.08)
+#print(ascii_art_begin2)
