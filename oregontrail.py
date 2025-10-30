@@ -1,6 +1,8 @@
 #Here is our code for amazing Oregon Trail Game
 events_list = ['car sick', 'ran out of snacks', 'phone died']
 #Intro
+import sys
+import time
 ascii_art_intro = """
 __        __   _                            _                                    
 \ \      / /__| | ___ ___  _ __ ___   ___  | |_ ___                              
@@ -17,7 +19,10 @@ __        __   _                            _
  \___/|_|  \___|\__, |\___/|_| |_|   |_||_|  \__,_|_|_(_)                        
                 |___/                                                                                                                       
 """
-print(ascii_art_intro)
+for line in ascii_art_intro.strip().split('\n'):
+    print(line)
+    time.sleep(0.08)
+#print(ascii_art_intro)
 ready = input("Ready to continue? (please enter y or n): ")
 #Find and check passengers
 def find_passengers():
