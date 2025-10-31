@@ -7,6 +7,7 @@ def slow_print(ascii_art,speed):
 
 events_list = ['car sick', 'ran out of snacks', 'phone died']
 #Intro
+import Events
 import sys
 import time
 ascii_art_intro = """
@@ -94,3 +95,28 @@ __________________ _______  _______   _________ _______    ______   _______  ___
    )_(   \_______/|/     \|(_______/     )_(   (_______)  |/ \___/ (_______/(_______)\_______/|/    )_)(_)
 """
 slow_print(ascii_art_begin2, 0.08)
+
+
+class Passenger:
+  def __init__(self, name):
+    self.name = name
+    self.status = "Fine"
+    self.hunger = 100
+  def get_name(self):
+    return self.name
+  def set_status(self, new_status):
+    self.status = new_status
+  def get_status(self):
+    return self.status
+  def get_hunger(self):
+    return self.hunger
+  def set_hunger(self, new_hunger):
+    self.hunger = new_hunger
+
+driver = Passenger(passenger_list[0])
+passenger_one = Passenger(passenger_list[1])
+passenger_two = Passenger(passenger_list[2])
+passenger_three = Passenger(passenger_list[3])
+passengers = [driver, passenger_one, passenger_two, passenger_three]
+
+Events.car_sick()
