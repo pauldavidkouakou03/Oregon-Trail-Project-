@@ -78,7 +78,7 @@ while correct_names != 'y':
 package1 = ['15 packs of snacks', 'phone charged to 75%', 'car health 100']
 package2 = ['25 packs of snacks', 'phone charged to 25%', 'car health 50']
 package3 = ['50 packs of snacks', 'phone charged to 50%', 'car health 25']
-ascii_art_box = """
+ascii_art_box = r"""
 +-----------------------------------+
   /                                  /|
  /                                  / |
@@ -127,7 +127,8 @@ def check_package(correct_package):
         selection = int(input("Select your package!: "))
         print(f"This is your package: {selection}")
         correct_package = input("Is this the correct package? (please enter y or n): ")
-check_package(correct_package)
+while correct_package != 'y':
+  check_package(correct_package)
 #Set Package
 def set_package(selection):
   if input == 1:
