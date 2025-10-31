@@ -1,5 +1,5 @@
-from oregontrail import Passenger, passengers
 from random import randint
+from oregontrail import Passenger, passengers
 class Event_list:
     def car_sick():
         selection = randint(0, 3)
