@@ -75,10 +75,40 @@ correct_names = input("Is this correct? (please enter y or n): ")
 while correct_names != 'y':
     find_passengers()
     correct_names = input("Is this correct? (please enter y or n): ")
-
+#Package
+ascii_art_box = """
++-----------------------------------+
+  /                                  /|
+ /                                  / |
+/                                  /  |
++---------------------------------+   |
+|                                 |   |
+|                                 |   |
+|    #########################    |   |
+|    #                       #    |   |
+|    #                       #    |   |
+|    #      +-----------+    #    |   |
+|    #      |           |    #    |   |
+|    #      |           |    #    |   |
+|    #      |  PACKAGE  |    #    |   |
+|    #      |           |    #    |   |
+|    #      |           |    #    |   |
+|    #      +-----------+    #    |   |
+|    #                       #    |   |
+|    #                       #    |   |
+|    #########################    |   |
+|                                 |   |
+|                                 |   |
+|                                 |   |
++---------------------------------+  /
+/                                 / /
+/                                 / /
++---------------------------------+
+"""
 package1 = ['15 packs of snacks', 'phone charged to 75%', 'car health 100']
 package2 = ['25 packs of snacks', 'phone charged to 25%', 'car health 50']
 package3 = ['50 packs of snacks', 'phone charged to 50%', 'car health 25']
+print(ascii_art_box)
 print(f"Package 1: {package1}")
 print(f"Package 2: {package2}")
 print(f"Package 3: {package3}")
@@ -91,6 +121,7 @@ else:
 correct_package = input("Is this the correct package? (please enter y or n): ")
 def check_package(correct_package):
     while correct_package != 'y':
+        print(ascii_art_box)
         print(f"Package 1: {package1}")
         print(f"Package 2: {package2}")
         print(f"Package 3: {package3}")
