@@ -75,11 +75,31 @@ correct_names = input("Is this correct? (please enter y or n): ")
 while correct_names != 'y':
     find_passengers()
     correct_names = input("Is this correct? (please enter y or n): ")
-snacks = 0
-phone_charge = 0
-car_health = 0
-package1 = [snacks, phone_charge, car_health]
-def select_package(input):
+
+package1 = ['15 packs of snacks', 'phone charged to 75%', 'car health 100']
+package2 = ['25 packs of snacks', 'phone charged to 25%', 'car health 50']
+package3 = ['50 packs of snacks', 'phone charged to 50%', 'car health 25']
+print(f"Package 1: {package1}")
+print(f"Package 2: {package2}")
+print(f"Package 3: {package3}")
+selection = int(input("Select your package!: "))
+if selection > 3:
+  print("Invalid Package")
+else:
+    print(f"This is your package: {selection}")
+#Check Package
+correct_package = input("Is this the correct package? (please enter y or n): ")
+def check_package(correct_package):
+    while correct_package != 'y':
+        print(f"Package 1: {package1}")
+        print(f"Package 2: {package2}")
+        print(f"Package 3: {package3}")
+        selection = int(input("Select your package!: "))
+        print(f"This is your package: {selection}")
+        correct_package = input("Is this the correct package? (please enter y or n): ")
+check_package(correct_package)
+#Set Package
+def set_package(selection):
   if input == 1:
     snacks = 15
     phone_charge = 75
@@ -92,18 +112,6 @@ def select_package(input):
     snacks = 50
     phone_charge = 50
     car_health = 25
-  else:
-    return "Invalid Package"
-  
-print("1: 15 packs of snacks, phone charged to 75%, car health 100")
-print("2: 25 packs of snacks, phone charged to 25%, car health 50")
-print("3: 50 packs of snacks, phone charged to 50%, car health 25")
-selection = int(input("Select your package!: "))
-select_package(selection)
-print(f"This is your package: {selection}")
-correct_package = input("Is this the correct package (please enter y or n): ")
-while correct_package != 'y':
-  select_package()
 ascii_art_begin2 = """
 __________________ _______  _______   _________ _______    ______   _______  _______ _________ _        _ 
 \__   __/\__   __/(       )(  ____ \  \__   __/(  ___  )  (  ___ \ (  ____ \(  ____ \\__   __/( (    /|( )
@@ -138,5 +146,3 @@ passenger_one = Passenger(passenger_list[1])
 passenger_two = Passenger(passenger_list[2])
 passenger_three = Passenger(passenger_list[3])
 passengers = [driver, passenger_one, passenger_two, passenger_three]
-
-Events.car_sick()
