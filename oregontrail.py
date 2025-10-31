@@ -71,16 +71,39 @@ if ready == 'y':
   find_passengers()
 print(passenger_list)
 
-correct = input("Is this correct? (please enter y or n): ")
-while correct != 'y':
+correct_names = input("Is this correct? (please enter y or n): ")
+while correct_names != 'y':
     find_passengers()
-    correct = input("Is this correct? (please enter y or n): ")
-print("Select Your Package!: ")
-print("Package 1: 15 packs of snacks, phone charged to 75%, car health 100")
-print("Package 2: 25 packs of snacks, phone charged to 25%, car health 50")
-print("Package 3: 50 packs of snacks, phone charged to 50%, car health 25")
-
-
+    correct_names = input("Is this correct? (please enter y or n): ")
+snacks = 0
+phone_charge = 0
+car_health = 0
+package1 = [snacks, phone_charge, car_health]
+def select_package(input):
+  if input == 1:
+    snacks = 15
+    phone_charge = 75
+    car_health = 100
+  elif input == 2:
+    snacks = 25
+    phone_charge = 25
+    car_health = 50
+  elif input == 3:
+    snacks = 50
+    phone_charge = 50
+    car_health = 25
+  else:
+    return "Invalid Package"
+  
+print("1: 15 packs of snacks, phone charged to 75%, car health 100")
+print("2: 25 packs of snacks, phone charged to 25%, car health 50")
+print("3: 50 packs of snacks, phone charged to 50%, car health 25")
+selection = int(input("Select your package!: "))
+select_package(selection)
+print(f"This is your package: {selection}")
+correct_package = input("Is this the correct package (please enter y or n): ")
+while correct_package != 'y':
+  select_package()
 ascii_art_begin2 = """
 __________________ _______  _______   _________ _______    ______   _______  _______ _________ _        _ 
 \__   __/\__   __/(       )(  ____ \  \__   __/(  ___  )  (  ___ \ (  ____ \(  ____ \\__   __/( (    /|( )
