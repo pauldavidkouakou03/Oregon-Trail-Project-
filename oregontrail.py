@@ -10,7 +10,7 @@ events_list = ['car sick', 'ran out of snacks', 'phone died']
 import Events
 import sys
 import time
-ascii_art_intro = """
+ascii_art_intro = r"""
 __        __   _                            _                                    
 \ \      / /__| | ___ ___  _ __ ___   ___  | |_ ___                              
  \ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \ | __/ _ \                             
@@ -29,20 +29,8 @@ __        __   _                            _
 slow_print(ascii_art_intro, 0.08)
 ready = input("Ready to continue? (please enter y or n): ")
 #Find and check passengers
-def find_passengers():
-  slow_print(ascii_art_car, 0.05)
-  passenger1 = input("Enter first name of wagon leader: ")
-  passenger_list.append(passenger1)
-  passenger2 = input("Enter first name of first passenger: ")
-  passenger_list.append(passenger2)
-  passenger3 = input("Enter first name of second passenger: ")
-  passenger_list.append(passenger3)
-  passenger4 = input("Enter first name of third passenger: ")
-  passenger_list.append(passenger4)
-  return passenger_list
-ascii_art_car = """
+ascii_art_car = r"""
 Here is your car!
-
                             ▒▒░░  ░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒░░
                             ▒▒  ░░  ▒▒    ▒▒    ▒▒    ░░  ░░  ░░                                  
                               ▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒░░                                    
@@ -65,7 +53,18 @@ Here is your car!
             ████████▓▓▓▓▒▒▒▒▓▓▓▓██████████████████████████████████████████████▓▓▓▓▒▒▒▒▓▓▓▓██      
                     ██▓▓▓▓▓▓▓▓██                                              ██▓▓▓▓▓▓▓▓██        
                       ████████                                                  ████████          
-"""
+"""  
+def find_passengers():
+  slow_print(ascii_art_car, 0.05)
+  passenger1 = input("Enter first name of wagon leader: ")
+  passenger_list.append(passenger1)
+  passenger2 = input("Enter first name of first passenger: ")
+  passenger_list.append(passenger2)
+  passenger3 = input("Enter first name of second passenger: ")
+  passenger_list.append(passenger3)
+  passenger4 = input("Enter first name of third passenger: ")
+  passenger_list.append(passenger4)
+  return passenger_list      
 passenger_list = []
 if ready == 'y':
   find_passengers()
@@ -76,6 +75,9 @@ while correct_names != 'y':
     find_passengers()
     correct_names = input("Is this correct? (please enter y or n): ")
 #Package
+package1 = ['15 packs of snacks', 'phone charged to 75%', 'car health 100']
+package2 = ['25 packs of snacks', 'phone charged to 25%', 'car health 50']
+package3 = ['50 packs of snacks', 'phone charged to 50%', 'car health 25']
 ascii_art_box = """
 +-----------------------------------+
   /                                  /|
@@ -105,9 +107,6 @@ ascii_art_box = """
 /                                 / /
 +---------------------------------+
 """
-package1 = ['15 packs of snacks', 'phone charged to 75%', 'car health 100']
-package2 = ['25 packs of snacks', 'phone charged to 25%', 'car health 50']
-package3 = ['50 packs of snacks', 'phone charged to 50%', 'car health 25']
 print(ascii_art_box)
 print(f"Package 1: {package1}")
 print(f"Package 2: {package2}")
@@ -143,7 +142,8 @@ def set_package(selection):
     snacks = 50
     phone_charge = 50
     car_health = 25
-ascii_art_begin2 = """
+
+ascii_art_begin = """
 __________________ _______  _______   _________ _______    ______   _______  _______ _________ _        _ 
 \__   __/\__   __/(       )(  ____ \  \__   __/(  ___  )  (  ___ \ (  ____ \(  ____ \\__   __/( (    /|( )
    ) (      ) (   | () () || (    \/     ) (   | (   ) |  | (   ) )| (    \/| (    \/   ) (   |  \  ( || |
@@ -153,7 +153,7 @@ __________________ _______  _______   _________ _______    ______   _______  ___
    | |   ___) (___| )   ( || (____/\     | |   | (___) |  | )___) )| (____/\| (___) |___) (___| )  \  | _ 
    )_(   \_______/|/     \|(_______/     )_(   (_______)  |/ \___/ (_______/(_______)\_______/|/    )_)(_)
 """
-slow_print(ascii_art_begin2, 0.08)
+slow_print(ascii_art_begin, 0.08)
 
 
 class Passenger:
