@@ -1,6 +1,14 @@
 #Here is our code for amazing Oregon Trail Game
+#Slow Print Function
+def slow_print(ascii_art,speed):
+   for line in ascii_art.strip().split('\n'):
+    print(line)
+    time.sleep(speed)
+
 events_list = ['car sick', 'ran out of snacks', 'phone died']
 #Intro
+import sys
+import time
 ascii_art_intro = """
 __        __   _                            _                                    
 \ \      / /__| | ___ ___  _ __ ___   ___  | |_ ___                              
@@ -17,11 +25,11 @@ __        __   _                            _
  \___/|_|  \___|\__, |\___/|_| |_|   |_||_|  \__,_|_|_(_)                        
                 |___/                                                                                                                       
 """
-print(ascii_art_intro)
+slow_print(ascii_art_intro, 0.08)
 ready = input("Ready to continue? (please enter y or n): ")
 #Find and check passengers
 def find_passengers():
-  print(ascii_art_car)
+  slow_print(ascii_art_car, 0.05)
   passenger1 = input("Enter first name of wagon leader: ")
   passenger_list.append(passenger1)
   passenger2 = input("Enter first name of first passenger: ")
@@ -32,6 +40,8 @@ def find_passengers():
   passenger_list.append(passenger4)
   return passenger_list
 ascii_art_car = """
+Here is your car!
+
                             ▒▒░░  ░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒░░
                             ▒▒  ░░  ▒▒    ▒▒    ▒▒    ░░  ░░  ░░                                  
                               ▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒░░                                    
@@ -73,4 +83,14 @@ ascii_art_begin = """
   |_| |_|_| |_| |_|\___|  \__\___/  |_.__/ \___|\__, |_|_| |_(_)
                                                 |___/           
 """
-print(ascii_art_begin)
+ascii_art_begin2 = """
+__________________ _______  _______   _________ _______    ______   _______  _______ _________ _        _ 
+\__   __/\__   __/(       )(  ____ \  \__   __/(  ___  )  (  ___ \ (  ____ \(  ____ \\__   __/( (    /|( )
+   ) (      ) (   | () () || (    \/     ) (   | (   ) |  | (   ) )| (    \/| (    \/   ) (   |  \  ( || |
+   | |      | |   | || || || (__         | |   | |   | |  | (__/ / | (__    | |         | |   |   \ | || |
+   | |      | |   | |(_)| ||  __)        | |   | |   | |  |  __ (  |  __)   | | ____    | |   | (\ \) || |
+   | |      | |   | |   | || (           | |   | |   | |  | (  \ \ | (      | | \_  )   | |   | | \   |(_)
+   | |   ___) (___| )   ( || (____/\     | |   | (___) |  | )___) )| (____/\| (___) |___) (___| )  \  | _ 
+   )_(   \_______/|/     \|(_______/     )_(   (_______)  |/ \___/ (_______/(_______)\_______/|/    )_)(_)
+"""
+slow_print(ascii_art_begin2, 0.08)
