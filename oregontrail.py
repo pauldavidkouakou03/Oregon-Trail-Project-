@@ -75,7 +75,12 @@ correct = input("Is this correct? (please enter y or n): ")
 while correct != 'y':
     find_passengers()
     correct = input("Is this correct? (please enter y or n): ")
-#
+print("Select Your Package!: ")
+print("Package 1: 15 packs of snacks, phone charged to 75%, car health 100")
+print("Package 2: 25 packs of snacks, phone charged to 25%, car health 50")
+print("Package 3: 50 packs of snacks, phone charged to 50%, car health 25")
+
+
 ascii_art_begin2 = """
 __________________ _______  _______   _________ _______    ______   _______  _______ _________ _        _ 
 \__   __/\__   __/(       )(  ____ \  \__   __/(  ___  )  (  ___ \ (  ____ \(  ____ \\__   __/( (    /|( )
