@@ -131,9 +131,6 @@ def check_package(correct_package):
 while correct_package != 'y':
   check_package(correct_package)
 #Set Package
-snacks = 0
-phone_charge = 0
-car_health = 0
 def set_package(input):
   if input == 1:
    return 15, 75, 100
@@ -142,6 +139,8 @@ def set_package(input):
   elif input == 3:
     return 50, 50, 25
 snacks, phone_charge, car_health = set_package(selection)
+print(f"Snacks: {snacks}, Phone Charge: {phone_charge}%, Car Health: {car_health}%")
+#Game Begins
 ascii_art_begin = """
 __________________ _______  _______   _________ _______    ______   _______  _______ _________ _        _ 
 \__   __/\__   __/(       )(  ____ \  \__   __/(  ___  )  (  ___ \ (  ____ \(  ____ \\__   __/( (    /|( )
@@ -174,3 +173,5 @@ passenger_one = Passenger(passenger_list[1])
 passenger_two = Passenger(passenger_list[2])
 passenger_three = Passenger(passenger_list[3])
 passengers = [driver, passenger_one, passenger_two, passenger_three]
+
+print(driver)
