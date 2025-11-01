@@ -28,7 +28,7 @@ __        __   _                            _
             |_|                     |___/                                    
 """
 slow_print(ascii_art_intro, 0.08)
-ready = input("Ready to continue? (please enter y or n): ")
+ready = input("Ready to continue? (y/n): ")
 #Find and check passengers
 ascii_art_car = r"""
 Here is your car!
@@ -71,12 +71,11 @@ if ready == 'y':
   find_passengers()
 print(passenger_list)
 
-
-correct_names = input("Is this correct? (please enter y or n): ")
+correct_names = input("Is this correct? (y/n): ")
 while correct_names != 'y':
     find_passengers()
-    correct_names = input("Is this correct? (please enter y or n): ")
-#Package
+    correct_names = input("Is this correct? (y/n): ")
+#Packages
 package1 = ['15 packs of snacks', 'phone charged to 75%', 'car health 100']
 package2 = ['25 packs of snacks', 'phone charged to 25%', 'car health 50']
 package3 = ['50 packs of snacks', 'phone charged to 50%', 'car health 25']
@@ -119,7 +118,7 @@ if selection > 3:
 else:
     print(f"This is your package: {selection}")
 #Check Package
-correct_package = input("Is this the correct package? (please enter y or n): ")
+correct_package = input("Is this the correct package? (y/n): ")
 def check_package(correct_package):
     while correct_package != 'y':
         slow_print(ascii_art_box, 0.05)
@@ -128,24 +127,21 @@ def check_package(correct_package):
         print(f"Package 3: {package3}")
         selection = int(input("Select your package!: "))
         print(f"This is your package: {selection}")
-        correct_package = input("Is this the correct package? (please enter y or n): ")
+        correct_package = input("Is this the correct package? (y/n): ")
 while correct_package != 'y':
   check_package(correct_package)
 #Set Package
-def set_package(selection):
+snacks = 0
+phone_charge = 0
+car_health = 0
+def set_package(input):
   if input == 1:
-    snacks = 15
-    phone_charge = 75
-    car_health = 100
+   return 15, 75, 100
   elif input == 2:
-    snacks = 25
-    phone_charge = 25
-    car_health = 50
+    return 25, 25, 50
   elif input == 3:
-    snacks = 50
-    phone_charge = 50
-    car_health = 25
-
+    return 50, 50, 25
+snacks, phone_charge, car_health = set_package(selection)
 ascii_art_begin = """
 __________________ _______  _______   _________ _______    ______   _______  _______ _________ _        _ 
 \__   __/\__   __/(       )(  ____ \  \__   __/(  ___  )  (  ___ \ (  ____ \(  ____ \\__   __/( (    /|( )
@@ -156,7 +152,6 @@ __________________ _______  _______   _________ _______    ______   _______  ___
   | |   ___) (___| )   ( || (____/\     | |   | (___) |  | )___) )| (____/\| (___) |___) (___| )  \  | _ 
   )_(   \_______/|/     \|(_______/     )_(   (_______)  |/ \___/ (_______/(_______)\_______/|/    )_)(_)
 """
-slow_print(ascii_art_begin, 0.08)
 #Class System
 class Passenger:
   def __init__(self, name):
