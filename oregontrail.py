@@ -1,30 +1,31 @@
 #Here is our code for amazing Oregon Trail Game
 #Slow Print Function
 def slow_print(ascii_art,speed):
-   for line in ascii_art.strip().split('\n'):
+  for line in ascii_art.strip().split('\n'):
     print(line)
     time.sleep(speed)
 
 events_list = ['car sick', 'ran out of snacks', 'phone died']
 #Intro
-import Events
+#import Events
 import sys
 import time
 ascii_art_intro = r"""
-__        __   _                            _                                    
-\ \      / /__| | ___ ___  _ __ ___   ___  | |_ ___                              
- \ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \ | __/ _ \                             
-  \ V  V /  __/ | (_| (_) | | | | | |  __/ | || (_) |                            
- __\_/\_/ \___|_|\___\___/|_| |_| |_|\___|  \__\___/       _   _____     _       
-|  \/  | ___   __| | ___ _ __ _ __   |  _ \ ___   __ _  __| | |_   _| __(_)_ __  
-| |\/| |/ _ \ / _` |/ _ \ '__| '_ \  | |_) / _ \ / _` |/ _` |   | || '__| | '_ \ 
-| |  | | (_) | (_| |  __/ |  | | | | |  _ < (_) | (_| | (_| |   | || |  | | |_) |
-|_|__|_|\___/ \__,_|\___|_|  |_| |_|_|_|_\_\___/ \__,_|\__,_|   |_||_|  |_| .__/ 
- / _ \ _ __ ___  __ _  ___  _ __   |_   _| __ __ _(_) | |                 |_|    
-| | | | '__/ _ \/ _` |/ _ \| '_ \    | || '__/ _` | | | |                        
-| |_| | | |  __/ (_| | (_) | | | |   | || | | (_| | | |_|                        
- \___/|_|  \___|\__, |\___/|_| |_|   |_||_|  \__,_|_|_(_)                        
-                |___/                                                                                                                       
+__        __   _                            _                                
+\ \      / /__| | ___ ___  _ __ ___   ___  | |_ ___                          
+ \ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \ | __/ _ \                         
+  \ V  V /  __/ | (_| (_) | | | | | |  __/ | || (_) |                        
+ __\_/\_/ \___|_|\___\___/|_| |_| |_|\___|  \__\___/       _                 
+|  \/  | ___   __| | ___ _ __ _ __   |  _ \ ___   __ _  __| |                
+| |\/| |/ _ \ / _` |/ _ \ '__| '_ \  | |_) / _ \ / _` |/ _` |                
+| |  | | (_) | (_| |  __/ |  | | | | |  _ < (_) | (_| | (_| |                
+|_|  |_|\___/ \__,_|\___|_|  |_| |_| |_| \_\___/ \__,_|\__,_|                
+ _____     _          ___                               _____          _ _ _ 
+|_   _| __(_)_ __    / _ \ _ __ ___  __ _  ___  _ __   |_   _| __ __ _(_) | |
+  | || '__| | '_ \  | | | | '__/ _ \/ _` |/ _ \| '_ \    | || '__/ _` | | | |
+  | || |  | | |_) | | |_| | | |  __/ (_| | (_) | | | |   | || | | (_| | | |_|
+  |_||_|  |_| .__/   \___/|_|  \___|\__, |\___/|_| |_|   |_||_|  \__,_|_|_(_)
+            |_|                     |___/                                    
 """
 slow_print(ascii_art_intro, 0.08)
 ready = input("Ready to continue? (please enter y or n): ")
@@ -70,6 +71,7 @@ if ready == 'y':
   find_passengers()
 print(passenger_list)
 
+
 correct_names = input("Is this correct? (please enter y or n): ")
 while correct_names != 'y':
     find_passengers()
@@ -81,7 +83,7 @@ package3 = ['50 packs of snacks', 'phone charged to 50%', 'car health 25']
 ascii_art_box = r"""
 +-----------------------------------+
   /                                  /|
- /                                  / |
+/                                  / |
 /                                  /  |
 +---------------------------------+   |
 |                                 |   |
@@ -107,7 +109,7 @@ ascii_art_box = r"""
 /                                 / /
 +---------------------------------+
 """
-print(ascii_art_box)
+slow_print(ascii_art_box, 0.03)
 print(f"Package 1: {package1}")
 print(f"Package 2: {package2}")
 print(f"Package 3: {package3}")
@@ -120,7 +122,7 @@ else:
 correct_package = input("Is this the correct package? (please enter y or n): ")
 def check_package(correct_package):
     while correct_package != 'y':
-        print(ascii_art_box)
+        slow_print(ascii_art_box, 0.05)
         print(f"Package 1: {package1}")
         print(f"Package 2: {package2}")
         print(f"Package 3: {package3}")
@@ -147,16 +149,15 @@ def set_package(selection):
 ascii_art_begin = """
 __________________ _______  _______   _________ _______    ______   _______  _______ _________ _        _ 
 \__   __/\__   __/(       )(  ____ \  \__   __/(  ___  )  (  ___ \ (  ____ \(  ____ \\__   __/( (    /|( )
-   ) (      ) (   | () () || (    \/     ) (   | (   ) |  | (   ) )| (    \/| (    \/   ) (   |  \  ( || |
-   | |      | |   | || || || (__         | |   | |   | |  | (__/ / | (__    | |         | |   |   \ | || |
-   | |      | |   | |(_)| ||  __)        | |   | |   | |  |  __ (  |  __)   | | ____    | |   | (\ \) || |
-   | |      | |   | |   | || (           | |   | |   | |  | (  \ \ | (      | | \_  )   | |   | | \   |(_)
-   | |   ___) (___| )   ( || (____/\     | |   | (___) |  | )___) )| (____/\| (___) |___) (___| )  \  | _ 
-   )_(   \_______/|/     \|(_______/     )_(   (_______)  |/ \___/ (_______/(_______)\_______/|/    )_)(_)
+  ) (      ) (   | () () || (    \/     ) (   | (   ) |  | (   ) )| (    \/| (    \/   ) (   |  \  ( || |
+  | |      | |   | || || || (__         | |   | |   | |  | (__/ / | (__    | |         | |   |   \ | || |
+  | |      | |   | |(_)| ||  __)        | |   | |   | |  |  __ (  |  __)   | | ____    | |   | (\ \) || |
+  | |      | |   | |   | || (           | |   | |   | |  | (  \ \ | (      | | \_  )   | |   | | \   |(_)
+  | |   ___) (___| )   ( || (____/\     | |   | (___) |  | )___) )| (____/\| (___) |___) (___| )  \  | _ 
+  )_(   \_______/|/     \|(_______/     )_(   (_______)  |/ \___/ (_______/(_______)\_______/|/    )_)(_)
 """
 slow_print(ascii_art_begin, 0.08)
-
-
+'''
 class Passenger:
   def __init__(self, name):
     self.name = name
@@ -178,3 +179,4 @@ passenger_one = Passenger(passenger_list[1])
 passenger_two = Passenger(passenger_list[2])
 passenger_three = Passenger(passenger_list[3])
 passengers = [driver, passenger_one, passenger_two, passenger_three]
+'''
