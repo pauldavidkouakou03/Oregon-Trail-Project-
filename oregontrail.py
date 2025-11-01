@@ -28,6 +28,7 @@ __        __   _                            _
             |_|                     |___/                                    
 """
 slow_print(ascii_art_intro, 0.08)
+print(" ")
 ready = input("Ready to continue? (y/n): ")
 #Find and check passengers
 ascii_art_car = r"""
@@ -141,7 +142,7 @@ def set_package(input):
 snacks, phone_charge, car_health = set_package(selection)
 print(f"Snacks: {snacks}, Phone Charge: {phone_charge}%, Car Health: {car_health}%")
 #Game Begins
-ascii_art_begin = """
+ascii_art_begin = r"""
 __________________ _______  _______   _________ _______    ______   _______  _______ _________ _        _ 
 \__   __/\__   __/(       )(  ____ \  \__   __/(  ___  )  (  ___ \ (  ____ \(  ____ \\__   __/( (    /|( )
   ) (      ) (   | () () || (    \/     ) (   | (   ) |  | (   ) )| (    \/| (    \/   ) (   |  \  ( || |
@@ -173,5 +174,3 @@ passenger_one = Passenger(passenger_list[1])
 passenger_two = Passenger(passenger_list[2])
 passenger_three = Passenger(passenger_list[3])
 passengers = [driver, passenger_one, passenger_two, passenger_three]
-
-print(driver)
