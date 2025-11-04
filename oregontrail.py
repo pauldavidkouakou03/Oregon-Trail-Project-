@@ -4,7 +4,6 @@ def slow_print(ascii_art,speed):
   for line in ascii_art.strip().split('\n'):
     print(line)
     time.sleep(speed)
-
 events_list = ['car sick', 'ran out of snacks', 'phone died']
 #Intro
 #import Events
