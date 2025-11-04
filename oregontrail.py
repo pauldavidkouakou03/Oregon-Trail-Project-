@@ -6,7 +6,7 @@ def slow_print(ascii_art,speed):
     time.sleep(speed)
 events_list = ['car sick', 'ran out of snacks', 'phone died']
 #Intro
-#import Events
+import Events
 import sys
 import time
 ascii_art_intro = r"""
@@ -179,3 +179,5 @@ passenger_one = Passenger(passenger_list[1])
 passenger_two = Passenger(passenger_list[2])
 passenger_three = Passenger(passenger_list[3])
 passengers = [driver, passenger_one, passenger_two, passenger_three]
+Events.Event_list.car_sick()
+
