@@ -110,6 +110,7 @@ ascii_art_box = r"""
 +---------------------------------+
 """
 slow_print(ascii_art_box, 0.03)
+print(" ")
 print(f"Package 1: {package1}")
 print(f"Package 2: {package2}")
 print(f"Package 3: {package3}")
@@ -123,6 +124,7 @@ correct_package = input("Is this the correct package? (y/n): ")
 def check_package(correct_package):
     while correct_package != 'y':
         slow_print(ascii_art_box, 0.05)
+        print(" ")
         print(f"Package 1: {package1}")
         print(f"Package 2: {package2}")
         print(f"Package 3: {package3}")
