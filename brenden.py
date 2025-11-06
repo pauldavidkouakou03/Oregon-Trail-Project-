@@ -1,4 +1,6 @@
-
+from oregontrail import package1
+from oregontrail import package2
+from oregontrail import package3
 #Slow Print Function
 import time
 def slow_print(ascii_art,speed):

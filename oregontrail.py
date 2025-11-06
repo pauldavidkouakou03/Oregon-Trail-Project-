@@ -181,3 +181,7 @@ passenger_three = Passenger(passenger_list[3])
 passengers = [driver, passenger_one, passenger_two, passenger_three]
 Events.Event_list.car_sick()
 
+
+#Start of the actual game
+
+#Ending
