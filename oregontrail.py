@@ -28,7 +28,10 @@ __        __   _                            _
 """
 slow_print(ascii_art_intro, 0.08)
 print(" ")
-ready = input("Ready to continue? (y/n): ")
+print("You will be traveling from Billings, Montana to Bend, Oregon")
+print("It will be about a 1000 mile travel")
+print(" ")
+ready = input("Are you ready to continue? (y/n): ")
 #Find and check passengers
 ascii_art_car = r"""
 Here is your car!
@@ -56,6 +59,7 @@ Here is your car!
                       ████████                                                  ████████          
 """  
 def find_passengers():
+  print(" ")
   slow_print(ascii_art_car, 0.05)
   print(" ")
   passenger1 = input("Enter first name of wagon leader: ")
@@ -158,6 +162,7 @@ __________________ _______  _______   _________ _______    ______   _______  ___
   )_(   \_______/|/     \|(_______/     )_(   (_______)  |/ \___/ (_______/(_______)\_______/|/    )_)(_)
 """
 slow_print(ascii_art_begin, 0.05)
+print("")
 #Class System
 class Passenger:
   def __init__(self, name):
