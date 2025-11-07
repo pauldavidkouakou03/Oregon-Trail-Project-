@@ -53,11 +53,7 @@ ascii_art = r"""
 ********************************************************************---*******************************************************************:.
 ********************************************************************---*********************************************************************
 ********************************************************************---*********************************************************************
-"""
-print(ascii_art)                                                                                                                                                                                                                                                                                                                                   
-from oregontrail import package1
-from oregontrail import package2
-from oregontrail import package3
+"""                                                                                                                                                                                                                                                                                                                             
 #Slow Print Function
 import time
 def slow_print(ascii_art,speed):
@@ -65,6 +61,8 @@ def slow_print(ascii_art,speed):
     print(line)
     time.sleep(speed)
 
+slow_print(ascii_art, 0.02)
+'''
 #Find Passengers
 def find_passengers():
   slow_print(ascii_art_car, 0.05)
@@ -164,3 +162,4 @@ ascii_art_car = r"""
                     ██▓▓▓▓▓▓▓▓██                                              ██▓▓▓▓▓▓▓▓██        
                       ████████                                                  ████████          
 """
+'''
