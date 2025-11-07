@@ -15,6 +15,7 @@ class Vehicle:
         self.health = 100
         self.fuel = 20
         self.gas_tank_size = 20
+        self.passengers = []
     def get_health(self):
         return self.health
     def reduce_health(self, reduction):
@@ -23,7 +24,12 @@ class Vehicle:
         self.fuel -= reduction
     def __str__(self):
         return f"Vechicle Health: {self.health}, Gas: {self.fuel}"
-    
+    def add_passenger(self, passenger):
+        self.passengers.append(passenger)
+    def show_passengers(self):
+        for passenger in self.passengers:
+            print(passenger.get_name())
+
 class Passenger:
     
     def __init__ (self, name):
@@ -50,7 +56,6 @@ class Passenger:
         self.hunger += increase
     def reduce_phone_battery(self, reduction):
         self.phone_battery -= reduction
-        
 
     def __str__(self):
         return f"Name: {self.name}, Status: {self.status}, Hunger: {self.hunger} Phone Battery: {self.phone_battery}"
@@ -96,6 +101,16 @@ class Events:
         passengers[selection].reduce_phone_battery(10)
         print(f"{passengers[selection].get_name()} used their phone.")
 
+#Creating Objects
+'''
+driver = Passenger(passenger_list[0])
+passenger_one = Passenger(passenger_list[1])
+passenger_two = Passenger(passenger_list[2])
+passenger_three = Passenger(passenger_list[3])
+'''
+car = Vehicle()
+supplies = Supplies()
+#passengers = [driver, passenger_one, passenger_two, passenger_three]
 
 ascii_art_intro = r"""
 __        __   _                            _                                
@@ -150,19 +165,24 @@ def find_passengers():
   print(" ")
   slow_print(ascii_art_car, 0.05)
   print(" ")
-  passenger1 = input("Enter first name of wagon leader: ")
-  passenger_list.append(passenger1)
-  passenger2 = input("Enter first name of first passenger: ")
-  passenger_list.append(passenger2)
-  passenger3 = input("Enter first name of second passenger: ")
-  passenger_list.append(passenger3)
-  passenger4 = input("Enter first name of third passenger: ")
-  passenger_list.append(passenger4)
-  return passenger_list      
-passenger_list = []
+  input1 = input("Enter first name of wagon leader: ")
+  driver = Passenger(input1)
+  car.add_passenger(driver)
+  passenger1 = input("Enter first name of first passenger: ")
+  passenger1 = Passenger(passenger1)
+  car.add_passenger(passenger1)
+  passenger2 = input("Enter first name of second passenger: ")
+  passenger2 = Passenger(passenger2)
+  car.add_passenger(passenger2)
+  passenger3 = input("Enter first name of third passenger: ")
+  passenger3 = Passenger(passenger3)
+  car.add_passenger(passenger3)
+  
+print(car.show_passengers())
+
 if ready == 'y':
   find_passengers()
-print(passenger_list)
+car.show_passengers
 
 correct_names = input("Is this correct? (y/n): ")
 print(" ")
@@ -170,15 +190,6 @@ while correct_names != 'y':
     find_passengers()
     correct_names = input("Is this correct? (y/n): ")
     print(" ")
-
-#Creating Objects
-driver = Passenger(passenger_list[0])
-passenger_one = Passenger(passenger_list[1])
-passenger_two = Passenger(passenger_list[2])
-passenger_three = Passenger(passenger_list[3])
-car = Vehicle()
-supplies = Supplies()
-passengers = [driver, passenger_one, passenger_two, passenger_three]
 
 
 #Packages
