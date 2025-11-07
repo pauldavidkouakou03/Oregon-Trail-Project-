@@ -6,6 +6,7 @@ class Passenger:
         self.name = name
         self.status = "Healthy"
         self.hunger = 100
+        self.phone_battery = 100
     
     def get_name(self):
         return self.name
@@ -19,6 +20,8 @@ class Passenger:
         self.hunger -= reduction
     def increase_hunger(self, increase):
         self.hunger += increase
+    def reduce_phone_battery(self, reduction):
+        self.phone_battery -= reduction
 
     def __str__(self):
         return f"Name: {self.name}, Status: {self.status}, Hunger: {self.hunger}"
@@ -31,6 +34,8 @@ class Vehicle:
         return self.health
     def reduce_health(self, reduction):
         self.health -= reduction
+    def reduce_fuel(self, reduction):
+        self.fuel -= reduction
     def __str__(self):
         return f"Vechicle Health: {self.health}"
     
@@ -65,21 +70,27 @@ car = Vehicle(100)
 supplies = Supplies(10, 3)
 
 #Event Functions
-def car_sick():
-    selection = random.randint(0, 3)
-    passengers[selection].set_status("Car Sick")
-    print(f"{passengers[selection].get_name()} has gotten car sick!")
+class Events:
+    def car_sick():
+        selection = random.randint(0, 3)
+        passengers[selection].set_status("Car Sick")
+        print(f"{passengers[selection].get_name()} has gotten car sick!")
 
-def fever():
-    selection = random.randint(0, 3)
-    passengers[selection].set_status("Fever")
-    print(f"{passengers[selection].get_name()} has gotten a Fever!")
+    def fever():
+        selection = random.randint(0, 3)
+        passengers[selection].set_status("Fever")
+        print(f"{passengers[selection].get_name()} has gotten a Fever!")
+    
+    def use_phone():
+        selection = random.randint(0, 3)
+        passengers[selection].reduce_phone_battery(10)
+        print(f"{passengers[selection].get_name()} used their phone.")
 
 
 
 
 #Event Testing
-event_list = [car_sick, fever]
+event_list = [Events.car_sick, Events.fever, Events.use_phone]
 def run_event():
     chosen_event = random.choice(event_list)
     chosen_event()
@@ -93,8 +104,9 @@ def print_stats():
     print(supplies)
 
 
+run_event()
 print_stats()
-
+'''
 user_input = input(f"Would you like to give {passenger1.get_name()} a snack? (y/n):")
 if user_input == "y":
     supplies.use_snack()
@@ -104,7 +116,7 @@ else:
     pass
 
 print_stats()
-
+'''
 
 
 
