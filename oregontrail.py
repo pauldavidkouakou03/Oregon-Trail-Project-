@@ -91,12 +91,12 @@ class Events:
     def car_sick():
         selection = random.randint(0, 3)
         car.passengers[selection].set_status("Car Sick")
-        print(f"{self.passengers[selection].get_name()} has gotten car sick!")
+        print(f"{car.passengers[selection].get_name()} has gotten car sick!")
 
     def fever():
         selection = random.randint(0, 3)
         car.passengers[selection].set_status("Fever")
-        print(f"{self.passengers[selection].get_name()} has gotten a Fever!")
+        print(f"{car.passengers[selection].get_name()} has gotten a Fever!")
     
     def use_phone():
         selection = random.randint(0, 3)
@@ -173,7 +173,6 @@ def find_passengers():
 if ready == 'y':
   find_passengers()
 car.show_passengers()
-
 correct_names = input("Is this correct? (y/n): ")
 print(" ")
 while correct_names != 'y':
