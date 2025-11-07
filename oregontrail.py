@@ -34,6 +34,8 @@ class Passenger:
     
     def get_name(self):
         return self.name
+    def set_name(self, new_name):
+        self.name = new_name
     def get_status(self):
         return self.status
     def set_status(self, new_status):
