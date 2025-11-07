@@ -1,8 +1,4 @@
-#from random import randint
-#from oregontrail import Passenger, passengers
+#Might Delete this file later
+#Events will be in a class in the main file
+#Or use it for whatever else
 
-#class Event_list:
-    #def car_sick(self):
-        #selection = randint(0, 3)
-        #passengers[selection].set_status("Car Sick")
-        #return f"{driver.get_name()} has gotten car sick!"

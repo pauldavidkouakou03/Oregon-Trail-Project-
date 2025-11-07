@@ -4,11 +4,97 @@ def slow_print(ascii_art,speed):
   for line in ascii_art.strip().split('\n'):
     print(line)
     time.sleep(speed)
-events_list = ['car sick', 'ran out of snacks', 'phone died']
 #Intro
-import Events
+import random
 import sys
 import time
+
+#Classes for the Game
+class Vehicle:
+    def __init__(self):
+        self.health = 100
+        self.fuel = 20
+        self.gas_tank_size = 20
+    def get_health(self):
+        return self.health
+    def reduce_health(self, reduction):
+        self.health -= reduction
+    def use_fuel(self, reduction):
+        self.fuel -= reduction
+    def __str__(self):
+        return f"Vechicle Health: {self.health}, Gas: {self.fuel}"
+    
+class Passenger:
+    
+    def __init__ (self, name):
+        self.name = name
+        self.status = "Healthy"
+        self.hunger = 100
+        self.phone_battery = 100
+    
+    def get_name(self):
+        return self.name
+    def get_status(self):
+        return self.status
+    def set_status(self, new_status):
+        self.status = new_status
+    def get_hunger(self):
+        return self.hunger
+    def get_phone_battery(self):
+        return self.phone_battery
+    def reduce_hunger(self, reduction):
+        self.hunger -= reduction
+    def increase_hunger(self, increase):
+        self.hunger += increase
+    def reduce_phone_battery(self, reduction):
+        self.phone_battery -= reduction
+        
+
+    def __str__(self):
+        return f"Name: {self.name}, Status: {self.status}, Hunger: {self.hunger} Phone Battery: {self.phone_battery}"
+
+class Supplies:
+    def __init__(self):
+        self.snacks = 0
+        self.medicine = 0
+        self.money = 500
+    def get_snacks(self):
+        return self.snacks
+    def add_snacks(self, amount):
+        self.snacks += amount
+    def get_money(self):
+        return self.money
+    def get_medicine(self):
+        return self.medicine
+    def use_snack(self):
+        if self.snacks > 0:
+            self.snacks -= 1
+    def use_medicine(self):
+        if self.medicine > 0:
+            self.medicine -= 1
+    def spend_money(self):
+        if self.money > 0:
+            self.money -= 10
+    def __str__(self):
+        return f"Supplies - Snacks: {self.snacks}, Medicine: {self.medicine}, Money: {self.money}"
+
+class Events:
+    def car_sick():
+        selection = random.randint(0, 3)
+        passengers[selection].set_status("Car Sick")
+        print(f"{passengers[selection].get_name()} has gotten car sick!")
+
+    def fever():
+        selection = random.randint(0, 3)
+        passengers[selection].set_status("Fever")
+        print(f"{passengers[selection].get_name()} has gotten a Fever!")
+    
+    def use_phone():
+        selection = random.randint(0, 3)
+        passengers[selection].reduce_phone_battery(10)
+        print(f"{passengers[selection].get_name()} used their phone.")
+
+
 ascii_art_intro = r"""
 __        __   _                            _                                
 \ \      / /__| | ___ ___  _ __ ___   ___  | |_ ___                          
@@ -82,6 +168,17 @@ while correct_names != 'y':
     find_passengers()
     correct_names = input("Is this correct? (y/n): ")
     print(" ")
+
+#Creating Objects
+driver = Passenger(passenger_list[0])
+passenger_one = Passenger(passenger_list[1])
+passenger_two = Passenger(passenger_list[2])
+passenger_three = Passenger(passenger_list[3])
+car = Vehicle()
+supplies = Supplies()
+passengers = [driver, passenger_one, passenger_two, passenger_three]
+
+
 #Packages
 package1 = ['15 packs of snacks', 'phone charged to 75%', 'car health 100']
 package2 = ['25 packs of snacks', 'phone charged to 25%', 'car health 50']
@@ -143,13 +240,21 @@ while correct_package != 'y':
 #Set Package
 def set_package(input):
   if input == 1:
-   return 15, 75, 100
+   for passenger in passengers:
+       passenger.reduce_phone_battery(25)
+   supplies.add_snacks(15)
   elif input == 2:
-    return 25, 25, 50
+    for passenger in passengers:
+       passenger.reduce_phone_battery(75)
+    supplies.add_snacks(25)
+    car.reduce_health(50)
   elif input == 3:
-    return 50, 50, 25
-snacks, phone_charge, car_health = set_package(selection)
-print(f"Snacks: {snacks}, Phone Charge: {phone_charge}%, Car Health: {car_health}%")
+    for passenger in passengers:
+       passenger.reduce_phone_battery(50)
+    supplies.add_snacks(50)
+    car.reduce_health(75)
+set_package(selection)
+print(f"Snacks: {supplies.get_snacks()}, Phone Charge: {driver.get_phone_battery()}%, Car Health: {car.get_health()}%")
 #Game Begins
 ascii_art_begin = r"""
 __________________ _______  _______   _________ _______    ______   _______  _______ _________ _        _ 
@@ -163,30 +268,6 @@ __________________ _______  _______   _________ _______    ______   _______  ___
 """
 slow_print(ascii_art_begin, 0.05)
 print("")
-#Class System
-class Passenger:
-  def __init__(self, name):
-    self.name = name
-    self.status = "Fine"
-    self.hunger = 100
-  def get_name(self):
-    return self.name
-  def set_status(self, new_status):
-    self.status = new_status
-  def get_status(self):
-    return self.status
-  def get_hunger(self):
-    return self.hunger
-  def set_hunger(self, new_hunger):
-    self.hunger = new_hunger
-
-driver = Passenger(passenger_list[0])
-passenger_one = Passenger(passenger_list[1])
-passenger_two = Passenger(passenger_list[2])
-passenger_three = Passenger(passenger_list[3])
-passengers = [driver, passenger_one, passenger_two, passenger_three]
-#Events.Event_list.car_sick()
-
 
 #Start of the actual game
 ascii_art_car_driving = r"""
@@ -246,4 +327,11 @@ ascii_art_car_driving = r"""
 ********************************************************************---*********************************************************************
 """        
 slow_print(ascii_art_car_driving,0.03)
+
+#This will pick out one random event from the "Events" class near the top of the file
+event_list = [Events.car_sick, Events.fever, Events.use_phone]
+def run_event():
+    chosen_event = random.choice(event_list)
+    chosen_event()
+
 #Ending

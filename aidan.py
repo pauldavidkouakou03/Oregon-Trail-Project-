@@ -1,12 +1,12 @@
 import random
-
+import Events
 #Classes (Not Final, Just Experimental for Integration Later)  
 class Passenger:
-    def __init__ (self, name):
+    def __init__ (self, name, battery):
         self.name = name
         self.status = "Healthy"
         self.hunger = 100
-        self.phone_battery = 100
+        self.phone_battery = battery
     
     def get_name(self):
         return self.name
@@ -24,27 +24,31 @@ class Passenger:
         self.phone_battery -= reduction
 
     def __str__(self):
-        return f"Name: {self.name}, Status: {self.status}, Hunger: {self.hunger}"
+        return f"Name: {self.name}, Status: {self.status}, Hunger: {self.hunger} Phone Battery: {self.phone_battery}"
     
 class Vehicle:
     def __init__(self, health):
         self.health = health
-        self.fuel = 100    
+        self.fuel = 20
+        self.gas_tank_size = 20
     def get_health(self):
         return self.health
     def reduce_health(self, reduction):
         self.health -= reduction
-    def reduce_fuel(self, reduction):
+    def use_fuel(self, reduction):
         self.fuel -= reduction
     def __str__(self):
-        return f"Vechicle Health: {self.health}"
+        return f"Vechicle Health: {self.health}, Gas: {self.fuel}"
     
 class Supplies:
-    def __init__(self, snacks, medicine):
+    def __init__(self, snacks):
         self.snacks = snacks
-        self.medicine = medicine
+        self.medicine = 0
+        self.money = 500
     def get_snacks(self):
         return self.snacks
+    def get_money(self):
+        return self.money
     def get_medicine(self):
         return self.medicine
     def get_fuel(self):
@@ -55,8 +59,11 @@ class Supplies:
     def use_medicine(self):
         if self.medicine > 0:
             self.medicine -= 1
+    def spend_money(self):
+        if self.money > 0:
+            self.money -= 10
     def __str__(self):
-        return f"Supplies - Snacks: {self.snacks}, Medicine: {self.medicine}"
+        return f"Supplies - Snacks: {self.snacks}, Medicine: {self.medicine}, Money: {self.money}"
     
 
 
@@ -87,8 +94,6 @@ class Events:
         print(f"{passengers[selection].get_name()} used their phone.")
 
 
-
-
 #Event Testing
 event_list = [Events.car_sick, Events.fever, Events.use_phone]
 def run_event():
@@ -106,6 +111,7 @@ def print_stats():
 
 run_event()
 print_stats()
+
 '''
 user_input = input(f"Would you like to give {passenger1.get_name()} a snack? (y/n):")
 if user_input == "y":
