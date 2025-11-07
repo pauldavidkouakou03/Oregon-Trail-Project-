@@ -29,6 +29,8 @@ class Vehicle:
     def show_passengers(self):
         for passenger in self.passengers:
             print(passenger.get_name())
+    def clear_passengers(self):
+        self.passengers.clear()
 
 class Passenger:
     
@@ -181,6 +183,7 @@ car.show_passengers()
 correct_names = input("Is this correct? (y/n): ")
 print(" ")
 while correct_names != 'y':
+    car.clear_passengers()
     find_passengers()
     car.show_passengers()
     correct_names = input("Is this correct? (y/n): ")
