@@ -90,26 +90,20 @@ class Supplies:
 class Events:
     def car_sick():
         selection = random.randint(0, 3)
-        passengers[selection].set_status("Car Sick")
-        print(f"{passengers[selection].get_name()} has gotten car sick!")
+        car.passengers[selection].set_status("Car Sick")
+        print(f"{self.passengers[selection].get_name()} has gotten car sick!")
 
     def fever():
         selection = random.randint(0, 3)
-        passengers[selection].set_status("Fever")
-        print(f"{passengers[selection].get_name()} has gotten a Fever!")
+        car.passengers[selection].set_status("Fever")
+        print(f"{self.passengers[selection].get_name()} has gotten a Fever!")
     
     def use_phone():
         selection = random.randint(0, 3)
-        passengers[selection].reduce_phone_battery(10)
-        print(f"{passengers[selection].get_name()} used their phone.")
+        car.passengers[selection].reduce_phone_battery(10)
+        print(f"{car.passengers[selection].get_name()} used their phone.")
 
 #Creating Objects
-'''
-driver = Passenger(passenger_list[0])
-passenger_one = Passenger(passenger_list[1])
-passenger_two = Passenger(passenger_list[2])
-passenger_three = Passenger(passenger_list[3])
-'''
 car = Vehicle()
 supplies = Supplies()
 #passengers = [driver, passenger_one, passenger_two, passenger_three]
@@ -251,21 +245,21 @@ while correct_package != 'y':
 #Set Package
 def set_package(input):
   if input == 1:
-   for passenger in passengers:
+   for passenger in car.passengers:
        passenger.reduce_phone_battery(25)
    supplies.add_snacks(15)
   elif input == 2:
-    for passenger in passengers:
+    for passenger in car.passengers:
        passenger.reduce_phone_battery(75)
     supplies.add_snacks(25)
     car.reduce_health(50)
   elif input == 3:
-    for passenger in passengers:
+    for passenger in car.passengers:
        passenger.reduce_phone_battery(50)
     supplies.add_snacks(50)
     car.reduce_health(75)
 set_package(selection)
-print(f"Snacks: {supplies.get_snacks()}, Phone Charge: {driver.get_phone_battery()}%, Car Health: {car.get_health()}%")
+print(f"Snacks: {supplies.get_snacks()}, Phone Charge: {car.passengers[0].get_phone_battery()}%, Car Health: {car.get_health()}%")
 #Game Begins
 ascii_art_begin = r"""
 __________________ _______  _______   _________ _______    ______   _______  _______ _________ _        _ 
