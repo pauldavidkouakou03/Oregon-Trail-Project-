@@ -165,29 +165,24 @@ def find_passengers():
   print(" ")
   slow_print(ascii_art_car, 0.05)
   print(" ")
-  input1 = input("Enter first name of wagon leader: ")
-  driver = Passenger(input1)
-  car.add_passenger(driver)
+  driver = input("Enter first name of wagon leader: ")
+  car.add_passenger(Passenger(driver))
   passenger1 = input("Enter first name of first passenger: ")
-  passenger1 = Passenger(passenger1)
-  car.add_passenger(passenger1)
+  car.add_passenger(Passenger(passenger1))
   passenger2 = input("Enter first name of second passenger: ")
-  passenger2 = Passenger(passenger2)
-  car.add_passenger(passenger2)
+  car.add_passenger(Passenger(passenger2))
   passenger3 = input("Enter first name of third passenger: ")
-  passenger3 = Passenger(passenger3)
-  car.add_passenger(passenger3)
-  
-print(car.show_passengers())
+  car.add_passenger(Passenger(passenger3))
 
 if ready == 'y':
   find_passengers()
-car.show_passengers
+car.show_passengers()
 
 correct_names = input("Is this correct? (y/n): ")
 print(" ")
 while correct_names != 'y':
     find_passengers()
+    car.show_passengers()
     correct_names = input("Is this correct? (y/n): ")
     print(" ")
 
