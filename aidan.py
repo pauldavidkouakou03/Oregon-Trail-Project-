@@ -1,5 +1,5 @@
 import random
-import Events
+import time
 #Classes (Not Final, Just Experimental for Integration Later)  
 class Passenger:
     def __init__ (self, name, battery):
@@ -41,9 +41,9 @@ class Vehicle:
         return f"Vechicle Health: {self.health}, Gas: {self.fuel}"
     
 class Supplies:
-    def __init__(self, snacks):
+    def __init__(self, snacks, medicine):
         self.snacks = snacks
-        self.medicine = 0
+        self.medicine = medicine
         self.money = 500
     def get_snacks(self):
         return self.snacks
@@ -51,8 +51,6 @@ class Supplies:
         return self.money
     def get_medicine(self):
         return self.medicine
-    def get_fuel(self):
-        return self.fuel
     def use_snack(self):
         if self.snacks > 0:
             self.snacks -= 1
@@ -68,10 +66,10 @@ class Supplies:
 
 
 
-driver = Passenger("Aidan")
-passenger1 = Passenger("Bob")
-passenger2 = Passenger("Charlie")
-passenger3 = Passenger("Diana")
+driver = Passenger("Aidan", 100)
+passenger1 = Passenger("Bob", 100)
+passenger2 = Passenger("Charlie", 100)
+passenger3 = Passenger("Diana", 100)
 passengers = [driver, passenger1, passenger2, passenger3]
 car = Vehicle(100)
 supplies = Supplies(10, 3)
@@ -109,8 +107,8 @@ def print_stats():
     print(supplies)
 
 
-run_event()
-print_stats()
+#run_event()
+#print_stats()
 
 '''
 user_input = input(f"Would you like to give {passenger1.get_name()} a snack? (y/n):")
@@ -123,9 +121,72 @@ else:
 
 print_stats()
 '''
+def option_selection(selection):
+    pass
+def passenger_item_use(choice):
+    match choice:
+        case 1:
+            pass
+        case 2:
+            pass
+        case 3:
+            pass
+        case 4:
+            pass
+
+#Running a Test for the Game Loop
+while True:
+    time.sleep(5)
+    run_event()
+    time.sleep(5)
+    while True:
+        print("\n") #Add space for readability
+        print("1. View Stats")
+        print("2. Use Item")
+        print("3. Continue Driving")
+        try:
+            selection = int(input("What would you like to do?: "))
+            match selection:
+                case 1:
+                    print_stats()
+                    continue #Restarts the inner loop after viewing stats
+                case 2:
+                    print("\n")
+                    print(supplies)
+                    print(f"1. {driver.get_name()}")
+                    print(f"2. {passenger1.get_name()}")
+                    print(f"3. {passenger2.get_name()}")
+                    print(f"4. {passenger3.get_name()}")
+                    try:
+                        choice = int(input("Which passenger would you like to give an item to? (1-4):"))
+                        print("\n")
+                        passenger_item_use(choice)
+                        continue #Restarts the inner loop after using an item
+                    except ValueError:
+                        print("Invalid Input")
+                case 3:
+                    break #Restarts the entire loop to continue driving
+        except ValueError:
+            print("Invalid Input")
 
 
 
+    '''
+    if user_input == 1:
+        print_stats()
+    elif user_input == 2:
+        print(supplies)
+        print(f"1. {driver.get_name()}")
+        print(f"2. {passenger1.get_name()}")
+        print(f"3. {passenger2.get_name()}")
+        print(f"4. {passenger3.get_name()}")
+        passenger_choice = input("Which passenger would you like to give an item to? (1-4):")
+        
+    elif user_input == 3:
+        pass
+    else:
+        print("Invalid Input")
+    '''
 
 
 
