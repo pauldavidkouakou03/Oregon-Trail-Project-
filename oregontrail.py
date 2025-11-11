@@ -273,6 +273,7 @@ __________________ _______  _______   _________ _______    ______   _______  ___
 slow_print(ascii_art_begin, 0.05)
 print("")
 
+<<<<<<< Updated upstream
 #Start of the actual game
 ascii_art_car_driving = r"""
 --------------------------------------------------------------------------------------------------------------------------------------------
@@ -339,3 +340,10 @@ def run_event():
     chosen_event()
 
 #Ending
+=======
+driver = Passenger(passenger_list[0])
+passenger_one = Passenger(passenger_list[1])
+passenger_two = Passenger(passenger_list[2])
+passenger_three = Passenger(passenger_list[3])
+passengers = [driver, passenger_one, passenger_two, passenger_three]
+>>>>>>> Stashed changes
