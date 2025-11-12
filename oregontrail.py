@@ -159,9 +159,9 @@ Here is your car!
 """
 
 def find_passengers():
-  print(" ")
+  print("")
   slow_print(ascii_art_car, 0.05)
-  print(" ")
+  print("")
   driver = input("Enter first name of wagon leader: ")
   car.add_passenger(Passenger(driver))
   passenger1 = input("Enter first name of first passenger: ")
@@ -175,13 +175,13 @@ if ready == 'y':
   find_passengers()
 car.show_passengers()
 correct_names = input("Is this correct? (y/n): ")
-print(" ")
+print("")
 while correct_names != 'y':
     car.clear_passengers()
     find_passengers()
     car.show_passengers()
     correct_names = input("Is this correct? (y/n): ")
-    print(" ")
+    print("")
 
 #Packages
 package1 = ['15 packs of snacks', 'phone charged to 75%', 'car health 100']
@@ -233,12 +233,12 @@ correct_package = input("Is this the correct package? (y/n): ")
 def check_package(correct_package):
     while correct_package != 'y':
         slow_print(ascii_art_box, 0.05)
-        print(" ")
+        print("")
         print(f"Package 1: {package1}")
         print(f"Package 2: {package2}")
         print(f"Package 3: {package3}")
         selection = int(input("Select your package!: "))
-        print(" ")
+        print("")
         print(f"This is your package: {selection}")
         correct_package = input("Is this the correct package? (y/n): ")
 while correct_package != 'y':
