@@ -106,7 +106,6 @@ class Events:
 #Creating Objects
 car = Vehicle()
 supplies = Supplies()
-#passengers = [driver, passenger_one, passenger_two, passenger_three]
 
 ascii_art_intro = r"""
 __        __   _                            _                                
@@ -126,10 +125,11 @@ __        __   _                            _
             |_|                     |___/                                    
 """
 slow_print(ascii_art_intro, 0.08)
-print(" ")
+print("")
 print("You will be traveling from Billings, Montana to Bend, Oregon")
+print("")
 print("It will be about a 1000 mile travel")
-print(" ")
+print("")
 ready = input("Are you ready to continue? (y/n): ")
 #Find and check passengers
 ascii_art_car = r"""
@@ -183,7 +183,6 @@ while correct_names != 'y':
     correct_names = input("Is this correct? (y/n): ")
     print(" ")
 
-
 #Packages
 package1 = ['15 packs of snacks', 'phone charged to 75%', 'car health 100']
 package2 = ['25 packs of snacks', 'phone charged to 25%', 'car health 50']
@@ -224,8 +223,10 @@ print(f"Package 2: {package2}")
 print(f"Package 3: {package3}")
 selection = int(input("Select your package!: "))
 if selection > 3:
+  print("")
   print("Invalid Package")
 else:
+    print("")
     print(f"This is your package: {selection}")
 #Check Package
 correct_package = input("Is this the correct package? (y/n): ")
@@ -260,6 +261,7 @@ def set_package(input):
     car.reduce_health(75)
 set_package(selection)
 print(f"Snacks: {supplies.get_snacks()}, Phone Charge: {car.passengers[0].get_phone_battery()}%, Car Health: {car.get_health()}%")
+
 #Game Begins
 ascii_art_begin = r"""
 __________________ _______  _______   _________ _______    ______   _______  _______ _________ _        _ 
