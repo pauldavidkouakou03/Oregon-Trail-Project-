@@ -1,5 +1,6 @@
 import random
 import time
+import sys
 #Classes (Not Final, Just Experimental for Integration Later)  
 class Passenger:
     def __init__ (self, name, battery):
@@ -31,14 +32,21 @@ class Vehicle:
         self.health = health
         self.fuel = 20
         self.gas_tank_size = 20
+        self.miles_driven = 0
     def get_health(self):
         return self.health
     def reduce_health(self, reduction):
         self.health -= reduction
     def use_fuel(self, reduction):
         self.fuel -= reduction
+    def get_fuel(self):
+        return self.fuel
+    def get_miles_driven(self):
+        return self.miles_driven
+    def drive_miles(self, miles):
+        self.miles_driven += miles
     def __str__(self):
-        return f"Vechicle Health: {self.health}, Gas: {self.fuel}"
+        return f"Vechicle Health: {self.health}, Gas: {self.fuel} gallons"
     
 class Supplies:
     def __init__(self, snacks, medicine):
@@ -78,22 +86,37 @@ supplies = Supplies(10, 3)
 class Events:
     def car_sick():
         selection = random.randint(0, 3)
-        passengers[selection].set_status("Car Sick")
-        print(f"{passengers[selection].get_name()} has gotten car sick!")
+        if passengers[selection].get_status() != "Dead":
+            passengers[selection].set_status("Car Sick")
+            print(f"{passengers[selection].get_name()} has gotten car sick!")
 
     def fever():
         selection = random.randint(0, 3)
-        passengers[selection].set_status("Fever")
-        print(f"{passengers[selection].get_name()} has gotten a Fever!")
+        if passengers[selection].get_status() != "Dead":
+            passengers[selection].set_status("Fever")
+            print(f"{passengers[selection].get_name()} has gotten a Fever!")
     
     def use_phone():
         selection = random.randint(0, 3)
-        passengers[selection].reduce_phone_battery(10)
-        print(f"{passengers[selection].get_name()} used their phone.")
+        if passengers[selection].get_status() != "Dead":
+            passengers[selection].reduce_phone_battery(10)
+            print(f"{passengers[selection].get_name()} used their phone.")
 
+    def object_in_road():
+        user_input = input("There is debris in the road! You can try to avoid it but it may damage the car.\n You could also take another way, but you will lose distance on your destination. (y (Avoid) / n (Detour))")
+        if user_input == "y":
+            chance = random.randint(1, 10)
+            if chance <= 6:
+                print("You sucessfully avoided the debris!")
+            else:
+                print("You hit the debris, damaging the car.")
+                car.reduce_health(25)
+        elif user_input == "n":
+            print("You took a detour, losing some distance.")
 
+    
 #Event Testing
-event_list = [Events.car_sick, Events.fever, Events.use_phone]
+event_list = [Events.object_in_road, Events.car_sick, Events.fever, Events.use_phone]
 def run_event():
     chosen_event = random.choice(event_list)
     chosen_event()
@@ -110,34 +133,58 @@ def print_stats():
 #run_event()
 #print_stats()
 
-'''
-user_input = input(f"Would you like to give {passenger1.get_name()} a snack? (y/n):")
-if user_input == "y":
-    supplies.use_snack()
-    passenger1.increase_hunger(25)
-    print(f"{passenger1.get_name()} has eaten a snack.")
-else:
-    pass
 
-print_stats()
-'''
-def option_selection(selection):
-    pass
+#Item Use / Selection / and Game Check Functions
+def supply_selection(selection):
+    match selection:
+        case 1:
+            if supplies.get_snacks() > 0:
+                supplies.use_snack()
+                passenger.increase_hunger(30)
+            else:
+                print("No Snacks Left!")
+        case 2:
+            if supplies.get_medicine() > 0:
+                supplies.use_medicine()
+                passenger.set_status("Healthy")
+            else:
+                print("No Medicine Left!")
+
+#Passenger Item Use Function
 def passenger_item_use(choice):
     match choice:
-        case 1:
-            print(f"Which item would you like to give to {driver.getname()}?")
-        case 2:
-            print(f"Which item would you like to give to {passenger1.getname()}?")
-        case 3:
-            print(f"Which item would you like to give to {passenger2.getname()}?")
-        case 4:
-            print(f"Which item would you like to give to {passenger3.getname()}?")
+        #Will check if the passenger is dead before allowing item use
+        case 1 | _ if driver.get_status() != "Dead":
+            selection = int(input(f"Which item would you like to give to {driver.get_name()}?"))
+            supply_selection(selection)
+        case 2 | _ if passenger1.get_status() != "Dead":
+            print(f"Which item would you like to give to {passenger1.get_name()}?")
+        case 3 | _ if passenger2.get_status() != "Dead":
+            print(f"Which item would you like to give to {passenger2.get_name()}?")
+        case 4 | _ if passenger3.get_status() != "Dead":
+            print(f"Which item would you like to give to {passenger3.get_name()}?")
+        case _ :
+            print("This Passenger is Dead, you cannot give them an item.")
 
-def check_passengers():
+def game_check():
+    #Check if Passenger has starved
     for passenger in passengers:
         if passenger.get_hunger() <= 0:
             passenger.set_status("Dead")
+            print(f"{passenger.get_name()} has died of starvation.")
+    #Check Passenger with Fever
+    for passenger in passengers:
+        if passenger.get_status() == "Fever":
+            fever_counter += 1
+            if fever_counter > 4:
+                print(f"{passenger.get_name()} has died from their fever.")
+                passenger.set_status("Dead")
+    #Check if Vehicle is Dead or out of fuel
+    if car.get_health() <= 0 or car.get_fuel() <= 0:
+        print("Your vehicle is no longer operable. Game Over.")
+        sys.exit()
+    
+    
 
 
 
@@ -145,25 +192,26 @@ def check_passengers():
 
 #Running a Test for the Game Loop
 while True:
-    driver.reduce_hunger(100)
-    check_passengers()
-    if len(passengers) > 0:
-        pass
-    else:
-        print("All Passengers have Died. Game Over.")
-        break
+    #Simulate driving a certain amount of miles
+    for passenger in passengers:
+        passenger.reduce_hunger(10)
+    car.use_fuel(2)
+    game_check()
+    run_event()
+
     while True:
         print("\n") #Add space for readability
+        print(f"Miles Left: {1000 - car.get_miles_driven()}")
         print("1. View Stats")
         print("2. Use Item")
         print("3. Continue Driving")
         try:
             selection = int(input("What would you like to do?: "))
             match selection:
-                case 1:
+                case 1: #Shows All Stats
                     print_stats()
                     continue #Restarts the inner loop after viewing stats
-                case 2:
+                case 2: #Allows you to use an item
                     print("\n")
                     print(supplies)
                     if driver.get_status() != "Dead":
@@ -176,6 +224,7 @@ while True:
                         print(f"3. {passenger2.get_name()}")
                     if passenger3.get_status() != "Dead":
                         print(f"4. {passenger3.get_name()}")
+                    #try and except will catch any invalid inputs when choosing a passenger
                     try:
                         choice = int(input("Which passenger would you like to give an item to? (1-4):"))
                         print("\n")
@@ -183,7 +232,7 @@ while True:
                         continue #Restarts the inner loop after using an item
                     except ValueError:
                         print("Invalid Input")
-                case 3:
+                case 3: #Allows you to continue driving
                     break #Restarts the entire loop to continue driving
         except ValueError:
             print("Invalid Input")
