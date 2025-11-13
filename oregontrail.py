@@ -106,7 +106,6 @@ class Events:
 #Creating Objects
 car = Vehicle()
 supplies = Supplies()
-#passengers = [driver, passenger_one, passenger_two, passenger_three]
 
 ascii_art_intro = r"""
 __        __   _                            _                                
@@ -126,10 +125,11 @@ __        __   _                            _
             |_|                     |___/                                    
 """
 slow_print(ascii_art_intro, 0.08)
-print(" ")
+print("")
 print("You will be traveling from Billings, Montana to Bend, Oregon")
+print("")
 print("It will be about a 1000 mile travel")
-print(" ")
+print("")
 ready = input("Are you ready to continue? (y/n): ")
 #Find and check passengers
 ascii_art_car = r"""
@@ -159,9 +159,9 @@ Here is your car!
 """
 
 def find_passengers():
-  print(" ")
+  print("")
   slow_print(ascii_art_car, 0.05)
-  print(" ")
+  print("")
   driver = input("Enter first name of wagon leader: ")
   car.add_passenger(Passenger(driver))
   passenger1 = input("Enter first name of first passenger: ")
@@ -175,14 +175,13 @@ if ready == 'y':
   find_passengers()
 car.show_passengers()
 correct_names = input("Is this correct? (y/n): ")
-print(" ")
+print("")
 while correct_names != 'y':
     car.clear_passengers()
     find_passengers()
     car.show_passengers()
     correct_names = input("Is this correct? (y/n): ")
-    print(" ")
-
+    print("")
 
 #Packages
 package1 = ['15 packs of snacks', 'phone charged to 75%', 'car health 100']
@@ -224,20 +223,22 @@ print(f"Package 2: {package2}")
 print(f"Package 3: {package3}")
 selection = int(input("Select your package!: "))
 if selection > 3:
+  print("")
   print("Invalid Package")
 else:
+    print("")
     print(f"This is your package: {selection}")
 #Check Package
 correct_package = input("Is this the correct package? (y/n): ")
 def check_package(correct_package):
     while correct_package != 'y':
         slow_print(ascii_art_box, 0.05)
-        print(" ")
+        print("")
         print(f"Package 1: {package1}")
         print(f"Package 2: {package2}")
         print(f"Package 3: {package3}")
         selection = int(input("Select your package!: "))
-        print(" ")
+        print("")
         print(f"This is your package: {selection}")
         correct_package = input("Is this the correct package? (y/n): ")
 while correct_package != 'y':
@@ -260,6 +261,7 @@ def set_package(input):
     car.reduce_health(75)
 set_package(selection)
 print(f"Snacks: {supplies.get_snacks()}, Phone Charge: {car.passengers[0].get_phone_battery()}%, Car Health: {car.get_health()}%")
+
 #Game Begins
 ascii_art_begin = r"""
 __________________ _______  _______   _________ _______    ______   _______  _______ _________ _        _ 
