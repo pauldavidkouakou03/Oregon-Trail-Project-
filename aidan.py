@@ -8,6 +8,7 @@ class Passenger:
         self.status = "Healthy"
         self.hunger = 100
         self.phone_battery = battery
+        self.fever_days = 0
     
     def get_name(self):
         return self.name
@@ -21,6 +22,10 @@ class Passenger:
         self.hunger -= reduction
     def increase_hunger(self, increase):
         self.hunger += increase
+    def fever_counter(self):
+        self.fever_days += 1
+    def get_fever_days(self):
+        return self.fever_days
     def reduce_phone_battery(self, reduction):
         self.phone_battery -= reduction
 
@@ -103,7 +108,7 @@ class Events:
             print(f"{passengers[selection].get_name()} used their phone.")
 
     def object_in_road():
-        user_input = input("There is debris in the road! You can try to avoid it but it may damage the car.\n You could also take another way, but you will lose distance on your destination. (y (Avoid) / n (Detour))")
+        user_input = input("There is debris in the road! You can try to avoid it but it may damage the car.\n You could also take another way, but you will lose distance on your destination. (y (Avoid) / n (Detour)): ")
         if user_input == "y":
             chance = random.randint(1, 10)
             if chance <= 6:
@@ -113,6 +118,7 @@ class Events:
                 car.reduce_health(25)
         elif user_input == "n":
             print("You took a detour, losing some distance.")
+            car.drive_miles(-40)
 
     
 #Event Testing
@@ -141,30 +147,40 @@ def supply_selection(selection):
             if supplies.get_snacks() > 0:
                 supplies.use_snack()
                 passenger.increase_hunger(30)
+                print(f"{passenger.get_name()} has eaten a snack.")
             else:
                 print("No Snacks Left!")
         case 2:
             if supplies.get_medicine() > 0:
                 supplies.use_medicine()
                 passenger.set_status("Healthy")
+                print(f"{passenger.get_name()} has used some medicine.")
             else:
                 print("No Medicine Left!")
 
 #Passenger Item Use Function
 def passenger_item_use(choice):
     match choice:
-        #Will check if the passenger is dead before allowing item use
-        case 1 | _ if driver.get_status() != "Dead":
+        case 1:
+            print("1. Snacks")
+            print("2. Medicine")
             selection = int(input(f"Which item would you like to give to {driver.get_name()}?"))
             supply_selection(selection)
-        case 2 | _ if passenger1.get_status() != "Dead":
-            print(f"Which item would you like to give to {passenger1.get_name()}?")
-        case 3 | _ if passenger2.get_status() != "Dead":
-            print(f"Which item would you like to give to {passenger2.get_name()}?")
-        case 4 | _ if passenger3.get_status() != "Dead":
-            print(f"Which item would you like to give to {passenger3.get_name()}?")
-        case _ :
-            print("This Passenger is Dead, you cannot give them an item.")
+        case 2:
+            print("1. Snacks")
+            print("2. Medicine")
+            selection = int(input(f"Which item would you like to give to {passenger1.get_name()}?"))
+            supply_selection(selection)
+        case 3:
+            print("1. Snacks")
+            print("2. Medicine")
+            selection = int(input(f"Which item would you like to give to {passenger2.get_name()}?"))
+            supply_selection(selection)
+        case 4:
+            print("1. Snacks")
+            print("2. Medicine")
+            selection = int(input(f"Which item would you like to give to {passenger3.get_name()}?"))
+            supply_selection(selection)
 
 def game_check():
     #Check if Passenger has starved
@@ -175,15 +191,21 @@ def game_check():
     #Check Passenger with Fever
     for passenger in passengers:
         if passenger.get_status() == "Fever":
-            fever_counter += 1
-            if fever_counter > 4:
+            passenger.fever_counter()
+            if passenger.get_fever_days() > 4:
                 print(f"{passenger.get_name()} has died from their fever.")
                 passenger.set_status("Dead")
     #Check if Vehicle is Dead or out of fuel
     if car.get_health() <= 0 or car.get_fuel() <= 0:
-        print("Your vehicle is no longer operable. Game Over.")
+        print("Your vehicle is no longer operable! Game Over.")
         sys.exit()
-    
+    dead_count = 0
+    for passenger in passengers:
+        if passenger.get_status() == "Dead":
+            dead_count += 1
+    if dead_count == 4:
+        print("All Passengers have died! Game Over.")
+        sys.exit()
     
 
 
@@ -211,6 +233,7 @@ while True:
                 case 1: #Shows All Stats
                     print_stats()
                     continue #Restarts the inner loop after viewing stats
+                #Note for Case 2, it does not check if the passenger is dead or not, only displays it, will be added later.
                 case 2: #Allows you to use an item
                     print("\n")
                     print(supplies)
