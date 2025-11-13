@@ -126,19 +126,32 @@ def option_selection(selection):
 def passenger_item_use(choice):
     match choice:
         case 1:
-            pass
+            print(f"Which item would you like to give to {driver.getname()}?")
         case 2:
-            pass
+            print(f"Which item would you like to give to {passenger1.getname()}?")
         case 3:
-            pass
+            print(f"Which item would you like to give to {passenger2.getname()}?")
         case 4:
-            pass
+            print(f"Which item would you like to give to {passenger3.getname()}?")
+
+def check_passengers():
+    for passenger in passengers:
+        if passenger.get_hunger() <= 0:
+            passenger.set_status("Dead")
+
+
+
+
 
 #Running a Test for the Game Loop
 while True:
-    time.sleep(5)
-    run_event()
-    time.sleep(5)
+    driver.reduce_hunger(100)
+    check_passengers()
+    if len(passengers) > 0:
+        pass
+    else:
+        print("All Passengers have Died. Game Over.")
+        break
     while True:
         print("\n") #Add space for readability
         print("1. View Stats")
@@ -153,10 +166,16 @@ while True:
                 case 2:
                     print("\n")
                     print(supplies)
-                    print(f"1. {driver.get_name()}")
-                    print(f"2. {passenger1.get_name()}")
-                    print(f"3. {passenger2.get_name()}")
-                    print(f"4. {passenger3.get_name()}")
+                    if driver.get_status() != "Dead":
+                        print(f"1. {driver.get_name()}")
+                    else:
+                        print(f"1. {driver.get_name()} is Dead.")
+                    if passenger1.get_status() != "Dead":
+                        print(f"2. {passenger1.get_name()}")
+                    if passenger2.get_status() != "Dead":
+                        print(f"3. {passenger2.get_name()}")
+                    if passenger3.get_status() != "Dead":
+                        print(f"4. {passenger3.get_name()}")
                     try:
                         choice = int(input("Which passenger would you like to give an item to? (1-4):"))
                         print("\n")
@@ -171,22 +190,9 @@ while True:
 
 
 
-    '''
-    if user_input == 1:
-        print_stats()
-    elif user_input == 2:
-        print(supplies)
-        print(f"1. {driver.get_name()}")
-        print(f"2. {passenger1.get_name()}")
-        print(f"3. {passenger2.get_name()}")
-        print(f"4. {passenger3.get_name()}")
-        passenger_choice = input("Which passenger would you like to give an item to? (1-4):")
-        
-    elif user_input == 3:
-        pass
-    else:
-        print("Invalid Input")
-    '''
+
+
+
 
 
 
