@@ -137,8 +137,6 @@ def animate_car(loops=3, speed=0.15):
             time.sleep(speed)
 #Intro
 import random
-import sys
-import time
 
 #Classes for the Game
 class Vehicle:
@@ -147,6 +145,7 @@ class Vehicle:
         self.fuel = 20
         self.gas_tank_size = 20
         self.passengers = []
+        self.miles_driven = 0
     def get_health(self):
         return self.health
     def reduce_health(self, reduction):
