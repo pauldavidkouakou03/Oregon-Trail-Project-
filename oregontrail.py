@@ -505,7 +505,7 @@ slow_print(ascii_art_car_driving,0.03)
 '''
 print("🚗 Starting engine... VROOM VROOM!\n")
 time.sleep(1)
-animate_car(loops=5, speed=0.2)
+animate_car(loops = 4, speed = 0.05)
 
 #Item Use / Selection / and Game Checks and Functionality
 event_list = [Events.car_sick, Events.fever, Events.use_phone, Events.object_in_road]
@@ -594,7 +594,7 @@ while True:
     #Simulate driving a certain amount of miles
     for passenger in car.passengers:
         passenger.reduce_hunger(10)
-    animate_car(loops=5, speed=0.2)
+    animate_car(loops = 4, speed = 0.2)
     car.use_fuel(2)
     game_check()
     run_event()
