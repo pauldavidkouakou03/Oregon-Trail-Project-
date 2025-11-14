@@ -597,7 +597,9 @@ while True:
     animate_car(loops = 4, speed = 0.2)
     car.use_fuel(2)
     game_check()
-    run_event()
+    #run_event()
+    if random.random() < 0.75:
+        run_event()
 
     while True:
         print("\n") #Add space for readability
