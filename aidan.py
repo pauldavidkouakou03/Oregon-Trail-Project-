@@ -119,10 +119,22 @@ class Events:
         elif user_input == "n":
             print("You took a detour, losing some distance.")
             car.drive_miles(-40)
-
     
+    def flat_tire():
+        user_input = input("You got a flat tire! You can try to fix it yourself or call for roadside assistance. (f (fix) / c (call)): ")
+        if user_input == "f":
+            chance = random.randint(1, 20)
+            if chance > 15:
+                print("You successfully fixed the tire!")
+            else:
+                print("You failed to fix the tire, damaging the car.")
+                car.reduce_health(25)
+        elif user_input == "c":
+            print("You called for roadside assistance, spending some money.")
+            supplies.spend_money(30)
+            
 #Event Testing
-event_list = [Events.object_in_road, Events.car_sick, Events.fever, Events.use_phone]
+event_list = [Events.flat_tire, Events.object_in_road, Events.car_sick, Events.fever, Events.use_phone]
 def run_event():
     chosen_event = random.choice(event_list)
     chosen_event()
@@ -141,7 +153,7 @@ def print_stats():
 
 
 #Item Use / Selection / and Game Check Functions
-def supply_selection(selection):
+def supply_selection(selection, passenger):
     match selection:
         case 1:
             if supplies.get_snacks() > 0:
@@ -165,22 +177,22 @@ def passenger_item_use(choice):
             print("1. Snacks")
             print("2. Medicine")
             selection = int(input(f"Which item would you like to give to {driver.get_name()}?"))
-            supply_selection(selection)
+            supply_selection(selection, driver)
         case 2:
             print("1. Snacks")
             print("2. Medicine")
             selection = int(input(f"Which item would you like to give to {passenger1.get_name()}?"))
-            supply_selection(selection)
+            supply_selection(selection, passenger1)
         case 3:
             print("1. Snacks")
             print("2. Medicine")
             selection = int(input(f"Which item would you like to give to {passenger2.get_name()}?"))
-            supply_selection(selection)
+            supply_selection(selection, passenger2)
         case 4:
             print("1. Snacks")
             print("2. Medicine")
             selection = int(input(f"Which item would you like to give to {passenger3.get_name()}?"))
-            supply_selection(selection)
+            supply_selection(selection, passenger3)
 
 def game_check():
     #Check if Passenger has starved
@@ -218,8 +230,10 @@ while True:
     for passenger in passengers:
         passenger.reduce_hunger(10)
     car.use_fuel(2)
+    car.drive_miles(20)
     game_check()
     run_event()
+    
 
     while True:
         print("\n") #Add space for readability
@@ -259,17 +273,3 @@ while True:
                     break #Restarts the entire loop to continue driving
         except ValueError:
             print("Invalid Input")
-
-
-
-
-
-
-
-
-
-#Prompt the user for inputs every certain amount of miles driven
-#Let the user choose to use items for their passengers
-#Set up a time system
-#End the game if all passengers are gone or if vehicle health reaches 0
-#Occansional stops will happen along the way, allowing the user to restock supplies
