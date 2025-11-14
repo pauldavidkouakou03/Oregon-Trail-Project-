@@ -493,7 +493,7 @@ slow_print(ascii_art_car_driving,0.03)
 animate_car(loops=4, speed=0.2)
 
 #Item Use / Selection / and Game Checks and Functionality
-event_list = [Events.car_sick, Events.fever, Events.use_phone]
+event_list = [Events.car_sick, Events.fever, Events.use_phone, Events.object_in_road]
 def run_event():
     chosen_event = random.choice(event_list)
     chosen_event()
