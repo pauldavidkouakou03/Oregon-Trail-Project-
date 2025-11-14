@@ -192,6 +192,8 @@ class Passenger:
         self.hunger += increase
     def fever_counter(self):
         self.fever_days += 1
+    def reset_fever_counter(self):
+        self.fever_days = 0
     def get_fever_days(self):
         return self.fever_days
     def reduce_phone_battery(self, reduction):
@@ -219,9 +221,10 @@ class Supplies:
     def use_medicine(self):
         if self.medicine > 0:
             self.medicine -= 1
-    def spend_money(self):
+    def spend_money(self, amount):
         if self.money > 0:
-            self.money -= 10
+            self.money -= amount
+    
     def __str__(self):
         return f"Supplies - Snacks: {self.snacks}, Medicine: {self.medicine}, Money: {self.money}"
 
@@ -253,6 +256,19 @@ class Events:
         elif user_input == "n":
             print("You took a detour, losing some distance.")
             car.drive_miles(-40)
+
+    def flat_tire():
+        user_input = input("You got a flat tire! You can try to fix it yourself or call for roadside assistance. (f (fix) / c (call)): ")
+        if user_input == "f":
+            chance = random.randint(1, 20)
+            if chance > 15:
+                print("You successfully fixed the tire!")
+            else:
+                print("You failed to fix the tire, damaging the car.")
+                car.reduce_health(25)
+        elif user_input == "c":
+            print("You called for roadside assistance, spending some money.")
+            supplies.spend_money(30)
 
 #Creating Objects
 car = Vehicle()
@@ -517,6 +533,8 @@ def supply_selection(selection):
         case 2:
             if supplies.get_medicine() > 0:
                 supplies.use_medicine()
+                if passenger.get_status() == "Fever":
+                    passenger.reset_fever_counter()
                 passenger.set_status("Healthy")
                 print(f"{passenger.get_name()} has used some medicine.")
             else:

@@ -70,9 +70,9 @@ class Supplies:
     def use_medicine(self):
         if self.medicine > 0:
             self.medicine -= 1
-    def spend_money(self):
+    def spend_money(self, amount):
         if self.money > 0:
-            self.money -= 10
+            self.money -= amount
     def __str__(self):
         return f"Supplies - Snacks: {self.snacks}, Medicine: {self.medicine}, Money: {self.money}"
     
@@ -229,7 +229,7 @@ while True:
     #Simulate driving a certain amount of miles
     for passenger in passengers:
         passenger.reduce_hunger(10)
-    car.use_fuel(2)
+    car.use_fuel(1)
     car.drive_miles(20)
     game_check()
     run_event()
