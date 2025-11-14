@@ -595,7 +595,8 @@ while True:
     for passenger in car.passengers:
         passenger.reduce_hunger(10)
     animate_car(loops = 4, speed = 0.2)
-    car.use_fuel(2)
+    car.use_fuel(1)
+    car.drive_miles(25)
     game_check()
     #run_event()
     if random.random() < 0.75:
