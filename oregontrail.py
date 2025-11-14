@@ -119,7 +119,7 @@ import time
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def animate_car(loops=3, speed=0.15):
+def animate_car(loops=3, speed=0.2):
     frames = [ascii_car_frame1, ascii_car_frame2, ascii_car_frame3, ascii_car_frame4]
     road_line = "░▒▓█" * 25  # Scrolling road
 
