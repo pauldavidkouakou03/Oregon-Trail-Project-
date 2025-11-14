@@ -123,9 +123,6 @@ def animate_car(loops=3, speed=0.15):
     frames = [ascii_car_frame1, ascii_car_frame2, ascii_car_frame3, ascii_car_frame4]
     road_line = "░▒▓█" * 25  # Scrolling road
 
-    print("🚗 Starting engine... VROOM VROOM!\n")
-    time.sleep(1)
-
     for _ in range(loops):
         for i, frame in enumerate(frames):
             clear_screen()
@@ -490,6 +487,8 @@ ascii_art_car_driving = r"""
 """        
 slow_print(ascii_art_car_driving,0.03)
 '''
+print("🚗 Starting engine... VROOM VROOM!\n")
+time.sleep(1)
 animate_car(loops=4, speed=0.2)
 
 #Item Use / Selection / and Game Checks and Functionality
@@ -577,6 +576,7 @@ while True:
     #Simulate driving a certain amount of miles
     for passenger in car.passengers:
         passenger.reduce_hunger(10)
+    animate_car(loops=4, speed=0.2)
     car.use_fuel(2)
     game_check()
     run_event()
