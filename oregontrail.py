@@ -505,7 +505,7 @@ slow_print(ascii_art_car_driving,0.03)
 '''
 print("🚗 Starting engine... VROOM VROOM!\n")
 time.sleep(1)
-animate_car(loops = 4, speed = 0.05)
+animate_car(loops = 4, speed = 0.2)
 #Game Over Screen
 game_over_screen = r"""
 ..............................................................................................................................................................................
@@ -573,25 +573,24 @@ def print_stats():
     print(car)
     print(supplies)
 
-def supply_selection(selection):
+def supply_selection(selection,choice):
     match selection:
         case 1:
             if supplies.get_snacks() > 0:
                 supplies.use_snack()
-                passenger.increase_hunger(30)
-                print(f"{passenger.get_name()} has eaten a snack.")
+                passenger[choice].increase_hunger(30)
+                print(f"{passenger[choice].get_name()} has eaten a snack.")
             else:
                 print("No Snacks Left!")
         case 2:
             if supplies.get_medicine() > 0:
                 supplies.use_medicine()
-                if passenger.get_status() == "Fever":
-                    passenger.reset_fever_counter()
-                passenger.set_status("Healthy")
-                print(f"{passenger.get_name()} has used some medicine.")
+                if passenger[choice].get_status() == "Fever":
+                    passenger[choice].reset_fever_counter()
+                passenger[choice].set_status("Healthy")
+                print(f"{passenger[choice].get_name()} has used some medicine.")
             else:
                 print("No Medicine Left!")
-
 
 def passenger_item_use(choice):
     match choice:
@@ -599,22 +598,23 @@ def passenger_item_use(choice):
             print("1. Snacks")
             print("2. Medicine")
             selection = int(input(f"Which item would you like to give to {car.passengers[0].get_name()}?"))
-            supply_selection(selection)
+            supply_selection(selection, choice - 1)
         case 2:
             print("1. Snacks")
             print("2. Medicine")
             selection = int(input(f"Which item would you like to give to {car.passengers[1].get_name()}?"))
-            supply_selection(selection)
+            supply_selection(selection, choice - 1)
         case 3:
             print("1. Snacks")
             print("2. Medicine")
             selection = int(input(f"Which item would you like to give to {car.passengers[2].get_name()}?"))
-            supply_selection(selection)
+            supply_selection(selection, choice - 1)
         case 4:
             print("1. Snacks")
             print("2. Medicine")
             selection = int(input(f"Which item would you like to give to {car.passengers[3].get_name()}?"))
-            supply_selection(selection)
+            supply_selection(selection, choice - 1)
+
 
 def game_check():
     #Check if Passenger has starved
@@ -692,7 +692,6 @@ while True:
                     break #Restarts the entire loop to continue driving
         except ValueError:
             print("Invalid Input")
-
 
 
 
