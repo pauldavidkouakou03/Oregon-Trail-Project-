@@ -573,22 +573,22 @@ def print_stats():
     print(car)
     print(supplies)
 
-def supply_selection(selection,choice):
+def supply_selection(selection):
     match selection:
         case 1:
             if supplies.get_snacks() > 0:
                 supplies.use_snack()
-                passenger[choice].increase_hunger(30)
-                print(f"{passenger[choice].get_name()} has eaten a snack.")
+                passenger.increase_hunger(30)
+                print(f"{passenger.get_name()} has eaten a snack.")
             else:
                 print("No Snacks Left!")
         case 2:
             if supplies.get_medicine() > 0:
                 supplies.use_medicine()
-                if passenger[choice].get_status() == "Fever":
-                    passenger[choice].reset_fever_counter()
-                passenger[choice].set_status("Healthy")
-                print(f"{passenger[choice].get_name()} has used some medicine.")
+                if passenger.get_status() == "Fever":
+                    passenger.reset_fever_counter()
+                passenger.set_status("Healthy")
+                print(f"{passenger.get_name()} has used some medicine.")
             else:
                 print("No Medicine Left!")
 
@@ -598,22 +598,22 @@ def passenger_item_use(choice):
             print("1. Snacks")
             print("2. Medicine")
             selection = int(input(f"Which item would you like to give to {car.passengers[0].get_name()}?"))
-            supply_selection(selection, choice - 1)
+            supply_selection(selection)
         case 2:
             print("1. Snacks")
             print("2. Medicine")
             selection = int(input(f"Which item would you like to give to {car.passengers[1].get_name()}?"))
-            supply_selection(selection, choice - 1)
+            supply_selection(selection)
         case 3:
             print("1. Snacks")
             print("2. Medicine")
             selection = int(input(f"Which item would you like to give to {car.passengers[2].get_name()}?"))
-            supply_selection(selection, choice - 1)
+            supply_selection(selection)
         case 4:
             print("1. Snacks")
             print("2. Medicine")
             selection = int(input(f"Which item would you like to give to {car.passengers[3].get_name()}?"))
-            supply_selection(selection, choice - 1)
+            supply_selection(selection)
 
 
 def game_check():
