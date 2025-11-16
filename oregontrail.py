@@ -573,7 +573,7 @@ def print_stats():
     print(car)
     print(supplies)
 
-def supply_selection(selection):
+def supply_selection(selection, passenger):
     match selection:
         case 1:
             if supplies.get_snacks() > 0:
@@ -598,22 +598,26 @@ def passenger_item_use(choice):
             print("1. Snacks")
             print("2. Medicine")
             selection = int(input(f"Which item would you like to give to {car.passengers[0].get_name()}?"))
-            supply_selection(selection)
+            selected_passenger = car.passengers[0]
+            supply_selection(selection, selected_passenger)
         case 2:
             print("1. Snacks")
             print("2. Medicine")
             selection = int(input(f"Which item would you like to give to {car.passengers[1].get_name()}?"))
-            supply_selection(selection)
+            selected_passenger = car.passengers[1]
+            supply_selection(selection, selected_passenger)
         case 3:
             print("1. Snacks")
             print("2. Medicine")
             selection = int(input(f"Which item would you like to give to {car.passengers[2].get_name()}?"))
-            supply_selection(selection)
+            selected_passenger = car.passengers[2]
+            supply_selection(selection, selected_passenger)
         case 4:
             print("1. Snacks")
             print("2. Medicine")
             selection = int(input(f"Which item would you like to give to {car.passengers[3].get_name()}?"))
-            supply_selection(selection)
+            selected_passenger = car.passengers[3]
+            supply_selection(selection, selected_passenger)
 
 
 def game_check():
