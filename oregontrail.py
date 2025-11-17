@@ -291,12 +291,22 @@ __        __   _                            _
   |_||_|  |_| .__/   \___/|_|  \___|\__, |\___/|_| |_|   |_||_|  \__,_|_|_(_)
             |_|                     |___/                                    
 """
+Montana_and_Oregon= r"""
+      ,--.
+     |   |    ___
+     |   |   /   \           ^    ^    ^   ^
+     |   |  |     |         ^^   ^^   ^^  ^^ 
+  ___|   |__ \___/         ^^^  ^^^  ^^^ ^^^ 
+ /           \            ^^^^^^^^^^^^^^^^ ^^^
+|   M O N T A N A   |     |     B E N D      |
+|___________________|     |__________________|
+"""
 slow_print(ascii_art_intro, 0.08)
 print("")
 print("You will be traveling from Billings, Montana to Bend, Oregon")
+print(Montana_and_Oregon)
 print("")
-print("It will be about a 1000 mile travel")
-print("")
+print("It will be about a 1000 mile travel\n")
 ready = input("Are you ready to continue? (y/n): ")
 #Find and check passengers
 ascii_art_car = r"""
@@ -505,7 +515,7 @@ slow_print(ascii_art_car_driving,0.03)
 '''
 print("🚗 Starting engine... VROOM VROOM!\n")
 time.sleep(1)
-animate_car(loops = 4, speed = 0.2)
+animate_car(loops = 3, speed = 0.15)
 #Game Over Screen
 game_over_screen = r"""
 ..............................................................................................................................................................................
@@ -652,7 +662,7 @@ while True:
     #Simulate driving a certain amount of miles
     for passenger in car.passengers:
         passenger.reduce_hunger(10)
-    animate_car(loops = 4, speed = 0.2)
+    animate_car(loops = 3, speed = 0.2)
     car.use_fuel(1)
     car.drive_miles(25)
     game_check()
