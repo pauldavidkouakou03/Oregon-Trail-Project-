@@ -287,3 +287,8 @@ def rest_stop():
             print("Everyone feels better!")
         elif choice == "6":
             print("Back on the road!\n")
+
+car.clear_passengers()
+for passenger in self.passengers:
+    if passenger.get_status() != 'dead':
+        car.add_passenger(passenger)
