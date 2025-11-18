@@ -162,8 +162,6 @@ class Vehicle:
     def show_passengers(self):
         for passenger in self.passengers:
             print(passenger.get_name())
-    def clear_passengers(self):
-        self.passengers.clear()
 
 class Passenger:
     
