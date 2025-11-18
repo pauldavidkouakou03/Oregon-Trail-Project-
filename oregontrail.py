@@ -698,7 +698,6 @@ def game_check():
         print("All Passengers have died! Game Over.")
         slow_print(game_over_screen, 0.07)
         sys.exit()
-
 Montana_Plains = r"""
       ,--.
      |   |    ___
@@ -734,7 +733,12 @@ while True:
     animate_car(loops = 3, speed = 0.2)
     car.use_fuel(1)
     car.drive_miles(25)
+    car.clear_passengers()
     game_check()
+    car.clear_passengers()
+    for passenger in car.passengers:
+        if passenger.get_status() != 'Dead':
+            car.add_passenger(passenger)
     if random.random() < 0.75:
         run_event()
 
