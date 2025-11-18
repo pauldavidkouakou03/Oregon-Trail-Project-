@@ -675,14 +675,14 @@ def passenger_item_use(choice):
 def game_check():
     #Check if Passenger has starved
     for passenger in car.passengers:
-        if passenger.get_hunger() <= 0:
+        if passenger.get_hunger() <= 0 and passenger.get_status() != 'Dead':
             passenger.set_status("Dead")
             print(f"{passenger.get_name()} has died of starvation.")
     #Check Passenger with Fever
     for passenger in car.passengers:
         if passenger.get_status() == "Fever":
             passenger.fever_counter()
-            if passenger.get_fever_days() > 4:
+            if passenger.get_fever_days() > 4 and passenger.get_status() != 'Dead':
                 print(f"{passenger.get_name()} has died from their fever.")
                 passenger.set_status("Dead")
     #Check if Vehicle is Dead or out of fuel
