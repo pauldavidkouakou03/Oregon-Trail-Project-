@@ -108,30 +108,38 @@ class Events:
             print(f"{passengers[selection].get_name()} used their phone.")
 
     def object_in_road():
-        user_input = input("There is debris in the road! You can try to avoid it but it may damage the car.\n You could also take another way, but you will lose distance on your destination. (y (Avoid) / n (Detour)): ")
-        if user_input == "y":
-            chance = random.randint(1, 10)
-            if chance <= 6:
-                print("You sucessfully avoided the debris!")
-            else:
-                print("You hit the debris, damaging the car.")
-                car.reduce_health(25)
-        elif user_input == "n":
-            print("You took a detour, losing some distance.")
-            car.drive_miles(-40)
+        try:
+            user_input = input("There is debris in the road! You can try to avoid it but it may damage the car.\n You could also take another way, but you will lose distance on your destination. (y (Avoid) / n (Detour)): ")
+            if user_input == "y":
+                chance = random.randint(1, 10)
+                if chance <= 6:
+                    print("You sucessfully avoided the debris!")
+                else:
+                    print("You hit the debris, damaging the car.")
+                    car.reduce_health(25)
+            elif user_input == "n":
+                print("You took a detour, losing some distance.")
+                car.drive_miles(-40)
+        except ValueError:
+            print("Invalid Input")
     
     def flat_tire():
         user_input = input("You got a flat tire! You can try to fix it yourself or call for roadside assistance. (f (fix) / c (call)): ")
-        if user_input == "f":
-            chance = random.randint(1, 20)
-            if chance > 15:
-                print("You successfully fixed the tire!")
-            else:
-                print("You failed to fix the tire, damaging the car.")
-                car.reduce_health(25)
-        elif user_input == "c":
-            print("You called for roadside assistance, spending some money.")
-            supplies.spend_money(30)
+        try:
+            if user_input == "f":
+                chance = random.randint(1, 20)
+                if chance > 15:
+                    print("You successfully fixed the tire!")
+                else:
+                    print("You failed to fix the tire, damaging the car.")
+                    car.reduce_health(25)
+            elif user_input == "c":
+                print("You called for roadside assistance, spending some money.")
+                supplies.spend_money(30)
+        except ValueError:
+            print("Invalid Input")
+    
+
             
 #Event Testing
 event_list = [Events.flat_tire, Events.object_in_road, Events.car_sick, Events.fever, Events.use_phone]
