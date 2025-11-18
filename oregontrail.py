@@ -672,7 +672,6 @@ def passenger_item_use(choice):
             selected_passenger = car.passengers[3]
             supply_selection(selection, selected_passenger)
 
-
 def game_check():
     #Check if Passenger has starved
     for passenger in car.passengers:
@@ -747,8 +746,8 @@ while True:
             750: "Burns, Oregon – Middle of Nowhere Trading Post",
             950: "Sisters, Oregon – Last stop before Bend!"
         }
-        print("🎉 You have reached a major stop!")
-        print(f"📍 {locations[miles]}")
+        print("You have reached a major stop!")
+        print(f"{locations[miles]}")
         if miles == 250:
             print(Montana_Plains)
         elif miles == 500:
