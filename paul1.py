@@ -1,5 +1,8 @@
-def get_health(self):
-def get_fuel(self):
-def get_hunger(self):
-def get_phone_battery(self):
-def get_snacks(self):
+def get_health(self): car
+def get_fuel(self): car
+def get_hunger(self): passenger
+def get_phone_battery(self): passenger
+def get_snacks(self): supplies
+
+for passenger in self.passenger:
+    passenger.get_hunger()
