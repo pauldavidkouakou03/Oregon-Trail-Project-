@@ -119,7 +119,7 @@ import time
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def animate_car(loops=3, speed=0.2):
+def animate_car(loops = 3, speed = 0.2):
     frames = [ascii_car_frame1, ascii_car_frame2, ascii_car_frame3, ascii_car_frame4]
     road_line = "░▒▓█" * 25  # Scrolling road
 
@@ -134,7 +134,9 @@ def animate_car(loops=3, speed=0.2):
             time.sleep(speed)
 #Intro
 import random
-
+#Get Living Passengers
+def get_living_passengers():
+    return [passenger for passenger in car.passengers if passenger.get_status() != 'Dead']
 #Classes for the Game
 class Vehicle:
     def __init__(self):
@@ -196,7 +198,6 @@ class Passenger:
         return self.fever_days
     def reduce_phone_battery(self, reduction):
         self.phone_battery -= reduction
-
     def __str__(self):
         return f"Name: {self.name}, Status: {self.status}, Hunger: {self.hunger} Phone Battery: {self.phone_battery}"
 
@@ -228,19 +229,28 @@ class Supplies:
 
 class Events:
     def car_sick():
-        selection = random.randint(0, 3)
-        car.passengers[selection].set_status("Car Sick")
-        print(f"{car.passengers[selection].get_name()} has gotten car sick!")
+        #selection = random.randint(0, 3)
+        living = get_living_passengers()
+        if living:
+            passenger = random.choice(living)
+            passenger.set_status("Car Sick")
+            print(f"{car.passengers[selection].get_name()} has gotten car sick!")
 
     def fever():
-        selection = random.randint(0, 3)
-        car.passengers[selection].set_status("Fever")
-        print(f"{car.passengers[selection].get_name()} has gotten a Fever!")
+        #selection = random.randint(0, 3)
+        living = get_living_passengers()
+        if living:
+            passenger = random.choice(living)
+            passenger.set_status("Fever")
+            print(f"{car.passengers[selection].get_name()} has gotten a Fever!")
     
     def use_phone():
-        selection = random.randint(0, 3)
-        car.passengers[selection].reduce_phone_battery(10)
-        print(f"{car.passengers[selection].get_name()} used their phone.")
+        #selection = random.randint(0, 3)
+        living = get_living_passengers()
+        if living:
+            passenger = random.choice(living)
+            passenger.reduce_phone_battery(10)
+            print(f"{car.passengers[selection].get_name()} used their phone.")
     
     def object_in_road():
         user_input = input("There is debris in the road! You can try to avoid it but it may damage the car.\n You could also take another way, but you will lose distance on your destination. (y (Avoid) / n (Detour)): ")
