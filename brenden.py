@@ -228,4 +228,62 @@ gas_pump = r"""
                        +%+***************************+@
                        +@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 """
-print(gas_pump)
+#print(gas_pump)
+
+#Working on Stop System
+
+    # Fixed stops at certain milestones
+miles = car.get_miles_driven()
+if miles in [250, 500, 750, 950]:   # You can adjust these
+    locations = {
+        250: "Butte, Montana – Big Sky Country Rest Stop",
+        500: "Boise, Idaho – Capital City Gas & Snacks",
+        750: "Burns, Oregon – Middle of Nowhere Trading Post",
+        950: "Sisters, Oregon – Last stop before Bend!"
+    }
+    print("🎉 You have reached a major stop!")
+    print(f"📍 {locations[miles]}")
+    rest_stop()
+
+
+def rest_stop():
+    clear_screen()
+    print("You pull over at a gas station / rest area!")
+    print("1. Snacks ($5 each)   2. Medicine ($20)   3. Gas ($60 full tank)")
+    print("4. Repair car ($50 → +40 health)   5. Rest & charge phones   6. Leave")
+    while True:
+        choice = input("Choice (1-6): ")
+        if choice == "1":
+            amount = int(input("How many? ") or 0)
+            if supplies.get_money() >= amount * 5:
+                supplies.spend_money(amount * 5)
+                supplies.add_snacks(amount)
+                print(f"Bought {amount} snacks")
+            else: print("Not enough $")
+        elif choice == "2":
+            amount = int(input("How many? ") or 0)
+            if supplies.get_money() >= amount * 20:
+                supplies.spend_money(amount * 20)
+                supplies.medicine += amount
+                print(f"Bought {amount} medicine")
+            else: print("Not enough $")
+        elif choice == "3" and supplies.get_money() >= 60:
+            supplies.spend_money(60)
+            car.fuel = car.gas_tank_size
+            print("Tank filled!")
+        elif choice == "4" and supplies.get_money() >= 50:
+            supplies.spend_money(50)
+            car.health += 40
+            if car.health > 100:
+                car.health = 100
+            print(f"Car health → {car.get_health()}")
+        elif choice == "5":
+            for passenger in car.passengers:
+                if passenger.get_status() != "Dead":
+                    passenger.increase_hunger(15)
+                    passenger.phone_battery += 25
+                    if passenger.phone_battery > 100:
+                        passenger.phone_battery = 100
+            print("Everyone feels better!")
+        elif choice == "6":
+            print("Back on the road!\n")

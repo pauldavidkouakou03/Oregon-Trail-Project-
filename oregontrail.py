@@ -577,7 +577,6 @@ def run_event():
 
 #Rest Stops Function
 def rest_stop():
-    clear_screen()
     print("You pull over at a gas station / rest area!")
     print("1. Snacks ($5 each)   2. Medicine ($20)   3. Gas ($60 full tank)")
     print("4. Repair car ($50 → +40 health)   5. Rest & charge phones   6. Leave")
@@ -701,6 +700,33 @@ def game_check():
         slow_print(game_over_screen, 0.07)
         sys.exit()
 
+Montana_Plains = r"""
+      ,--.
+     |   |    ___
+     |   |   /   \
+     |   |  |     |
+  ___|   |__ \___/
+ /           \
+|   M O N T A N A   |
+|___________________|
+"""
+Idaho_Mountains = r"""
+   /\           /\
+  /  \         /  \
+ /    \   _   /    \
+/      \_/ \_/      \
+|                    |
+|    I D A H O       |
+|____________________|
+"""
+Oregon_Forest = r"""
+   ^    ^    ^   ^  
+  ^^   ^^   ^^  ^^  
+ ^^^  ^^^  ^^^ ^^^ 
+^^^^^^^^^^^^^^^^ ^^^
+|     B E N D      |
+|__________________|
+"""
 #Running a Test for the Game Loop
 while True:
     #Simulate driving a certain amount of miles
@@ -723,6 +749,10 @@ while True:
         }
         print("🎉 You have reached a major stop!")
         print(f"📍 {locations[miles]}")
+        if miles == 250:
+            print(Montana_Plains)
+        elif miles == 500:
+            print(Idaho_Mountains)
         rest_stop()
 
     while True:
