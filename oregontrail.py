@@ -234,7 +234,7 @@ class Events:
         if living:
             passenger = random.choice(living)
             passenger.set_status("Car Sick")
-            print(f"{car.passengers[selection].get_name()} has gotten car sick!")
+            print(f"{passenger.get_name()} has gotten car sick!")
 
     def fever():
         #selection = random.randint(0, 3)
@@ -242,7 +242,7 @@ class Events:
         if living:
             passenger = random.choice(living)
             passenger.set_status("Fever")
-            print(f"{car.passengers[selection].get_name()} has gotten a Fever!")
+            print(f"{passenger.get_name()} has gotten a Fever!")
     
     def use_phone():
         #selection = random.randint(0, 3)
@@ -250,7 +250,7 @@ class Events:
         if living:
             passenger = random.choice(living)
             passenger.reduce_phone_battery(10)
-            print(f"{car.passengers[selection].get_name()} used their phone.")
+            print(f"{passenger.get_name()} used their phone.")
     
     def object_in_road():
         user_input = input("There is debris in the road! You can try to avoid it but it may damage the car.\n You could also take another way, but you will lose distance on your destination. (y (Avoid) / n (Detour)): ")
