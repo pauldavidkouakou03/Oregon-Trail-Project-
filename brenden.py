@@ -292,3 +292,7 @@ car.clear_passengers()
 for passenger in self.passengers:
     if passenger.get_status() != 'dead':
         car.add_passenger(passenger)
+
+
+car.get_health()
+print
