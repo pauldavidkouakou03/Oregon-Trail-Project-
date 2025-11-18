@@ -570,7 +570,7 @@ game_over_screen = r"""
 ..............................................................................................................................................................................
 """
 #Item Use / Selection / and Game Checks and Functionality
-event_list = [Events.car_sick, Events.fever, Events.use_phone, Events.object_in_road]
+event_list = [Events.car_sick, Events.fever, Events.use_phone, Events.object_in_road, Events.flat_tire]
 def run_event():
     chosen_event = random.choice(event_list)
     chosen_event()
@@ -735,10 +735,6 @@ while True:
     car.drive_miles(25)
     car.clear_passengers()
     game_check()
-    car.clear_passengers()
-    for passenger in car.passengers:
-        if passenger.get_status() != 'Dead':
-            car.add_passenger(passenger)
     if random.random() < 0.75:
         run_event()
 
