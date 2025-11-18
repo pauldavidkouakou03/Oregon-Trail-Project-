@@ -698,6 +698,7 @@ def game_check():
         print("All Passengers have died! Game Over.")
         slow_print(game_over_screen, 0.07)
         sys.exit()
+
 Montana_Plains = r"""
       ,--.
      |   |    ___
