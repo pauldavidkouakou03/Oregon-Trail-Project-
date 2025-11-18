@@ -733,6 +733,7 @@ while True:
     animate_car(loops = 3, speed = 0.2)
     car.use_fuel(1)
     car.drive_miles(25)
+    car.clear_passengers()
     game_check()
     if random.random() < 0.75:
         run_event()
