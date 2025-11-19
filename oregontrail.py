@@ -201,7 +201,7 @@ class Passenger:
         self.phone_battery -= reduction
     def __str__(self):
         for passenger in car.passengers:
-            if passenger.get_status() == 'Dead':
+            if passenger.get_status() == 'DEAD':
                 return f"Name: {self.name}, Status: {self.status}"
             else:
                 return f"Name: {self.name}, Status: {self.status}, Hunger: {self.hunger} Phone Battery: {self.phone_battery}"
@@ -662,25 +662,25 @@ def passenger_item_use(choice):
         case 1:
             print("1. Snacks")
             print("2. Medicine")
-            selection = int(input(f"Which item would you like to give to {car.passengers[0].get_name()}?"))
+            selection = int(input(f"Which item would you like to give to {car.passengers[0].get_name()}? "))
             selected_passenger = car.passengers[0]
             supply_selection(selection, selected_passenger)
         case 2:
             print("1. Snacks")
             print("2. Medicine")
-            selection = int(input(f"Which item would you like to give to {car.passengers[1].get_name()}?"))
+            selection = int(input(f"Which item would you like to give to {car.passengers[1].get_name()}? "))
             selected_passenger = car.passengers[1]
             supply_selection(selection, selected_passenger)
         case 3:
             print("1. Snacks")
             print("2. Medicine")
-            selection = int(input(f"Which item would you like to give to {car.passengers[2].get_name()}?"))
+            selection = int(input(f"Which item would you like to give to {car.passengers[2].get_name()}? "))
             selected_passenger = car.passengers[2]
             supply_selection(selection, selected_passenger)
         case 4:
             print("1. Snacks")
             print("2. Medicine")
-            selection = int(input(f"Which item would you like to give to {car.passengers[3].get_name()}?"))
+            selection = int(input(f"Which item would you like to give to {car.passengers[3].get_name()}? "))
             selected_passenger = car.passengers[3]
             supply_selection(selection, selected_passenger)
 
@@ -796,7 +796,7 @@ while True:
                         print(f"4. {car.passengers[3].get_name()}")
                     #try and except will catch any invalid inputs when choosing a passenger
                     try:
-                        choice = int(input("Which passenger would you like to give an item to? (1-4):"))
+                        choice = int(input("Which passenger would you like to give an item to? (1-4): "))
                         print("\n")
                         passenger_item_use(choice)
                         continue #Restarts the inner loop after using an item
