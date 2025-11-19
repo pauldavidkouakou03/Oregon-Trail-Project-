@@ -719,6 +719,7 @@ Montana_Plains = r"""
 |   M O N T A N A   |
 |___________________|
 """
+
 Idaho_Mountains = r"""
    /\           /\
   /  \         /  \
@@ -728,6 +729,7 @@ Idaho_Mountains = r"""
 |    I D A H O       |
 |____________________|
 """
+
 Oregon_Forest = r"""
    ^    ^    ^   ^  
   ^^   ^^   ^^  ^^  
@@ -736,6 +738,7 @@ Oregon_Forest = r"""
 |     B E N D      |
 |__________________|
 """
+
 #Running a Test for the Game Loop
 while True:
     #Simulate driving a certain amount of miles
