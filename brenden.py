@@ -350,7 +350,17 @@ def store():
                 passenger.phone_battery += (25 * amount)
                 if passenger.phone_battery > 100:
                     passenger.phone_battery = 100
-            print("Everyone feels better!")
         elif choice == "6":
-            print("Back on the road!\n")
+            print("Leaving The Store!\n")
             break
+
+snacks = 5
+deaths = 2
+
+new_file = open('game_stats.txt', 'w')
+new_file.write(f'{player_name}|{dead_count}|{car.health}|{car.fuel}|{supplies.money}|{supplies.snacks}|{supplies.snacks}')
+new_file.close()
+player_name
+car.health
+car.fuel
+dead_count
