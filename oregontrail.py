@@ -200,10 +200,11 @@ class Passenger:
     def reduce_phone_battery(self, reduction):
         self.phone_battery -= reduction
     def __str__(self):
-        if passenger.get_status() != 'Dead':
-            return f"Name: {self.name}, Status: {self.status}, Hunger: {self.hunger} Phone Battery: {self.phone_battery}"
-        else:
-            return f"Name: {self.name}, Status: {self.status}"
+        for passenger in car.passengers:
+            if passenger.get_status() == 'Dead':
+                return f"Name: {self.name}, Status: {self.status}, Hunger: {self.hunger} Phone Battery: {self.phone_battery}"
+            else:
+                return f"Name: {self.name}, Status: {self.status}"
 
 class Supplies:
     def __init__(self):
@@ -236,7 +237,7 @@ class Events:
         #selection = random.randint(0, 3)
         living = get_living_passengers()
         passenger = random.choice(living)
-        if passenger.get_status() != "Car Sick" or "Dead":
+        if passenger.get_status() != "Car Sick" or "Fever" or "Dead":
             passenger.set_status("Car Sick")
             print(f"{passenger.get_name()} has gotten car sick!")
 
