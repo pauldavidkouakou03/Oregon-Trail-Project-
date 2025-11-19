@@ -200,11 +200,7 @@ class Passenger:
     def reduce_phone_battery(self, reduction):
         self.phone_battery -= reduction
     def __str__(self):
-        for passenger in car.passengers:
-            if passenger.get_status() == 'DEAD':
-                return f"Name: {self.name}, Status: {self.status}"
-            else:
-                return f"Name: {self.name}, Status: {self.status}, Hunger: {self.hunger} Phone Battery: {self.phone_battery}"
+        return f"Name: {self.name}, Status: {self.status}, Hunger: {self.hunger} Phone Battery: {self.phone_battery}"
 
 class Supplies:
     def __init__(self):
@@ -696,8 +692,8 @@ def game_check():
         if passenger.get_status() == "Fever":
             passenger.fever_counter()
             if passenger.get_fever_days() > 4 and passenger.get_status() != 'DEAD':
-                print(f"{passenger.get_name()} has died from their fever.")
                 passenger.set_status("DEAD")
+                print(f"{passenger.get_name()} has died from their fever.")
     #Check if Vehicle is Dead or out of fuel
     if car.get_health() <= 0 or car.get_fuel() <= 0:
         print("Your vehicle is no longer operable! Game Over.")
@@ -751,7 +747,7 @@ while True:
     animate_car(loops = 3, speed = 0.2)
     car.use_fuel(1)
     car.drive_miles(25)
-    #game_check()
+    game_check()
     if random.random() < 0.75:
         run_event()
     game_check()
