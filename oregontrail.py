@@ -687,16 +687,16 @@ def passenger_item_use(choice):
 def game_check():
     #Check if Passenger has starved
     for passenger in car.passengers:
-        if passenger.get_hunger() <= 0 and passenger.get_status() != 'Dead':
-            passenger.set_status("Dead")
+        if passenger.get_hunger() <= 0 and passenger.get_status() != 'DEAD':
+            passenger.set_status("DEAD")
             print(f"{passenger.get_name()} has died of starvation.")
     #Check Passenger with Fever
     for passenger in car.passengers:
         if passenger.get_status() == "Fever":
             passenger.fever_counter()
-            if passenger.get_fever_days() > 4 and passenger.get_status() != 'Dead':
+            if passenger.get_fever_days() > 4 and passenger.get_status() != 'DEAD':
                 print(f"{passenger.get_name()} has died from their fever.")
-                passenger.set_status("Dead")
+                passenger.set_status("DEAD")
     #Check if Vehicle is Dead or out of fuel
     if car.get_health() <= 0 or car.get_fuel() <= 0:
         print("Your vehicle is no longer operable! Game Over.")
@@ -704,7 +704,7 @@ def game_check():
         sys.exit()
     dead_count = 0
     for passenger in car.passengers:
-        if passenger.get_status() == "Dead":
+        if passenger.get_status() == "DEAD":
             dead_count += 1
     if dead_count == 4:
         print("All Passengers have died! Game Over.")
@@ -745,7 +745,7 @@ Oregon_Forest = r"""
 while True:
     #Simulate driving a certain amount of miles
     for passenger in car.passengers:
-        if passenger.get_status() != "Dead":
+        if passenger.get_status() != "DEAD":
             passenger.reduce_hunger(10)
     animate_car(loops = 3, speed = 0.2)
     car.use_fuel(1)
@@ -786,13 +786,13 @@ while True:
                 case 2: #Allows you to use an item
                     print("\n")
                     print(supplies)
-                    if car.passengers[0].get_status() != "Dead":
+                    if car.passengers[0].get_status() != "DEAD":
                         print(f"1. {car.passengers[0].get_name()}")
-                    if car.passengers[1].get_status() != "Dead":
+                    if car.passengers[1].get_status() != "DEAD":
                         print(f"2. {car.passengers[1].get_name()}")
-                    if car.passengers[2].get_status() != "Dead":
+                    if car.passengers[2].get_status() != "DEAD":
                         print(f"3. {car.passengers[2].get_name()}")
-                    if car.passengers[3].get_status() != "Dead":
+                    if car.passengers[3].get_status() != "DEAD":
                         print(f"4. {car.passengers[3].get_name()}")
                     #try and except will catch any invalid inputs when choosing a passenger
                     try:
