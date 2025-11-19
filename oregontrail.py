@@ -237,7 +237,7 @@ class Events:
         #selection = random.randint(0, 3)
         living = get_living_passengers()
         passenger = random.choice(living)
-        if passenger.get_status() != "Car Sick" or "Fever" or "Dead":
+        if passenger.get_status() != "Car Sick" or "Fever" or "DEAD":
             passenger.set_status("Car Sick")
             print(f"{passenger.get_name()} has gotten car sick!")
 
@@ -245,7 +245,7 @@ class Events:
         #selection = random.randint(0, 3)
         living = get_living_passengers()
         passenger = random.choice(living)
-        if passenger.get_status() != "Fever" or "Dead":
+        if passenger.get_status() != "Fever" or "DEAD":
             passenger.set_status("Fever")
             print(f"{passenger.get_name()} has gotten a Fever!")
 
@@ -253,8 +253,9 @@ class Events:
         #selection = random.randint(0, 3)
         living = get_living_passengers()
         passenger = random.choice(living)
-        passenger.reduce_phone_battery(10)
-        print(f"{passenger.get_name()} used their phone.")
+        if passenger.get_status() != "DEAD":
+            passenger.reduce_phone_battery(10)
+            print(f"{passenger.get_name()} used their phone.")
     
     def object_in_road():
         user_input = input("There is debris in the road! You can try to avoid it but it may damage the car.\n You could also take another way, but you will lose distance on your destination. (y (Avoid) / n (Detour)): ")
@@ -750,9 +751,10 @@ while True:
     animate_car(loops = 3, speed = 0.2)
     car.use_fuel(1)
     car.drive_miles(25)
-    game_check()
+    #game_check()
     if random.random() < 0.75:
         run_event()
+    game_check()
 
     miles = car.get_miles_driven()
     if miles in [250, 500, 750, 950]:   # You can adjust these
