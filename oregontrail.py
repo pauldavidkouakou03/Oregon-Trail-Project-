@@ -348,7 +348,7 @@ def find_passengers():
   print("")
   slow_print(ascii_art_car, 0.05)
   print("")
-  driver = input("Enter first name of wagon leader: ")
+  driver = input("Enter first name of driver: ")
   car.add_passenger(Passenger(driver))
   passenger1 = input("Enter first name of first passenger: ")
   car.add_passenger(Passenger(passenger1))
