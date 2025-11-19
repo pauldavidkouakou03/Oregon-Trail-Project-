@@ -365,9 +365,5 @@ snacks = 5
 deaths = 2
 
 new_file = open('game_stats.txt', 'w')
-new_file.write(f'{player_name}|{dead_count}|{car.health}|{car.fuel}|{supplies.money}|{supplies.snacks}|{supplies.snacks}')
+new_file.write(f'{player_name} | Death Count: {dead_count} | Car Health: {car.health} | Fuel: {car.fuel} | Money: ${supplies.money} | Snacks: {supplies.snacks}')
 new_file.close()
-player_name
-car.health
-car.fuel
-dead_count
