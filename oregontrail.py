@@ -141,8 +141,8 @@ def get_living_passengers():
 #Classes for the Game
 class Vehicle:
     def __init__(self):
-        self.health = 100
-        self.fuel = 20
+        self.health = 25
+        self.fuel = 4
         self.gas_tank_size = 20
         self.passengers = []
         self.miles_driven = 0
@@ -173,7 +173,7 @@ class Passenger:
         self.name = name
         self.status = "Healthy"
         self.hunger = 100
-        self.phone_battery = 100
+        self.phone_battery = 25
         self.fever_days = 0
     
     def get_name(self):
@@ -317,6 +317,7 @@ print("You will be traveling from Billings, Montana to Bend, Oregon")
 print(Montana_and_Oregon)
 print("")
 print("It will be about a 1000 mile travel\n")
+player_name = input("What is your name?: \n")
 ready = input("Are you ready to continue? (y/n): ")
 #Find and check passengers
 ascii_art_car = r"""
@@ -370,7 +371,90 @@ while correct_names != 'y':
     correct_names = input("Is this correct? (y/n): ")
     print("")
 
+#Store
+gas_pump = r"""
+                           =%---------------------@.
+                         =#--+#@@@@@@@@@@@@@@@@@*+--@
+                         =#=*#--:::::::::::::::=:@=-@
+                         =#=*#:=:.:::.:::.::::::.@=-@
+                         =#=*#:=--%-%:%:%:%:%:--.@=-@     #@@=
+                         =#=*#:=--%%%:%%%:%%%:-:.@=-@:::::%+-.#=
+                         =#=*#:=:-----:--:-----:.@=-@:::::::#*-.*+
+                         =#=+#+:::::::::::::::::##+-@:::::::*@@+-=*=
+                         =#--=*#################+=--@:::::=#*#@+::#+
+                         =#-=+*******************+--@:::::#+%#*=::#+
+                         =%+***********************+@:::::#*%=#+::#+
+                         =%+***********@***********+@*@@@-#@*+=-::#+
+                         =%+*********%+=+%*********+@+%***#++%%*#*-
+                         =%+********#*-+-*%********+@#*@*+%= ##*%+
+                         =%+*******@-:=*=-:@*******+@::@*+%= ##+%+
+                         =%+******@-..***==:@******+@::@*+%= ##+%+
+                         =%+******@-....**=:@******+@::@*+%= ##+%+
+                         =%+*******##:::-:##*******+@::@*+%= ##+%+
+                         =%+*********####%*********+@::@#+%= ##+%+
+                         =%+***********************+@::@#+%= ##+%+
+                         =%+***********************+@:::%*+***++%+
+                       +%+-=++++++++++++++++++++++--+*@:::#@@@@=
+                       +%*###########################*@
+                       +%+***************************+@
+                       +@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+"""
+def store():
+    print("Welcome to The Store!")
+    print(f"You have a base of print - Snacks: {supplies.get_snacks()}, Medicine: {supplies.get_medicine()}, Fuel: {car.get_fuel()} of {car.gas_tank_size}, Car Health: {car.get_health()}, Phone Charge: {car.passengers[0].get_phone_battery()}%")
+    print("You have $500 to spend")
+    print("1. Snacks ($5 each)   2. Medicine ($20 each)   3. Gas ($15 for 1/4 tank)")
+    print("4. Car Health (25 Health for $50 each)   5. Phone Battery (25 Percent is $5 each)   6. Leave")
+    while True:
+        choice = input("Choice (1-6): ")
+        if choice == "1":
+            amount = int(input("How many? ") or 0)
+            if supplies.get_money() >= amount * 5:
+                supplies.spend_money(amount * 5)
+                supplies.add_snacks(amount)
+                print(f"Bought {amount} snacks")
+            else: print("Not enough $")
+        elif choice == "2":
+            amount = int(input("How many? ") or 0)
+            if supplies.get_money() >= amount * 20:
+                supplies.spend_money(amount * 20)
+                supplies.medicine += amount
+                print(f"Bought {amount} medicine")
+            else: print("Not enough $")
+        elif choice == "3":
+            amount = int(input("How many? ") or 0)
+            if supplies.get_money() >= amount * 15:
+                supplies.spend_money(amount * 15)
+                #car.fuel = car.gas_tank_size
+                car.fuel += amount * 5
+                print(gas_pump)
+                print("Tank filled!")
+            else: print("Not enough $")
+        elif choice == "4":
+            amount = int(input("How many? ") or 0)
+            if supplies.get_money() >= amount * 50:
+               supplies.spend_money(amount * 50)
+               car.set_health(25 * amount)
+            print(f"Car health → {car.get_health()}")
+            if car.health > 100:
+                car.health = 100
+                print(f"Car health → {car.get_health()}")
+        elif choice == "5":
+            amount = int(input("How many? ") or 0)
+            if supplies.get_money() >= amount * 5:
+                supplies.spend_money(amount * 5)
+                for passenger in car.passengers:
+                    passenger.phone_battery += (25 * amount)
+                    if passenger.phone_battery > 100:
+                        passenger.phone_battery = 100
+            else: print("Not enough $")
+        elif choice == "6":
+            print("Leaving The Store!\n")
+            break
+store()
+print(f"Snacks: {supplies.get_snacks()}, Medicine: {supplies.get_medicine()}, Fuel: {car.get_fuel()}, Car Health: {car.get_health()}, Phone Charge: {car.passengers[0].get_phone_battery()}%")
 #Packages
+'''
 package1 = ['15 packs of snacks', 'phone charged to 75%', 'car health 100']
 package2 = ['25 packs of snacks', 'phone charged to 25%', 'car health 50']
 package3 = ['50 packs of snacks', 'phone charged to 50%', 'car health 25']
@@ -448,6 +532,7 @@ def set_package(input):
     car.reduce_health(75)
 set_package(selection)
 print(f"Snacks: {supplies.get_snacks()}, Phone Charge: {car.passengers[0].get_phone_battery()}%, Car Health: {car.get_health()}%")
+'''
 
 #Game Begins
 ascii_art_begin = r"""
@@ -586,33 +671,6 @@ def run_event():
     chosen_event()
 
 #Rest Stops Function
-gas_pump = r"""
-                           =%---------------------@.
-                         =#--+#@@@@@@@@@@@@@@@@@*+--@
-                         =#=*#--:::::::::::::::=:@=-@
-                         =#=*#:=:.:::.:::.::::::.@=-@
-                         =#=*#:=--%-%:%:%:%:%:--.@=-@     #@@=
-                         =#=*#:=--%%%:%%%:%%%:-:.@=-@:::::%+-.#=
-                         =#=*#:=:-----:--:-----:.@=-@:::::::#*-.*+
-                         =#=+#+:::::::::::::::::##+-@:::::::*@@+-=*=
-                         =#--=*#################+=--@:::::=#*#@+::#+
-                         =#-=+*******************+--@:::::#+%#*=::#+
-                         =%+***********************+@:::::#*%=#+::#+
-                         =%+***********@***********+@*@@@-#@*+=-::#+
-                         =%+*********%+=+%*********+@+%***#++%%*#*-
-                         =%+********#*-+-*%********+@#*@*+%= ##*%+
-                         =%+*******@-:=*=-:@*******+@::@*+%= ##+%+
-                         =%+******@-..***==:@******+@::@*+%= ##+%+
-                         =%+******@-....**=:@******+@::@*+%= ##+%+
-                         =%+*******##:::-:##*******+@::@*+%= ##+%+
-                         =%+*********####%*********+@::@#+%= ##+%+
-                         =%+***********************+@::@#+%= ##+%+
-                         =%+***********************+@:::%*+***++%+
-                       +%+-=++++++++++++++++++++++--+*@:::#@@@@=
-                       +%*###########################*@
-                       +%+***************************+@
-                       +@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-"""
 def rest_stop():
     print("You pull over at a gas station / rest area!")
     print("1. Snacks ($5 each)   2. Medicine ($20)   3. Gas ($60 full tank)")

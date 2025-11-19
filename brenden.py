@@ -312,7 +312,7 @@ def set_package(input):
 def store():
     print("You pull over at a gas station / rest area!")
     print("You have $500 to spend")
-    print("1. Snacks ($5 each)   2. Medicine ($20 each)   3. Gas ($60 full tank)")
+    print("1. Snacks ($5 each)   2. Medicine ($20 each)   3. Gas ($15 for 1/4 tank)")
     print("4. Car Health (25 Health for $50 each)   5. Phone Battery (25 Percent is $5 each)   6. Leave")
     while True:
         choice = input("Choice (1-6): ")
@@ -330,26 +330,33 @@ def store():
                 supplies.medicine += amount
                 print(f"Bought {amount} medicine")
             else: print("Not enough $")
-        elif choice == "3" and supplies.get_money() >= 60:
-            supplies.spend_money(60)
-            car.fuel = car.gas_tank_size
-            print(gas_pump)
-            print("Tank filled!")
+        elif choice == "3":
+            amount = int(input("How many? ") or 0)
+            if supplies.get_money() >= amount * 15:
+                supplies.spend_money(amount * 15)
+                #car.fuel = car.gas_tank_size
+                car.fuel += amount * 5
+                print(gas_pump)
+                print("Tank filled!")
+            else: print("Not enough $")
         elif choice == "4":
             amount = int(input("How many? ") or 0)
             if supplies.get_money() >= amount * 50:
                supplies.spend_money(amount * 50)
                car.set_health(25 * amount)
+            print(f"Car health → {car.get_health()}")
             if car.health > 100:
                 car.health = 100
-            print(f"Car health → {car.get_health()}")
+                print(f"Car health → {car.get_health()}")
         elif choice == "5":
             amount = int(input("How many? ") or 0)
-            supplies.spend_money(amount * 5)
-            for passenger in car.passengers:
-                passenger.phone_battery += (25 * amount)
-                if passenger.phone_battery > 100:
-                    passenger.phone_battery = 100
+            if supplies.get_money() >= amount * 5:
+                supplies.spend_money(amount * 5)
+                for passenger in car.passengers:
+                    passenger.phone_battery += (25 * amount)
+                    if passenger.phone_battery > 100:
+                        passenger.phone_battery = 100
+            else: print("Not enough $")
         elif choice == "6":
             print("Leaving The Store!\n")
             break
