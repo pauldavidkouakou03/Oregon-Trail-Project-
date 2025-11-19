@@ -367,3 +367,15 @@ deaths = 2
 new_file = open('game_stats.txt', 'w')
 new_file.write(f'{player_name} | Death Count: {dead_count} | Car Health: {car.health} | Fuel: {car.fuel} | Money: ${supplies.money} | Snacks: {supplies.snacks}')
 new_file.close()
+
+
+#Stats Page
+with open("game_stats.txt", "a", encoding="utf-8") as f:
+    # Count how many plays we already have
+    try:
+        plays_so_far = len(open("game_stats.txt").readlines())
+    except:
+        plays_so_far = 0
+    
+    # Write the new line with the next number
+    f.write(f"{plays_so_far + 1}. Score: {score} | Level: {level} | Time: {time_played}s\n")
