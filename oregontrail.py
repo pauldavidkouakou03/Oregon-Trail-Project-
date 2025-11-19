@@ -148,6 +148,8 @@ class Vehicle:
         self.miles_driven = 0
     def get_health(self):
         return self.health
+    def set_health(self, health):
+        self.health = health
     def reduce_health(self, reduction):
         self.health -= reduction
     def use_fuel(self, reduction):
@@ -167,12 +169,11 @@ class Vehicle:
             print(passenger.get_name())
 
 class Passenger:
-    
     def __init__ (self, name):
         self.name = name
         self.status = "Healthy"
         self.hunger = 100
-        self.phone_battery = 100
+        self.phone_battery = 0
         self.fever_days = 0
     
     def get_name(self):
@@ -777,8 +778,8 @@ while True:
         if passenger.get_status() != "DEAD":
             passenger.reduce_hunger(10)
     animate_car(loops = 3, speed = 0.2)
-    car.use_fuel(1)
-    car.drive_miles(25)
+    car.use_fuel(2)
+    car.drive_miles(40)
     game_check()
     if random.random() < 0.75:
         run_event()
