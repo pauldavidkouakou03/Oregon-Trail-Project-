@@ -202,9 +202,9 @@ class Passenger:
     def __str__(self):
         for passenger in car.passengers:
             if passenger.get_status() == 'Dead':
-                return f"Name: {self.name}, Status: {self.status}, Hunger: {self.hunger} Phone Battery: {self.phone_battery}"
-            else:
                 return f"Name: {self.name}, Status: {self.status}"
+            else:
+                return f"Name: {self.name}, Status: {self.status}, Hunger: {self.hunger} Phone Battery: {self.phone_battery}"
 
 class Supplies:
     def __init__(self):
