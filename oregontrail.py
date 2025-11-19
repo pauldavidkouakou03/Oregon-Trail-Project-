@@ -173,7 +173,7 @@ class Passenger:
         self.name = name
         self.status = "Healthy"
         self.hunger = 100
-        self.phone_battery = 0
+        self.phone_battery = 100
         self.fever_days = 0
     
     def get_name(self):
