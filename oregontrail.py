@@ -317,7 +317,7 @@ print("You will be traveling from Billings, Montana to Bend, Oregon")
 print(Montana_and_Oregon)
 print("")
 print("It will be about a 1000 mile travel\n")
-player_name = input("What is your name?: \n")
+player_name = input("What is your name?: ")
 ready = input("Are you ready to continue? (y/n): ")
 #Find and check passengers
 ascii_art_car = r"""
@@ -401,8 +401,8 @@ gas_pump = r"""
 """
 def store():
     print("Welcome to The Store!")
-    print(f"You have a base of print - Snacks: {supplies.get_snacks()}, Medicine: {supplies.get_medicine()}, Fuel: {car.get_fuel()} of {car.gas_tank_size}, Car Health: {car.get_health()}, Phone Charge: {car.passengers[0].get_phone_battery()}%")
-    print("You have $500 to spend")
+    print(f"You have a base of - Snacks: {supplies.snacks}, Medicine: {supplies.medicine}, Fuel: {car.fuel} of {car.gas_tank_size}, Car Health: {car.health}, Phone Charge: {car.passengers[0].phone_battery}%")
+    print(f"You have {supplies.money} to spend on anything else")
     print("1. Snacks ($5 each)   2. Medicine ($20 each)   3. Gas ($15 for 1/4 tank)")
     print("4. Car Health (25 Health for $50 each)   5. Phone Battery (25 Percent is $5 each)   6. Leave")
     while True:
@@ -452,7 +452,8 @@ def store():
             print("Leaving The Store!\n")
             break
 store()
-print(f"Snacks: {supplies.get_snacks()}, Medicine: {supplies.get_medicine()}, Fuel: {car.get_fuel()}, Car Health: {car.get_health()}, Phone Charge: {car.passengers[0].get_phone_battery()}%")
+print(f"Snacks: {supplies.snacks}, Medicine: {supplies.medicine}, Fuel: {car.fuel}, Car Health: {car.health}, Phone Charge: {car.passengers[0].phone_battery}%")
+time.sleep(3)
 #Packages
 '''
 package1 = ['15 packs of snacks', 'phone charged to 75%', 'car health 100']
@@ -673,6 +674,7 @@ def run_event():
 #Rest Stops Function
 def rest_stop():
     print("You pull over at a gas station / rest area!")
+    print(f"You have {supplies.money} to spend")
     print("1. Snacks ($5 each)   2. Medicine ($20)   3. Gas ($60 full tank)")
     print("4. Repair car ($50 → +40 health)   5. Rest & charge phones   6. Leave")
     while True:
