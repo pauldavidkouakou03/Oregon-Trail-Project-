@@ -28,6 +28,8 @@ class Passenger:
         return self.fever_days
     def reduce_phone_battery(self, reduction):
         self.phone_battery -= reduction
+    def get_battery(self):
+        return self.phone_battery
 
     def __str__(self):
         return f"Name: {self.name}, Status: {self.status}, Hunger: {self.hunger} Phone Battery: {self.phone_battery}"
@@ -91,13 +93,13 @@ supplies = Supplies(10, 3)
 class Events:
     def car_sick():
         selection = random.randint(0, 3)
-        if passengers[selection].get_status() != "Dead":
+        if passengers[selection].get_status() != "Dead" or passengers[selection].get_status() != "Car Sick" or passengers[selection].get_status() != "Fever":
             passengers[selection].set_status("Car Sick")
             print(f"{passengers[selection].get_name()} has gotten car sick!")
 
     def fever():
         selection = random.randint(0, 3)
-        if passengers[selection].get_status() != "Dead":
+        if passengers[selection].get_status() != "Dead" or passengers[selection].get_status() != "Fever":
             passengers[selection].set_status("Fever")
             print(f"{passengers[selection].get_name()} has gotten a Fever!")
     
@@ -107,9 +109,14 @@ class Events:
             passengers[selection].reduce_phone_battery(10)
             print(f"{passengers[selection].get_name()} used their phone.")
 
+    def weather_event():
+        chance = random.randint(1, 20)
+        if chance <= 5:
+            print("It has started raining! You slow down a little.")
+
     def object_in_road():
+        user_input = input("There is debris in the road! You can try to avoid it but it may damage the car.\n You could also take another way, but you will lose distance on your destination. (y (Avoid) / n (Detour)): ")
         try:
-            user_input = input("There is debris in the road! You can try to avoid it but it may damage the car.\n You could also take another way, but you will lose distance on your destination. (y (Avoid) / n (Detour)): ")
             if user_input == "y":
                 chance = random.randint(1, 10)
                 if chance <= 6:
@@ -117,9 +124,9 @@ class Events:
                 else:
                     print("You hit the debris, damaging the car.")
                     car.reduce_health(25)
-            elif user_input == "n":
+            else:
                 print("You took a detour, losing some distance.")
-                car.drive_miles(-40)
+                car.drive_miles(-25)
         except ValueError:
             print("Invalid Input")
     
@@ -131,18 +138,46 @@ class Events:
                 if chance > 15:
                     print("You successfully fixed the tire!")
                 else:
-                    print("You failed to fix the tire, damaging the car.")
+                    print("You had some trouble fixing the tire, damaging the car in the process.")
                     car.reduce_health(25)
             elif user_input == "c":
+                dead_phones = 0
+                for passenger in passengers:
+                    if passenger.get_battery() <= 0:
+                        dead_phones += 1
+                if dead_phones == 4:
+                    print("All phones are dead! You had to try fixing the tire yourself.")
+                    time.sleep(1)
+                    chance = random.randint(1, 20)
+                    if chance > 15:
+                        print("You successfully fixed the tire!")
+                        return
+                    else:
+                        print("You had some trouble fixing the tire, damaging the car in the process.")
+                        car.reduce_health(25)
+                        return
+                if supplies.get_money() < 30:
+                    print("Not enough money to call for roadside assistance! So you tried fixing the tire yourself.")
+                    time.sleep(1)
+                    chance = random.randint(1, 20)
+                    if chance > 15:
+                        print("You successfully fixed the tire!")
+                        return
+                    else:
+                        print("You had some trouble fixing the tire, damaging the car in the process.")
+                        car.reduce_health(25)
+                        return
                 print("You called for roadside assistance, spending some money.")
                 supplies.spend_money(30)
         except ValueError:
             print("Invalid Input")
+
+    
     
 
             
 #Event Testing
-event_list = [Events.flat_tire, Events.object_in_road, Events.car_sick, Events.fever, Events.use_phone]
+event_list = [Events.flat_tire, Events.object_in_road, Events.car_sick, Events.fever, Events.use_phone, Events.weather_event]
 def run_event():
     chosen_event = random.choice(event_list)
     chosen_event()
@@ -238,10 +273,10 @@ while True:
     for passenger in passengers:
         passenger.reduce_hunger(10)
     car.use_fuel(1)
-    car.drive_miles(20)
+    car.drive_miles(25)
     game_check()
     run_event()
-    
+
 
     while True:
         print("\n") #Add space for readability

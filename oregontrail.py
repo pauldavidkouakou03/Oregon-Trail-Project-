@@ -266,7 +266,7 @@ class Events:
                 car.reduce_health(25)
         elif user_input == "n":
             print("You took a detour, losing some distance.")
-            car.drive_miles(-40)
+            car.drive_miles(-50)
 
     def flat_tire():
         user_input = input("You got a flat tire! You can try to fix it yourself or call for roadside assistance. (f (fix) / c (call)): ")
@@ -790,10 +790,15 @@ def game_check():
                 passenger.set_status("DEAD")
                 print(f"{passenger.get_name()} has died from their fever.")
     #Check if Vehicle is Dead or out of fuel
-    if car.get_health() <= 0 or car.get_fuel() <= 0:
+    if car.get_health() <= 0:
         print("Your vehicle is no longer operable! Game Over.")
         slow_print(game_over_screen, 0.07)
         sys.exit()
+    if car.get_fuel() <= 0:
+        print("You have run out of fuel! Game Over.")
+        slow_print(game_over_screen, 0.07)
+        sys.exit()
+    #Check if all Passengers are Dead
     dead_count = 0
     for passenger in car.passengers:
         if passenger.get_status() == "DEAD":
@@ -841,7 +846,7 @@ while True:
             passenger.reduce_hunger(10)
     animate_car(loops = 3, speed = 0.2)
     car.use_fuel(2)
-    car.drive_miles(40)
+    car.drive_miles(25)
     game_check()
     if random.random() < 0.75:
         run_event()
