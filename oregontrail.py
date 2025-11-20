@@ -454,6 +454,7 @@ def store():
 store()
 print(f"Snacks: {supplies.snacks}, Medicine: {supplies.medicine}, Fuel: {car.fuel}, Car Health: {car.health}, Phone Charge: {car.passengers[0].phone_battery}%")
 time.sleep(3)
+
 #Packages
 '''
 package1 = ['15 packs of snacks', 'phone charged to 75%', 'car health 100']
@@ -845,7 +846,7 @@ while True:
         run_event()
     game_check()
 
-    miles = car.get_miles_driven()
+    miles = car.miles_driven
     if miles in [250, 500, 750, 950]:   # You can adjust these
         locations = {
             250: "Butte, Montana – Big Sky Country Rest Stop",
