@@ -435,7 +435,8 @@ def store():
             amount = int(input("How many? ") or 0)
             if supplies.get_money() >= amount * 50:
                supplies.spend_money(amount * 50)
-               car.set_health(25 * amount)
+               added_health = (25 * amount)
+               car.set_health(25 + added_health)
             print(f"Car health → {car.get_health()}")
             if car.health > 100:
                 car.health = 100
