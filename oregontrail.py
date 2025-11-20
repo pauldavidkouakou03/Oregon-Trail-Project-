@@ -318,7 +318,6 @@ print("You will be traveling from Billings, Montana to Bend, Oregon")
 print(Montana_and_Oregon)
 print("")
 print("It will be about a 1000 mile travel\n")
-player_name = input("What is your name?: ")
 ready = input("Are you ready to continue? (y/n): ")
 #Find and check passengers
 ascii_art_car = r"""
@@ -868,9 +867,9 @@ while True:
         elif 500 < miles < 750:
             print(Idaho_Mountains)
         elif 750 < miles < 950:
-            print("a")
+            print(Oregon_Forest)
         elif 950 < miles < 1000:
-            print("b")
+            print(Oregon_Forest)
         rest_stop()
     while True:
         print("\n") #Add space for readability
