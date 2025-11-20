@@ -4,6 +4,8 @@ def slow_print(ascii_art,speed):
   for line in ascii_art.strip().split('\n'):
     print(line)
     time.sleep(speed)
+
+#Animation Frames
 # Frame 1: Wheels forward
 ascii_car_frame1 = r"""
                             ▒▒░░  ░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒░░
@@ -132,7 +134,7 @@ def animate_car(loops = 3, speed = 0.2):
             print(" " * 20 + shifted_road)
             print("\n" + " " * 30)
             time.sleep(speed)
-#Intro
+
 import random
 #Get Living Passengers
 def get_living_passengers():
@@ -285,6 +287,7 @@ class Events:
 car = Vehicle()
 supplies = Supplies()
 
+#Intro
 ascii_art_intro = r"""
 __        __   _                            _                                
 \ \      / /__| | ___ ___  _ __ ___   ___  | |_ ___                          
@@ -319,6 +322,7 @@ print(Montana_and_Oregon)
 print("")
 print("It will be about a 1000 mile travel\n")
 ready = input("Are you ready to continue? (y/n): ")
+
 #Find and check passengers
 ascii_art_car = r"""
 Here is your car!
@@ -537,7 +541,7 @@ set_package(selection)
 print(f"Snacks: {supplies.get_snacks()}, Phone Charge: {car.passengers[0].get_phone_battery()}%, Car Health: {car.get_health()}%")
 '''
 
-#Game Begins
+#Game Begins Page
 ascii_art_begin = r"""
 __________________ _______  _______   _________ _______    ______   _______  _______ _________ _        _ 
 \__   __/\__   __/(       )(  ____ \  \__   __/(  ___  )  (  ___ \ (  ____ \(  ____ \\__   __/( (    /|( )
