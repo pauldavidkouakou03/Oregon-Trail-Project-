@@ -142,7 +142,7 @@ def get_living_passengers():
 class Vehicle:
     def __init__(self):
         self.health = 25
-        self.fuel = 4
+        self.fuel = 5
         self.gas_tank_size = 20
         self.passengers = []
         self.miles_driven = 0
@@ -429,7 +429,7 @@ def store():
                 #car.fuel = car.gas_tank_size
                 car.fuel += amount * 5
                 print(gas_pump)
-                print("Tank filled!")
+                print(f"Tank filled to {car.fuel}!")
             else: print("Not enough $")
         elif choice == "4":
             amount = int(input("How many? ") or 0)
