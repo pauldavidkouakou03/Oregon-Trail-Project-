@@ -28,6 +28,8 @@ class Passenger:
         return self.fever_days
     def reduce_phone_battery(self, reduction):
         self.phone_battery -= reduction
+    def get_battery(self):
+        return self.phone_battery
 
     def __str__(self):
         return f"Name: {self.name}, Status: {self.status}, Hunger: {self.hunger} Phone Battery: {self.phone_battery}"
@@ -89,24 +91,46 @@ supplies = Supplies(10, 3)
 
 #Event Functions
 class Events:
+    
+    #Passive Events
     def car_sick():
-        selection = random.randint(0, 3)
-        if passengers[selection].get_status() != "Dead":
-            passengers[selection].set_status("Car Sick")
-            print(f"{passengers[selection].get_name()} has gotten car sick!")
+        invalid_choice = True
+        while invalid_choice:
+            selection = random.randint(0, 3)
+            if passengers[selection].get_status() != "Dead":
+                invalid_choice = False
+                passengers[selection].set_status("Car Sick")
+                print(f"{passengers[selection].get_name()} has gotten car sick!")
 
     def fever():
-        selection = random.randint(0, 3)
-        if passengers[selection].get_status() != "Dead":
-            passengers[selection].set_status("Fever")
-            print(f"{passengers[selection].get_name()} has gotten a Fever!")
+        invalid_choice = True
+        while invalid_choice:
+            selection = random.randint(0, 3)
+            if passengers[selection].get_status() != "Dead":
+                invalid_choice = False
+                passengers[selection].set_status("Fever")
+                print(f"{passengers[selection].get_name()} has gotten a Fever!")
     
     def use_phone():
-        selection = random.randint(0, 3)
-        if passengers[selection].get_status() != "Dead":
-            passengers[selection].reduce_phone_battery(10)
-            print(f"{passengers[selection].get_name()} used their phone.")
+        #Checking if possible to run event
+        dead_phones = 0
+        for passenger in passengers:
+            if passenger.get_battery() <= 0:
+                dead_phones += 1
+        if dead_phones == 4:
+                return
+        else:
+            pass
+        #If there is a any phones alive, it will make a choice
+        invalid_choice = True
+        while invalid_choice:
+            selection = random.randint(0, 3)
+            if passengers[selection].get_status() != "Dead" and passenger[selection].get_battery() > 0:
+                invalid_choice = False
+                passengers[selection].reduce_phone_battery(10)
+                print(f"{passengers[selection].get_name()} used their phone.")
 
+    #Interactive Events
     def object_in_road():
         user_input = input("There is debris in the road! You can try to avoid it but it may damage the car.\n You could also take another way, but you will lose distance on your destination. (y (Avoid) / n (Detour)): ")
         if user_input == "y":
@@ -130,8 +154,17 @@ class Events:
                 print("You failed to fix the tire, damaging the car.")
                 car.reduce_health(25)
         elif user_input == "c":
-            print("You called for roadside assistance, spending some money.")
-            supplies.spend_money(30)
+            invalid_choice = True
+            while invalid_choice:
+                selection = random.randint(0, 3)
+                if passengers[selection].get_battery() > "0" and passengers[selection].get_status() != "Dead":
+                    invalid_choice = False
+                if supplies.get_mpney() >= 30:
+                    print("You called for roadside assistance, spending some money.")
+                supplies.spend_money(30)
+    
+
+
             
 #Event Testing
 event_list = [Events.flat_tire, Events.object_in_road, Events.car_sick, Events.fever, Events.use_phone]
@@ -197,7 +230,7 @@ def passenger_item_use(choice):
 def game_check():
     #Check if Passenger has starved
     for passenger in passengers:
-        if passenger.get_hunger() <= 0:
+        if passenger.get_hunger() <= 0 & passenger.get_status() != "Dead":
             passenger.set_status("Dead")
             print(f"{passenger.get_name()} has died of starvation.")
     #Check Passenger with Fever
