@@ -863,12 +863,15 @@ while True:
         }
         print("You have reached a major stop!")
         print(f"{locations[miles]}")
-        if miles == 250:
+        if 250 < miles < 500:
             print(Montana_Plains)
-        elif miles == 500:
+        elif 500 < miles < 750:
             print(Idaho_Mountains)
+        elif 750 < miles < 950:
+            print("a")
+        elif 950 < miles < 1000:
+            print("b")
         rest_stop()
-
     while True:
         print("\n") #Add space for readability
         print(f"Miles Left: {1000 - car.get_miles_driven()}")
