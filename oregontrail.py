@@ -119,7 +119,7 @@ import time
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def animate_car(loops=3, speed=0.2):
+def animate_car(loops = 3, speed = 0.2):
     frames = [ascii_car_frame1, ascii_car_frame2, ascii_car_frame3, ascii_car_frame4]
     road_line = "░▒▓█" * 25  # Scrolling road
 
@@ -134,17 +134,22 @@ def animate_car(loops=3, speed=0.2):
             time.sleep(speed)
 #Intro
 import random
+#Get Living Passengers
+def get_living_passengers():
+    return [passenger for passenger in car.passengers if passenger.get_status() != 'Dead']
 
 #Classes for the Game
 class Vehicle:
     def __init__(self):
-        self.health = 100
-        self.fuel = 20
+        self.health = 25
+        self.fuel = 5
         self.gas_tank_size = 20
         self.passengers = []
         self.miles_driven = 0
     def get_health(self):
         return self.health
+    def set_health(self, health):
+        self.health = health
     def reduce_health(self, reduction):
         self.health -= reduction
     def use_fuel(self, reduction):
@@ -162,16 +167,13 @@ class Vehicle:
     def show_passengers(self):
         for passenger in self.passengers:
             print(passenger.get_name())
-    def clear_passengers(self):
-        self.passengers.clear()
 
 class Passenger:
-    
     def __init__ (self, name):
         self.name = name
         self.status = "Healthy"
         self.hunger = 100
-        self.phone_battery = 100
+        self.phone_battery = 25
         self.fever_days = 0
     
     def get_name(self):
@@ -198,7 +200,6 @@ class Passenger:
         return self.fever_days
     def reduce_phone_battery(self, reduction):
         self.phone_battery -= reduction
-
     def __str__(self):
         return f"Name: {self.name}, Status: {self.status}, Hunger: {self.hunger} Phone Battery: {self.phone_battery}"
 
@@ -230,19 +231,29 @@ class Supplies:
 
 class Events:
     def car_sick():
-        selection = random.randint(0, 3)
-        car.passengers[selection].set_status("Car Sick")
-        print(f"{car.passengers[selection].get_name()} has gotten car sick!")
+        #selection = random.randint(0, 3)
+        living = get_living_passengers()
+        passenger = random.choice(living)
+        if passenger.get_status() != "Car Sick" and "Fever" and "DEAD":
+            passenger.set_status("Car Sick")
+            print(f"{passenger.get_name()} has gotten car sick!")
 
     def fever():
-        selection = random.randint(0, 3)
-        car.passengers[selection].set_status("Fever")
-        print(f"{car.passengers[selection].get_name()} has gotten a Fever!")
-    
+        #selection = random.randint(0, 3)
+        living = get_living_passengers()
+        passenger = random.choice(living)
+        if passenger.get_status() != "Fever" and "DEAD":
+            passenger.set_status("Fever")
+            print(f"{passenger.get_name()} has gotten a Fever!")
+
     def use_phone():
-        selection = random.randint(0, 3)
-        car.passengers[selection].reduce_phone_battery(10)
-        print(f"{car.passengers[selection].get_name()} used their phone.")
+        #selection = random.randint(0, 3)
+        living = get_living_passengers()
+        passenger = random.choice(living)
+        if passenger.get_status() != "DEAD":
+            if passenger.phone_battery != 0:
+                passenger.reduce_phone_battery(10)
+                print(f"{passenger.get_name()} used their phone.")
     
     def object_in_road():
         user_input = input("There is debris in the road! You can try to avoid it but it may damage the car.\n You could also take another way, but you will lose distance on your destination. (y (Avoid) / n (Detour)): ")
@@ -307,6 +318,7 @@ print("You will be traveling from Billings, Montana to Bend, Oregon")
 print(Montana_and_Oregon)
 print("")
 print("It will be about a 1000 mile travel\n")
+player_name = input("What is your name?: ")
 ready = input("Are you ready to continue? (y/n): ")
 #Find and check passengers
 ascii_art_car = r"""
@@ -339,7 +351,7 @@ def find_passengers():
   print("")
   slow_print(ascii_art_car, 0.05)
   print("")
-  driver = input("Enter first name of wagon leader: ")
+  driver = input("Enter first name of driver: ")
   car.add_passenger(Passenger(driver))
   passenger1 = input("Enter first name of first passenger: ")
   car.add_passenger(Passenger(passenger1))
@@ -360,7 +372,92 @@ while correct_names != 'y':
     correct_names = input("Is this correct? (y/n): ")
     print("")
 
+#Store
+gas_pump = r"""
+                           =%---------------------@.
+                         =#--+#@@@@@@@@@@@@@@@@@*+--@
+                         =#=*#--:::::::::::::::=:@=-@
+                         =#=*#:=:.:::.:::.::::::.@=-@
+                         =#=*#:=--%-%:%:%:%:%:--.@=-@     #@@=
+                         =#=*#:=--%%%:%%%:%%%:-:.@=-@:::::%+-.#=
+                         =#=*#:=:-----:--:-----:.@=-@:::::::#*-.*+
+                         =#=+#+:::::::::::::::::##+-@:::::::*@@+-=*=
+                         =#--=*#################+=--@:::::=#*#@+::#+
+                         =#-=+*******************+--@:::::#+%#*=::#+
+                         =%+***********************+@:::::#*%=#+::#+
+                         =%+***********@***********+@*@@@-#@*+=-::#+
+                         =%+*********%+=+%*********+@+%***#++%%*#*-
+                         =%+********#*-+-*%********+@#*@*+%= ##*%+
+                         =%+*******@-:=*=-:@*******+@::@*+%= ##+%+
+                         =%+******@-..***==:@******+@::@*+%= ##+%+
+                         =%+******@-....**=:@******+@::@*+%= ##+%+
+                         =%+*******##:::-:##*******+@::@*+%= ##+%+
+                         =%+*********####%*********+@::@#+%= ##+%+
+                         =%+***********************+@::@#+%= ##+%+
+                         =%+***********************+@:::%*+***++%+
+                       +%+-=++++++++++++++++++++++--+*@:::#@@@@=
+                       +%*###########################*@
+                       +%+***************************+@
+                       +@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+"""
+def store():
+    print("Welcome to The Store!")
+    print(f"You have a base of - Snacks: {supplies.snacks}, Medicine: {supplies.medicine}, Fuel: {car.fuel} of {car.gas_tank_size}, Car Health: {car.health}, Phone Charge: {car.passengers[0].phone_battery}%")
+    print(f"You have {supplies.money} to spend on anything else")
+    print("1. Snacks ($5 each)   2. Medicine ($20 each)   3. Gas ($15 for 1/4 tank)")
+    print("4. Car Health (25 Health for $50 each)   5. Phone Battery (25 Percent is $5 each)   6. Leave")
+    while True:
+        choice = input("Choice (1-6): ")
+        if choice == "1":
+            amount = int(input("How many? ") or 0)
+            if supplies.get_money() >= amount * 5:
+                supplies.spend_money(amount * 5)
+                supplies.add_snacks(amount)
+                print(f"Bought {amount} snacks")
+            else: print("Not enough $")
+        elif choice == "2":
+            amount = int(input("How many? ") or 0)
+            if supplies.get_money() >= amount * 20:
+                supplies.spend_money(amount * 20)
+                supplies.medicine += amount
+                print(f"Bought {amount} medicine")
+            else: print("Not enough $")
+        elif choice == "3":
+            amount = int(input("How many? ") or 0)
+            if supplies.get_money() >= amount * 15:
+                supplies.spend_money(amount * 15)
+                #car.fuel = car.gas_tank_size
+                car.fuel += amount * 5
+                print(gas_pump)
+                print(f"Tank filled to {car.fuel}!")
+            else: print("Not enough $")
+        elif choice == "4":
+            amount = int(input("How many? ") or 0)
+            if supplies.get_money() >= amount * 50:
+               supplies.spend_money(amount * 50)
+               car.set_health(25 * amount)
+            print(f"Car health → {car.get_health()}")
+            if car.health > 100:
+                car.health = 100
+                print(f"Car health → {car.get_health()}")
+        elif choice == "5":
+            amount = int(input("How many? ") or 0)
+            if supplies.get_money() >= amount * 5:
+                supplies.spend_money(amount * 5)
+                for passenger in car.passengers:
+                    passenger.phone_battery += (25 * amount)
+                    if passenger.phone_battery > 100:
+                        passenger.phone_battery = 100
+            else: print("Not enough $")
+        elif choice == "6":
+            print("Leaving The Store!\n")
+            break
+store()
+print(f"Snacks: {supplies.snacks}, Medicine: {supplies.medicine}, Fuel: {car.fuel}, Car Health: {car.health}, Phone Charge: {car.passengers[0].phone_battery}%")
+time.sleep(3)
+
 #Packages
+'''
 package1 = ['15 packs of snacks', 'phone charged to 75%', 'car health 100']
 package2 = ['25 packs of snacks', 'phone charged to 25%', 'car health 50']
 package3 = ['50 packs of snacks', 'phone charged to 50%', 'car health 25']
@@ -438,6 +535,7 @@ def set_package(input):
     car.reduce_health(75)
 set_package(selection)
 print(f"Snacks: {supplies.get_snacks()}, Phone Charge: {car.passengers[0].get_phone_battery()}%, Car Health: {car.get_health()}%")
+'''
 
 #Game Begins
 ascii_art_begin = r"""
@@ -570,7 +668,7 @@ game_over_screen = r"""
 ..............................................................................................................................................................................
 """
 #Item Use / Selection / and Game Checks and Functionality
-event_list = [Events.car_sick, Events.fever, Events.use_phone, Events.object_in_road]
+event_list = [Events.car_sick, Events.fever, Events.use_phone, Events.object_in_road, Events.flat_tire]
 def run_event():
     chosen_event = random.choice(event_list)
     chosen_event()
@@ -578,6 +676,7 @@ def run_event():
 #Rest Stops Function
 def rest_stop():
     print("You pull over at a gas station / rest area!")
+    print(f"You have {supplies.money} to spend")
     print("1. Snacks ($5 each)   2. Medicine ($20)   3. Gas ($60 full tank)")
     print("4. Repair car ($50 → +40 health)   5. Rest & charge phones   6. Leave")
     while True:
@@ -599,6 +698,7 @@ def rest_stop():
         elif choice == "3" and supplies.get_money() >= 60:
             supplies.spend_money(60)
             car.fuel = car.gas_tank_size
+            print(gas_pump)
             print("Tank filled!")
         elif choice == "4" and supplies.get_money() >= 50:
             supplies.spend_money(50)
@@ -650,41 +750,45 @@ def passenger_item_use(choice):
         case 1:
             print("1. Snacks")
             print("2. Medicine")
-            selection = int(input(f"Which item would you like to give to {car.passengers[0].get_name()}?"))
+            selection = int(input(f"Which item would you like to give to {car.passengers[0].get_name()}? "))
             selected_passenger = car.passengers[0]
             supply_selection(selection, selected_passenger)
         case 2:
             print("1. Snacks")
             print("2. Medicine")
-            selection = int(input(f"Which item would you like to give to {car.passengers[1].get_name()}?"))
+            selection = int(input(f"Which item would you like to give to {car.passengers[1].get_name()}? "))
             selected_passenger = car.passengers[1]
             supply_selection(selection, selected_passenger)
         case 3:
             print("1. Snacks")
             print("2. Medicine")
-            selection = int(input(f"Which item would you like to give to {car.passengers[2].get_name()}?"))
+            selection = int(input(f"Which item would you like to give to {car.passengers[2].get_name()}? "))
             selected_passenger = car.passengers[2]
             supply_selection(selection, selected_passenger)
         case 4:
             print("1. Snacks")
             print("2. Medicine")
-            selection = int(input(f"Which item would you like to give to {car.passengers[3].get_name()}?"))
+            selection = int(input(f"Which item would you like to give to {car.passengers[3].get_name()}? "))
             selected_passenger = car.passengers[3]
             supply_selection(selection, selected_passenger)
 
 def game_check():
+    #Check if Hunger is Low
+    for passenger in car.passengers:
+        if passenger.get_hunger() < 15:
+            print(f"{passenger.get_name()} is hungry. Please feed them.")
     #Check if Passenger has starved
     for passenger in car.passengers:
-        if passenger.get_hunger() <= 0:
-            passenger.set_status("Dead")
+        if passenger.get_hunger() <= 0 and passenger.get_status() != 'DEAD':
+            passenger.set_status("DEAD")
             print(f"{passenger.get_name()} has died of starvation.")
     #Check Passenger with Fever
     for passenger in car.passengers:
         if passenger.get_status() == "Fever":
             passenger.fever_counter()
-            if passenger.get_fever_days() > 4:
+            if passenger.get_fever_days() > 4 and passenger.get_status() != 'DEAD':
+                passenger.set_status("DEAD")
                 print(f"{passenger.get_name()} has died from their fever.")
-                passenger.set_status("Dead")
     #Check if Vehicle is Dead or out of fuel
     if car.get_health() <= 0 or car.get_fuel() <= 0:
         print("Your vehicle is no longer operable! Game Over.")
@@ -692,7 +796,7 @@ def game_check():
         sys.exit()
     dead_count = 0
     for passenger in car.passengers:
-        if passenger.get_status() == "Dead":
+        if passenger.get_status() == "DEAD":
             dead_count += 1
     if dead_count == 4:
         print("All Passengers have died! Game Over.")
@@ -709,6 +813,7 @@ Montana_Plains = r"""
 |   M O N T A N A   |
 |___________________|
 """
+
 Idaho_Mountains = r"""
    /\           /\
   /  \         /  \
@@ -718,6 +823,7 @@ Idaho_Mountains = r"""
 |    I D A H O       |
 |____________________|
 """
+
 Oregon_Forest = r"""
    ^    ^    ^   ^  
   ^^   ^^   ^^  ^^  
@@ -726,19 +832,22 @@ Oregon_Forest = r"""
 |     B E N D      |
 |__________________|
 """
+
 #Running a Test for the Game Loop
 while True:
     #Simulate driving a certain amount of miles
     for passenger in car.passengers:
-        passenger.reduce_hunger(10)
+        if passenger.get_status() != "DEAD":
+            passenger.reduce_hunger(10)
     animate_car(loops = 3, speed = 0.2)
-    car.use_fuel(1)
-    car.drive_miles(25)
+    car.use_fuel(2)
+    car.drive_miles(40)
     game_check()
     if random.random() < 0.75:
         run_event()
+    game_check()
 
-    miles = car.get_miles_driven()
+    miles = car.miles_driven
     if miles in [250, 500, 750, 950]:   # You can adjust these
         locations = {
             250: "Butte, Montana – Big Sky Country Rest Stop",
@@ -770,17 +879,17 @@ while True:
                 case 2: #Allows you to use an item
                     print("\n")
                     print(supplies)
-                    if car.passengers[0].get_status() != "Dead":
+                    if car.passengers[0].get_status() != "DEAD":
                         print(f"1. {car.passengers[0].get_name()}")
-                    if car.passengers[1].get_status() != "Dead":
+                    if car.passengers[1].get_status() != "DEAD":
                         print(f"2. {car.passengers[1].get_name()}")
-                    if car.passengers[2].get_status() != "Dead":
+                    if car.passengers[2].get_status() != "DEAD":
                         print(f"3. {car.passengers[2].get_name()}")
-                    if car.passengers[3].get_status() != "Dead":
+                    if car.passengers[3].get_status() != "DEAD":
                         print(f"4. {car.passengers[3].get_name()}")
                     #try and except will catch any invalid inputs when choosing a passenger
                     try:
-                        choice = int(input("Which passenger would you like to give an item to? (1-4):"))
+                        choice = int(input("Which passenger would you like to give an item to? (1-4): "))
                         print("\n")
                         passenger_item_use(choice)
                         continue #Restarts the inner loop after using an item
@@ -791,57 +900,4 @@ while True:
         except ValueError:
             print("Invalid Input")
 
-
-#Ending
-game_over_screen = r"""
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-.........................-------:.......-------....---......---....:---------:....................-------.....:--:....---:...-----------....:--------.........................
-.......................:=@@***#%#=....-=@%#**@@--.-@@@==..-=@@@-...@@@%****##*..................==@%***%%=-...-%@@:...@@@=...@@@@*******...:%@@#***@%-:.......................
-.......................+@@@...:***:.. @@@#...@@@@.-@@@@@--%@@@@-...@@@%.........................@@@%...#@@@...-%@@:...@@@=...@@@@..........:%@@-...@@@+.......................
-.......................+@@@..+++++... @@@%+++@@@@.-@@@++@@++@@@-...@@@%+++......................@@@%...#@@@ ..-@@@:...@@@=...@@@@+++:......:%@@*+++@@+-.......................
-.......................+@@@..+*@@%:...@@@%+++@@@@.-@@@..++.:@@@-...@@@%+++......................@@@%...#@@@...:+%@++++@@+-...@@@@+++:......:%@@*+@@@@.........................
-.......................+@@@...-@@%:...@@@#...@@@@.-@@@.....:@@@-...@@@%.........................@@@%...%@@@.....#@@@@@@%.....@@@@..........:%@@-.=-@@*=.......................
-.......................:-@@**##@@@:...@@@#...@@@@.-@@@.....:@@@-...@@@%*******..................=-@@***%@=-.....--%@@%--.....@@@@*******...:%@@-...@@@+.......................
-.........................:--------....---:...----..---......---....-----------....................-------.........:--:.......:----------....---....---:.......................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-..............................................................................................................................................................................
-"""
+#Ending Screen With Stats Upon Completion

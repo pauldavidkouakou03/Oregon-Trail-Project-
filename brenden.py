@@ -50,7 +50,7 @@ game_over = r"""
 ..............................................................................................................................................................................
 ..............................................................................................................................................................................
 """
-print(game_over)
+#print(game_over)
 
 ascii_art = r"""
 --------------------------------------------------------------------------------------------------------------------------------------------
@@ -231,8 +231,8 @@ gas_pump = r"""
 #print(gas_pump)
 
 #Working on Stop System
-
-    # Fixed stops at certain milestones
+'''
+# Fixed stops at certain milestones
 miles = car.get_miles_driven()
 if miles in [250, 500, 750, 950]:   # You can adjust these
     locations = {
@@ -289,6 +289,93 @@ def rest_stop():
             print("Back on the road!\n")
 
 car.clear_passengers()
-for passenger in self.passengers:
-    if passenger.get_status() != 'dead':
+for passenger in car.passengers:
+    if passenger.get_status() != 'Dead':
         car.add_passenger(passenger)
+'''
+def set_package(input):
+  if input == 1:
+   for passenger in car.passengers:
+       passenger.reduce_phone_battery(25)
+   supplies.add_snacks(15)
+  elif input == 2:
+    for passenger in car.passengers:
+       passenger.reduce_phone_battery(75)
+    supplies.add_snacks(25)
+    car.reduce_health(50)
+  elif input == 3:
+    for passenger in car.passengers:
+       passenger.reduce_phone_battery(50)
+    supplies.add_snacks(50)
+    car.reduce_health(75)
+
+def store():
+    print("You pull over at a gas station / rest area!")
+    print("You have $500 to spend")
+    print("1. Snacks ($5 each)   2. Medicine ($20 each)   3. Gas ($15 for 1/4 tank)")
+    print("4. Car Health (25 Health for $50 each)   5. Phone Battery (25 Percent is $5 each)   6. Leave")
+    while True:
+        choice = input("Choice (1-6): ")
+        if choice == "1":
+            amount = int(input("How many? ") or 0)
+            if supplies.get_money() >= amount * 5:
+                supplies.spend_money(amount * 5)
+                supplies.add_snacks(amount)
+                print(f"Bought {amount} snacks")
+            else: print("Not enough $")
+        elif choice == "2":
+            amount = int(input("How many? ") or 0)
+            if supplies.get_money() >= amount * 20:
+                supplies.spend_money(amount * 20)
+                supplies.medicine += amount
+                print(f"Bought {amount} medicine")
+            else: print("Not enough $")
+        elif choice == "3":
+            amount = int(input("How many? ") or 0)
+            if supplies.get_money() >= amount * 15:
+                supplies.spend_money(amount * 15)
+                #car.fuel = car.gas_tank_size
+                car.fuel += amount * 5
+                print(gas_pump)
+                print("Tank filled!")
+            else: print("Not enough $")
+        elif choice == "4":
+            amount = int(input("How many? ") or 0)
+            if supplies.get_money() >= amount * 50:
+               supplies.spend_money(amount * 50)
+               car.set_health(25 * amount)
+            print(f"Car health → {car.get_health()}")
+            if car.health > 100:
+                car.health = 100
+                print(f"Car health → {car.get_health()}")
+        elif choice == "5":
+            amount = int(input("How many? ") or 0)
+            if supplies.get_money() >= amount * 5:
+                supplies.spend_money(amount * 5)
+                for passenger in car.passengers:
+                    passenger.phone_battery += (25 * amount)
+                    if passenger.phone_battery > 100:
+                        passenger.phone_battery = 100
+            else: print("Not enough $")
+        elif choice == "6":
+            print("Leaving The Store!\n")
+            break
+
+snacks = 5
+deaths = 2
+
+new_file = open('game_stats.txt', 'w')
+new_file.write(f'{player_name} | Death Count: {dead_count} | Car Health: {car.health} | Fuel: {car.fuel} | Money: ${supplies.money} | Snacks: {supplies.snacks}')
+new_file.close()
+
+
+#Stats Page
+with open("game_stats.txt", "a", encoding="utf-8") as f:
+    # Count how many plays we already have
+    try:
+        plays_so_far = len(open("game_stats.txt").readlines())
+    except:
+        plays_so_far = 0
+    
+    # Write the new line with the next number
+    f.write(f"{plays_so_far + 1}. Score: {score} | Level: {level} | Time: {time_played}s\n")
