@@ -373,6 +373,8 @@ class Passenger:
         return self.fever_days
     def reduce_phone_battery(self, reduction):
         self.phone_battery -= reduction
+    def get_battery(self):
+        return self.phone_battery
     def __str__(self):
         return f"Name: {self.name}, Status: {self.status}, Hunger: {self.hunger} Phone Battery: {self.phone_battery}"
 class Supplies:
@@ -446,8 +448,11 @@ class Events:
                 print("You failed to fix the tire, damaging the car.")
                 car.reduce_health(25)
         elif user_input == "c":
-            print("You called for roadside assistance, spending some money.")
-            supplies.spend_money(30)
+            if supplies.get_money() < 30:
+                print("Not enough money to call for roadside assistance.")
+            else:
+                print("You called for roadside assistance, spending some money.")
+                supplies.spend_money(30)
 #Creating Objects
 car = Vehicle()
 supplies = Supplies()
