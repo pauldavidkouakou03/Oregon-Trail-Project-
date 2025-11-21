@@ -870,36 +870,6 @@ def game_check():
         save_game_log()
         sys.exit()
 
-Montana_Plains = r"""
-      ,--.
-     |   |    ___
-     |   |   /   \
-     |   |  |     |
-  ___|   |__ \___/
- /           \
-|   M O N T A N A   |
-|___________________|
-"""
-
-Idaho_Mountains = r"""
-   /\           /\
-  /  \         /  \
- /    \   _   /    \
-/      \_/ \_/      \
-|                    |
-|    I D A H O       |
-|____________________|
-"""
-
-Oregon_Forest = r"""
-   ^    ^    ^   ^  
-  ^^   ^^   ^^  ^^  
- ^^^  ^^^  ^^^ ^^^ 
-^^^^^^^^^^^^^^^^ ^^^
-|     B E N D      |
-|__________________|
-"""
-
 #Running a Test for the Game Loop
 while True:
     #Simulate driving a certain amount of miles
