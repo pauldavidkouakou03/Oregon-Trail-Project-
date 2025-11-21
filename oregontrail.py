@@ -738,7 +738,7 @@ def rest_stop():
         elif choice == "5":
             for passenger in car.passengers:
                 if passenger.get_status() != "Dead":
-                    passenger.increase_hunger(15)
+                    passenger.increase_hunger(25)
                     passenger.phone_battery += 25
                     if passenger.phone_battery > 100:
                         passenger.phone_battery = 100
