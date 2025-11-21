@@ -462,7 +462,6 @@ car.add_passenger(Passenger('Bob'))
 
 def save_game_log():
     new_file = open('game_log.txt', 'w')
-    #new_file.write(f'{player_name} | Death Count: {dead_count} | Car Health: {car.health} | Fuel: {car.fuel} | Money: ${supplies.money} | Snacks: {supplies.snacks}')
     new_file.write("=============== OREGON TRAIL MODERN ROAD TRIP - LAST TRIP REPORT ===============\n")
     new_file.write(f"Miles Driven: {car.miles_driven}/1000\n")
     if car.miles_driven >= 1000:
@@ -490,4 +489,5 @@ def save_game_log():
             condition = "Survived"
         new_file.write(f"{passenger.get_name():<12} {passenger.status:<16} {passenger.get_hunger():<17} {passenger.get_phone_battery():<18} {condition}\n")
     new_file.write("=" * 80 + "\n")
+    new_file.close()
 save_game_log()
