@@ -906,6 +906,7 @@ while True:
         rest_stop()
         if miles >= 1000:
             save_game_log()
+            time.sleep(2)
     while True:
         print("\n")
         print(f"Miles Left: {1000 - car.get_miles_driven()}")
