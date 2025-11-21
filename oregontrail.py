@@ -878,7 +878,7 @@ while True:
     game_check()
 
     miles = car.miles_driven
-    if miles in [250, 500, 750, 950]:   # You can adjust these
+    if miles in [250, 500, 750, 950]:
         locations = {
             250: "Butte, Montana – Big Sky Country Rest Stop",
             500: "Boise, Idaho – Capital City Gas & Snacks",
@@ -897,7 +897,7 @@ while True:
             print(Oregon_Forest)
         rest_stop()
     while True:
-        print("\n") #Add space for readability
+        print("\n")
         print(f"Miles Left: {1000 - car.get_miles_driven()}")
         print("1. View Stats")
         print("2. Use Item")
