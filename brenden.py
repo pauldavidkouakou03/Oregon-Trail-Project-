@@ -456,12 +456,15 @@ class Supplies:
 car = Vehicle()
 supplies = Supplies()
 car.add_passenger(Passenger('Bob'))
+car.add_passenger(Passenger('Bob'))
+car.add_passenger(Passenger('Bob'))
+car.add_passenger(Passenger('Bob'))
 
 def save_game_log():
     new_file = open('game_log.txt', 'w')
     #new_file.write(f'{player_name} | Death Count: {dead_count} | Car Health: {car.health} | Fuel: {car.fuel} | Money: ${supplies.money} | Snacks: {supplies.snacks}')
-    new_file.write("=== OREGON TRAIL MODERN ROAD TRIP - LAST TRIP REPORT ===\n")
-    new_file.write(f"Miles Driven: {car.miles_driven}\n")
+    new_file.write("=============== OREGON TRAIL MODERN ROAD TRIP - LAST TRIP REPORT ===============\n")
+    new_file.write(f"Miles Driven: {car.miles_driven}/1000\n")
     if car.miles_driven >= 1000:
         outcome = "You made it all the way to Bend, Oregon"
     else:
@@ -469,8 +472,9 @@ def save_game_log():
     new_file.write(f"Outcome: {outcome}\n")
     new_file.write(f"End Fuel: {car.fuel}/{car.gas_tank_size}    End Car Health: {car.health}/100\n")
     new_file.write(f"Money Left: {supplies.money}\n")
+    new_file.write("\nPASSENGER STATS\n")
     new_file.write("-" * 80 + "\n")
-    new_file.write(f"{'Name':<12} {'Status':<10} {'Hunger':<8} {'Phone Battery':<15} {'Final Condition'}\n")
+    new_file.write(f"{'Name':<12} {'Status':<15} {'Hunger':<13} {'Phone Battery':<20} {'Final Condition'}\n")
     new_file.write("-" * 80 + "\n")
     for passenger in car.passengers:
         if passenger.status == "DEAD":
@@ -484,5 +488,6 @@ def save_game_log():
             condition = "Recovered"
         else:
             condition = "Survived"
-        new_file.write(f"{passenger.get_name():<12} {passenger.status:<11} {passenger.get_hunger():<12} {passenger.get_phone_battery():<13} {condition}\n")
+        new_file.write(f"{passenger.get_name():<12} {passenger.status:<16} {passenger.get_hunger():<17} {passenger.get_phone_battery():<18} {condition}\n")
+    new_file.write("-" * 80 + "\n")
 save_game_log()
