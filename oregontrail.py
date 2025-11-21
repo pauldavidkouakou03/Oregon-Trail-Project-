@@ -382,7 +382,7 @@ class Supplies:
     def __init__(self):
         self.snacks = 0
         self.medicine = 0
-        self.money = 500
+        self.money = 1000
     def get_snacks(self):
         return self.snacks
     def add_snacks(self, amount):
