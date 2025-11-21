@@ -794,6 +794,37 @@ def passenger_item_use(choice):
             selected_passenger = car.passengers[3]
             supply_selection(selection, selected_passenger)
 
+def save_game_log():
+    new_file = open('game_log.txt', 'w')
+    new_file.write("=============== OREGON TRAIL MODERN ROAD TRIP - LAST TRIP REPORT ===============\n")
+    new_file.write(f"Miles Driven: {car.miles_driven}/1000\n")
+    if car.miles_driven >= 1000:
+        outcome = "You made it all the way to Bend, Oregon"
+    else:
+        outcome = "Sorry you were unsuccessful to make it all the way to Bend, Oregon"
+    new_file.write(f"Outcome: {outcome}\n")
+    new_file.write(f"End Fuel: {car.fuel}/{car.gas_tank_size}    End Car Health: {car.health}/100\n")
+    new_file.write(f"Money Left: {supplies.money}\n")
+    new_file.write("\nPASSENGER STATS\n")
+    new_file.write("=" * 80 + "\n")
+    new_file.write(f"{'Name':<12} {'Status':<15} {'Hunger':<13} {'Phone Battery':<20} {'Final Condition'}\n")
+    new_file.write("=" * 80 + "\n")
+    for passenger in car.passengers:
+        if passenger.status == "DEAD":
+            if passenger.hunger <= 0:
+                condition = "Starved"
+            elif passenger.fever_days > 4:
+                condition = "Succumbed"
+        elif passenger.status == "Fever":
+            condition = "Recovered"
+        elif passenger.status == "Car Sick":
+            condition = "Recovered"
+        else:
+            condition = "Survived"
+        new_file.write(f"{passenger.get_name():<12} {passenger.status:<16} {passenger.get_hunger():<17} {passenger.get_phone_battery():<18} {condition}\n")
+    new_file.write("=" * 80 + "\n")
+    new_file.close()
+
 def game_check():
     #Check if Hunger is Low
     for passenger in car.passengers:
@@ -815,10 +846,12 @@ def game_check():
     if car.get_health() <= 0:
         print("Your vehicle is no longer operable! Game Over.")
         slow_print(game_over_screen, 0.07)
+        save_game_log()
         sys.exit()
     if car.get_fuel() <= 0:
         print("You have run out of fuel! Game Over.")
         slow_print(game_over_screen, 0.07)
+        save_game_log()
         sys.exit()
     #Check if all Passengers are Dead
     dead_count = 0
@@ -828,6 +861,7 @@ def game_check():
     if dead_count == 4:
         print("All Passengers have died! Game Over.")
         slow_print(game_over_screen, 0.07)
+        save_game_log()
         sys.exit()
 
 Montana_Plains = r"""
@@ -893,6 +927,8 @@ while True:
         elif 950 < miles < 1000:
             print(Oregon_Forest)
         rest_stop()
+        if miles >= 1000:
+            save_game_log()
     while True:
         print("\n")
         print(f"Miles Left: {1000 - car.get_miles_driven()}")
