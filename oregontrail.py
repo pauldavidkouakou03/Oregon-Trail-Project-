@@ -876,7 +876,7 @@ while True:
     if random.random() < 0.75:
         run_event()
     game_check()
-
+    
     miles = car.miles_driven
     if miles in [250, 500, 750, 950]:
         locations = {

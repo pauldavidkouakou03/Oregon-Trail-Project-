@@ -293,6 +293,7 @@ for passenger in car.passengers:
     if passenger.get_status() != 'Dead':
         car.add_passenger(passenger)
 '''
+'''
 def set_package(input):
   if input == 1:
    for passenger in car.passengers:
@@ -363,8 +364,125 @@ def store():
 
 snacks = 5
 deaths = 2
+'''
+class Vehicle:
+    def __init__(self):
+        self.health = 25
+        self.fuel = 5
+        self.gas_tank_size = 20
+        self.passengers = []
+        self.miles_driven = 0
+    def get_health(self):
+        return self.health
+    def set_health(self, health):
+        self.health = health
+    def reduce_health(self, reduction):
+        self.health -= reduction
+    def use_fuel(self, reduction):
+        self.fuel -= reduction
+    def get_fuel(self):
+        return self.fuel
+    def get_miles_driven(self):
+        return self.miles_driven
+    def drive_miles(self, miles):
+        self.miles_driven += miles
+    def __str__(self):
+        return f"Vechicle Health: {self.health}, Gas: {self.fuel}"
+    def add_passenger(self, passenger):
+        self.passengers.append(passenger)
+    def show_passengers(self):
+        for passenger in self.passengers:
+            print(passenger.get_name())
+class Passenger:
+    def __init__ (self, name):
+        self.name = name
+        self.status = "Healthy"
+        self.hunger = 100
+        self.phone_battery = 25
+        self.fever_days = 0
+    
+    def get_name(self):
+        return self.name
+    def set_name(self, new_name):
+        self.name = new_name
+    def get_status(self):
+        return self.status
+    def set_status(self, new_status):
+        self.status = new_status
+    def get_hunger(self):
+        return self.hunger
+    def get_phone_battery(self):
+        return self.phone_battery
+    def reduce_hunger(self, reduction):
+        self.hunger -= reduction
+    def increase_hunger(self, increase):
+        self.hunger += increase
+    def fever_counter(self):
+        self.fever_days += 1
+    def reset_fever_counter(self):
+        self.fever_days = 0
+    def get_fever_days(self):
+        return self.fever_days
+    def reduce_phone_battery(self, reduction):
+        self.phone_battery -= reduction
+    def __str__(self):
+        return f"Name: {self.name}, Status: {self.status}, Hunger: {self.hunger} Phone Battery: {self.phone_battery}"
+class Supplies:
+    def __init__(self):
+        self.snacks = 0
+        self.medicine = 0
+        self.money = 500
+    def get_snacks(self):
+        return self.snacks
+    def add_snacks(self, amount):
+        self.snacks += amount
+    def get_money(self):
+        return self.money
+    def get_medicine(self):
+        return self.medicine
+    def use_snack(self):
+        if self.snacks > 0:
+            self.snacks -= 1
+    def use_medicine(self):
+        if self.medicine > 0:
+            self.medicine -= 1
+    def spend_money(self, amount):
+        if self.money > 0:
+            self.money -= amount
+    
+    def __str__(self):
+        return f"Supplies - Snacks: {self.snacks}, Medicine: {self.medicine}, Money: {self.money}"
+    
+car = Vehicle()
+supplies = Supplies()
+car.add_passenger(Passenger('Bob'))
 
-new_file = open('game_stats.txt', 'w')
-new_file.write(f'{player_name} | Death Count: {dead_count} | Car Health: {car.health} | Fuel: {car.fuel} | Money: ${supplies.money} | Snacks: {supplies.snacks}')
-new_file.close()
-
+def save_game_log():
+    new_file = open('game_log.txt', 'w')
+    #new_file.write(f'{player_name} | Death Count: {dead_count} | Car Health: {car.health} | Fuel: {car.fuel} | Money: ${supplies.money} | Snacks: {supplies.snacks}')
+    new_file.write("=== OREGON TRAIL MODERN ROAD TRIP - LAST TRIP REPORT ===\n")
+    new_file.write(f"Miles Driven: {car.miles_driven}\n")
+    if car.miles_driven >= 1000:
+        outcome = "You made it all the way to Bend, Oregon"
+    else:
+        outcome = "Sorry you were unsuccessful to make it all the way to Bend, Oregon"
+    new_file.write(f"Outcome: {outcome}\n")
+    new_file.write(f"End Fuel: {car.fuel}/{car.gas_tank_size}    End Car Health: {car.health}/100\n")
+    new_file.write(f"Money Left: {supplies.money}\n")
+    new_file.write("-" * 80 + "\n")
+    new_file.write(f"{'Name':<12} {'Status':<10} {'Hunger':<8} {'Phone Battery':<15} {'Final Condition'}\n")
+    new_file.write("-" * 80 + "\n")
+    for passenger in car.passengers:
+        if passenger.status == "DEAD":
+            if passenger.hunger < 0:
+                condition = "Starved"
+            elif passenger.fever_days > 4:
+                condition = "Succumbed"
+        elif passenger.status == "Fever":
+            condition = "Recovered"
+        elif passenger.status == "Car Sick":
+            condition = "Recovered"
+        else:
+            condition = "Survived"
+        new_file.write(f"{passenger.get_name():<12} {passenger.status:<11} {passenger.get_hunger():<12} {passenger.get_phone_battery():<13} {condition}\n")
+save_game_log()
