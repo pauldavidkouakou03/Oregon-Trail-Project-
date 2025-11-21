@@ -880,13 +880,13 @@ while True:
     animate_car(loops = 3, speed = 0.2)
     car.use_fuel(1)
     car.drive_miles(25)
-    game_check()
     if random.random() < 0.75:
         run_event()
     game_check()
     
     miles = car.miles_driven
     if miles in [250, 500, 750, 950]:
+        time.sleep(2)
         locations = {
             250: "Butte, Montana – Big Sky Country Rest Stop",
             500: "Boise, Idaho – Capital City Gas & Snacks",
