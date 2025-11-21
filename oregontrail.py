@@ -797,7 +797,7 @@ def passenger_item_use(choice):
 def game_check():
     #Check if Hunger is Low
     for passenger in car.passengers:
-        if passenger.get_hunger() < 15:
+         if passenger.get_status() != "DEAD" and passenger.get_hunger() < 15:
             print(f"{passenger.get_name()} is hungry. Please feed them.")
     #Check if Passenger has starved
     for passenger in car.passengers:
