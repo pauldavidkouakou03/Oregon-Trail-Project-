@@ -473,9 +473,9 @@ def save_game_log():
     new_file.write(f"End Fuel: {car.fuel}/{car.gas_tank_size}    End Car Health: {car.health}/100\n")
     new_file.write(f"Money Left: {supplies.money}\n")
     new_file.write("\nPASSENGER STATS\n")
-    new_file.write("-" * 80 + "\n")
+    new_file.write("=" * 80 + "\n")
     new_file.write(f"{'Name':<12} {'Status':<15} {'Hunger':<13} {'Phone Battery':<20} {'Final Condition'}\n")
-    new_file.write("-" * 80 + "\n")
+    new_file.write("=" * 80 + "\n")
     for passenger in car.passengers:
         if passenger.status == "DEAD":
             if passenger.hunger < 0:
@@ -489,5 +489,5 @@ def save_game_log():
         else:
             condition = "Survived"
         new_file.write(f"{passenger.get_name():<12} {passenger.status:<16} {passenger.get_hunger():<17} {passenger.get_phone_battery():<18} {condition}\n")
-    new_file.write("-" * 80 + "\n")
+    new_file.write("=" * 80 + "\n")
 save_game_log()
