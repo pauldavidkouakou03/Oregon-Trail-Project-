@@ -1,3 +1,4 @@
+#Created By Brenden, Aidan, and Paul
 #Here is our code for amazing Oregon Trail Game
 #Slow Print Function
 def slow_print(ascii_art,speed):
