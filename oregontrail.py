@@ -546,7 +546,7 @@ def store():
             print("Leaving The Store!\n")
             break
 store()
-print(f"Snacks: {supplies.snacks}, Medicine: {supplies.medicine}, Fuel: {car.fuel}, Car Health: {car.health}, Phone Charge: {car.passengers[0].phone_battery}%")
+print(f"You have - Money Left: {supplies.money}, Snacks: {supplies.snacks}, Medicine: {supplies.medicine}, Fuel: {car.fuel}, Car Health: {car.health}, Phone Charge: {car.passengers[0].phone_battery}%")
 time.sleep(3)
 
 #Packages
@@ -703,6 +703,7 @@ def run_event():
 
 #Rest Stops Function
 def rest_stop():
+    print(f"You have - Money Left: {supplies.money}, Snacks: {supplies.snacks}, Medicine: {supplies.medicine}, Fuel: {car.fuel}, Car Health: {car.health}, Phone Charge: {car.passengers[0].phone_battery}%")
     print("You pull over at a gas station / rest area!")
     print(f"You have {supplies.money} to spend")
     print("1. Snacks ($5 each)   2. Medicine ($20)   3. Gas ($60 full tank)")
