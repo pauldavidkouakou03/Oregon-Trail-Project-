@@ -402,15 +402,13 @@ class Supplies:
         return f"Supplies - Snacks: {self.snacks}, Medicine: {self.medicine}, Money: {self.money}"
 class Events:
     def car_sick():
-        #selection = random.randint(0, 3)
         living = get_living_passengers()
         passenger = random.choice(living)
         if passenger.get_status() != "Car Sick" and "Fever" and "DEAD":
             passenger.set_status("Car Sick")
             print(f"{passenger.get_name()} has gotten car sick!")
 
-    def fever():
-        #selection = random.randint(0, 3)
+    def fever():  
         living = get_living_passengers()
         passenger = random.choice(living)
         if passenger.get_status() != "Fever" and "DEAD":
@@ -418,7 +416,6 @@ class Events:
             print(f"{passenger.get_name()} has gotten a Fever!")
 
     def use_phone():
-        #selection = random.randint(0, 3)
         living = get_living_passengers()
         passenger = random.choice(living)
         if passenger.get_status() != "DEAD":
@@ -870,7 +867,7 @@ while True:
         if passenger.get_status() != "DEAD":
             passenger.reduce_hunger(10)
     animate_car(loops = 3, speed = 0.2)
-    car.use_fuel(2)
+    car.use_fuel(1)
     car.drive_miles(25)
     game_check()
     if random.random() < 0.75:
