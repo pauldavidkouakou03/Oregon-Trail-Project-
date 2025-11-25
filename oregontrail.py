@@ -712,7 +712,7 @@ print("Starting engine... VROOM VROOM!\n")
 time.sleep(1)
 animate_car(loops = 3, speed = 0.15)
 #Item Use / Selection / and Game Checks and Functionality
-event_list = [Events.car_sick, Events.fever, Events.use_phone, Events.object_in_road, Events.flat_tire]
+event_list = [Events.car_sick, Events.fever, Events.use_phone, Events.object_in_road, Events.flat_tire, Events.storm_event]
 def run_event():
     chosen_event = random.choice(event_list)
     chosen_event()
@@ -891,7 +891,9 @@ def game_check():
 while True:
     #Simulate driving a certain amount of miles
     for passenger in car.passengers:
-        if passenger.get_status() != "DEAD":
+        if passenger.get_status() == "Car Sick":
+            passenger.reduce_hunger(20)
+        elif passenger.get_status() != "DEAD":
             passenger.reduce_hunger(10)
     animate_car(loops = 3, speed = 0.2)
     car.use_fuel(1)
@@ -961,6 +963,3 @@ while True:
             print("Invalid Input")
 
 #Ending Screen With Stats Upon Completion
-
-
-"hello world"
