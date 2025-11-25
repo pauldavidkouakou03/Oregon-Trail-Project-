@@ -108,11 +108,29 @@ class Events:
         if passengers[selection].get_status() != "Dead":
             passengers[selection].reduce_phone_battery(10)
             print(f"{passengers[selection].get_name()} used their phone.")
+    
+    def storm_event():
+        user_input = input("A storm is approaching! You can try to drive through it, however it is very dangerous, should we wait it out? (d (Drive) / w (Wait)): ")
+        try:
+            if user_input == "d":
+                chance = random.randint(1, 15)
+                if chance <= 14:
+                    print("You sucessfully drove through the storm!")
+                else:
+                    print("You got hit by a falling tree, the car was destroyed.")
+                    car.reduce_health(100)
+            else:
+                print("You waited out the storm, losing some time.")
+                car.drive_miles(-15)
+        except ValueError:
+            print("Invalid Input")
 
-    def weather_event():
-        chance = random.randint(1, 20)
-        if chance <= 5:
-            print("It has started raining! You slow down a little.")
+    def ():
+        user_input = input("")
+        try:
+            pass
+        except ValueError:
+            print("Invalid Input")
 
     def object_in_road():
         user_input = input("There is debris in the road! You can try to avoid it but it may damage the car.\n You could also take another way, but you will lose distance on your destination. (y (Avoid) / n (Detour)): ")
@@ -177,7 +195,7 @@ class Events:
 
             
 #Event Testing
-event_list = [Events.flat_tire, Events.object_in_road, Events.car_sick, Events.fever, Events.use_phone, Events.weather_event]
+event_list = [Events.flat_tire, Events.object_in_road, Events.car_sick, Events.fever, Events.use_phone, Events.storm_event]
 def run_event():
     chosen_event = random.choice(event_list)
     chosen_event()
