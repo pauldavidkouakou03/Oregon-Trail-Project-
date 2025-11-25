@@ -425,6 +425,22 @@ class Events:
             if passenger.phone_battery != 0:
                 passenger.reduce_phone_battery(10)
                 print(f"{passenger.get_name()} used their phone.")
+
+    def storm_event():
+        user_input = input("A storm is approaching! You can try to drive through it, however it is very dangerous, should we wait it out? (d (Drive) / w (Wait)): ")
+        try:
+            if user_input == "d":
+                chance = random.randint(1, 15)
+                if chance <= 14:
+                    print("You sucessfully drove through the storm!")
+                else:
+                    print("You got hit by a falling tree, the car was destroyed.")
+                    car.reduce_health(100)
+            else:
+                print("You waited out the storm, losing some time.")
+                car.drive_miles(-15)
+        except ValueError:
+            print("Invalid Input")
     
     def object_in_road():
         user_input = input("There is debris in the road! You can try to avoid it but it may damage the car.\n You could also take another way, but you will lose distance on your destination. (y (Avoid) / n (Detour)): ")
