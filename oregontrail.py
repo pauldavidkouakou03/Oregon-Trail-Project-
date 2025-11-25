@@ -374,6 +374,8 @@ class Passenger:
         return self.fever_days
     def reduce_phone_battery(self, reduction):
         self.phone_battery -= reduction
+        if self.phone_battery < 0:
+            self.phone_battery = 0
     def get_battery(self):
         return self.phone_battery
     def __str__(self):
@@ -507,6 +509,7 @@ while correct_names != 'y':
     car.show_passengers()
     correct_names = input("Is this correct? (y/n): ")
     print("")
+
 #Store
 def store():
     print("Welcome to The Store!")
