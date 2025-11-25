@@ -108,6 +108,15 @@ class Events:
         if passengers[selection].get_status() != "Dead":
             passengers[selection].reduce_phone_battery(10)
             print(f"{passengers[selection].get_name()} used their phone.")
+
+    '''
+    def ():
+        user_input = input("")
+        try:
+            pass
+        except ValueError:
+            print("Invalid Input")
+    '''
     
     def storm_event():
         user_input = input("A storm is approaching! You can try to drive through it, however it is very dangerous, should we wait it out? (d (Drive) / w (Wait)): ")
@@ -122,13 +131,6 @@ class Events:
             else:
                 print("You waited out the storm, losing some time.")
                 car.drive_miles(-15)
-        except ValueError:
-            print("Invalid Input")
-
-    def ():
-        user_input = input("")
-        try:
-            pass
         except ValueError:
             print("Invalid Input")
 
