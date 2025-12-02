@@ -428,6 +428,31 @@ class Events:
                 passenger.reduce_phone_battery(10)
                 print(f"{passenger.get_name()} used their phone.")
 
+    def random_useless_events():
+        useless_events = (
+            "You pulled over and found a nice rock on the side of the road...",
+            "You saw a beautiful sunset as you drive...",
+            "You slowed down for a cow on the side of the road, it stared for an uncomfortably long time...",
+            "A tumbleweed blew dramatically across the road... nothing else happens...",
+            "You saw a billboard advertising snacks, makes you feel hungry...",
+            "You passed by another personal injury lawyer's billboard... wonder if they get many clients...",
+            "You saw a hitchhiker, but decide not to pick them up...",
+            "Somebody honked at you for no reason...",
+            "You pulled over and found a penny on the ground, you feel slightly lucky...",
+        )
+        print(random.choice(useless_events))
+
+    def two_person_useless_events():
+        living = get_living_passengers()
+        if len(living) >= 2:
+            passenger_pair = random.sample(living, 2)
+            two_person_events = (
+                f"({passenger_pair[0].get_name()} and {passenger_pair[1].get_name()}) had a deep conversation about life...",
+                f"({passenger_pair[0].get_name()} and {passenger_pair[1].get_name()}) had an argument about whether or not coffee is a good ice cream flavor...",
+                f"({passenger_pair[0].get_name()} and {passenger_pair[1].get_name()}) sang a song on the radio together...",
+            )
+            print(random.choice(two_person_events))
+
     def storm_event():
         user_input = input("A storm is approaching! You can try to drive through it, however it is very dangerous, should we wait it out? (d (Drive) / w (Wait)): ")
         try:
