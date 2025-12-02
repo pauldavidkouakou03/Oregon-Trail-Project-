@@ -129,6 +129,11 @@ class Events:
         living = get_living_passengers()
         if len(living) >= 2:
             passenger_pair = random.sample(living, 2)
+            two_person_events = (
+                f"({passenger_pair[0].get_name()} and {passenger_pair[1].get_name()}) had a deep conversation about life...",
+                f"({passenger_pair[0].get_name()} and {passenger_pair[1].get_name()}) had an argument about whether or not coffee is a good ice cream flavor...",
+                f"({passenger_pair[0].get_name()} and {passenger_pair[1].get_name()}) sang a song on the radio together...",
+            )
 
 
     def storm_event():
