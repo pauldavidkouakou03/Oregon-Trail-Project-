@@ -78,7 +78,8 @@ class Supplies:
     def __str__(self):
         return f"Supplies - Snacks: {self.snacks}, Medicine: {self.medicine}, Money: {self.money}"
     
-
+def get_living_passengers():
+    return [passenger for passenger in car.passengers if passenger.get_status() != 'Dead']
 
 
 driver = Passenger("Aidan", 100)
@@ -105,19 +106,31 @@ class Events:
     
     def use_phone():
         selection = random.randint(0, 3)
-        if passengers[selection].get_status() != "Dead":
+        if passengers[selection].get_status() != "Dead" and passengers[selection].get_battery() > 0:
             passengers[selection].reduce_phone_battery(10)
             print(f"{passengers[selection].get_name()} used their phone.")
 
-    '''
-    def ():
-        user_input = input("")
-        try:
-            pass
-        except ValueError:
-            print("Invalid Input")
-    '''
     
+    def random_useless_events():
+        useless_events = (
+            "You pulled over and found a nice rock on the side of the road...",
+            "You saw a beautiful sunset as you drive...",
+            "You slowed down for a cow on the side of the road, it stared for an uncomfortably long time...",
+            "A tumbleweed blew dramatically across the road... nothing else happens...",
+            "You saw a billboard advertising snacks, makes you feel hungry...",
+            "You passed by another personal injury lawyer's billboard... wonder if they get many clients...",
+            "You saw a hitchhiker, but decide not to pick them up...",
+            "Somebody honked at you for no reason...",
+            "You pulled over and found a penny on the ground, you feel slightly lucky...",
+        )
+        print(random.choice(useless_events))
+    
+    def two_person_useless_events():
+        living = get_living_passengers()
+        if len(living) >= 2:
+            passenger_pair = random.sample(living, 2)
+
+
     def storm_event():
         user_input = input("A storm is approaching! You can try to drive through it, however it is very dangerous, should we wait it out? (d (Drive) / w (Wait)): ")
         try:
@@ -197,7 +210,7 @@ class Events:
 
             
 #Event Testing
-event_list = [Events.flat_tire, Events.object_in_road, Events.car_sick, Events.fever, Events.use_phone, Events.storm_event]
+event_list = [Events.flat_tire, Events.object_in_road, Events.car_sick, Events.fever, Events.use_phone, Events.storm_event, Events.random_useless_events]
 def run_event():
     chosen_event = random.choice(event_list)
     chosen_event()
