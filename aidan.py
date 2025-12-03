@@ -79,7 +79,7 @@ class Supplies:
         return f"Supplies - Snacks: {self.snacks}, Medicine: {self.medicine}, Money: {self.money}"
     
 def get_living_passengers():
-    return [passenger for passenger in car.passengers if passenger.get_status() != 'Dead']
+    return [passenger for passenger in passengers if passenger.get_status() != 'Dead']
 
 
 driver = Passenger("Aidan", 100)
@@ -124,17 +124,30 @@ class Events:
             "You pulled over and found a penny on the ground, you feel slightly lucky...",
         )
         print(random.choice(useless_events))
+
+    def one_person_useless_events():
+        living = get_living_passengers()
+        if len(living) >= 2:
+            passenger = random.sample(living)
+            one_person_events = (
+                f"{passenger[0].get_name()} is wondering why ranch dressing isn't its own food group...",
+                f"{passenger[0].get_name()} is wondering if a straw has only one hole or two...",
+                f"{passenger[0].get_name()} is contemplating about if water is actually wet...",
+                
+            )
+        print(random.choice(one_person_events))
     
     def two_person_useless_events():
         living = get_living_passengers()
         if len(living) >= 2:
             passenger_pair = random.sample(living, 2)
             two_person_events = (
-                f"({passenger_pair[0].get_name()} and {passenger_pair[1].get_name()}) had a deep conversation about life...",
-                f"({passenger_pair[0].get_name()} and {passenger_pair[1].get_name()}) had an argument about whether or not coffee is a good ice cream flavor...",
-                f"({passenger_pair[0].get_name()} and {passenger_pair[1].get_name()}) sang a song on the radio together...",
+                f"{passenger_pair[0].get_name()} and {passenger_pair[1].get_name()} had a deep conversation about life...",
+                f"{passenger_pair[0].get_name()} and {passenger_pair[1].get_name()} had an argument about whether or not coffee is a good ice cream flavor...",
+                f"{passenger_pair[0].get_name()} and {passenger_pair[1].get_name()} sang a song on the radio together...",
+                f"{passenger_pair[0].get_name()} and {passenger_pair[1].get_name()} had an debate about whether or not a hot dog is a sandwich..."
             )
-
+        print(random.choice(two_person_events))
 
     def storm_event():
         user_input = input("A storm is approaching! You can try to drive through it, however it is very dangerous, should we wait it out? (d (Drive) / w (Wait)): ")
@@ -215,7 +228,8 @@ class Events:
 
             
 #Event Testing
-event_list = [Events.flat_tire, Events.object_in_road, Events.car_sick, Events.fever, Events.use_phone, Events.storm_event, Events.random_useless_events]
+#event_list = [Events.flat_tire, Events.object_in_road, Events.car_sick, Events.fever, Events.use_phone, Events.storm_event, Events.random_useless_events]
+event_list = [Events.random_useless_events, Events.two_person_useless_events]
 def run_event():
     chosen_event = random.choice(event_list)
     chosen_event()
