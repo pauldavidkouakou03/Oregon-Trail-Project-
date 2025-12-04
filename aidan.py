@@ -127,14 +127,13 @@ class Events:
 
     def one_person_useless_events():
         living = get_living_passengers()
-        if len(living) >= 2:
-            passenger = random.sample(living)
-            one_person_events = (
-                f"{passenger[0].get_name()} is wondering why ranch dressing isn't its own food group...",
-                f"{passenger[0].get_name()} is wondering if a straw has only one hole or two...",
-                f"{passenger[0].get_name()} is contemplating about if water is actually wet...",
+        passenger = random.sample(living)
+        one_person_events = (
+            f"{passenger[0].get_name()} is wondering why ranch dressing isn't its own food group...",
+            f"{passenger[0].get_name()} is wondering if a straw has only one hole or two...",
+            f"{passenger[0].get_name()} is contemplating about if water is actually wet...",
                 
-            )
+        )
         print(random.choice(one_person_events))
     
     def two_person_useless_events():
