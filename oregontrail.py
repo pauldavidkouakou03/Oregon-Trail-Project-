@@ -507,6 +507,16 @@ class Events:
         )
         print(random.choice(useless_events))
 
+    def one_person_useless_events():
+        living = get_living_passengers()
+        passenger = random.sample(living)
+        one_person_events = (
+            f"{passenger[0].get_name()} is wondering why ranch dressing isn't its own food group...",
+            f"{passenger[0].get_name()} is wondering if a straw has only one hole or two...",
+            f"{passenger[0].get_name()} is contemplating about if water is actually wet...",       
+        )
+        print(random.choice(one_person_events))
+
     def two_person_useless_events():
         living = get_living_passengers()
         if len(living) >= 2:
@@ -666,7 +676,7 @@ print("Starting engine... VROOM VROOM!\n")
 time.sleep(1)
 animate_car(loops = 3, speed = 0.15)
 #Item Use / Selection / and Game Checks and Functionality
-event_list = [Events.car_sick, Events.fever, Events.use_phone, Events.object_in_road, Events.flat_tire, Events.storm_event]
+event_list = [Events.car_sick, Events.fever, Events.use_phone, Events.object_in_road, Events.flat_tire, Events.storm_event, Events.random_useless_events, Events.one_person_useless_events, Events.two_person_useless_events]
 def run_event():
     chosen_event = random.choice(event_list)
     chosen_event()
