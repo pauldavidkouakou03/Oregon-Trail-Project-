@@ -931,7 +931,6 @@ while True:
                 case 1: #Shows All Stats
                     print_stats()
                     continue #Restarts the inner loop after viewing stats
-                #Note for Case 2, it does not check if the passenger is dead or not, only shows visually, will add a check to prevent that later
                 case 2: #Allows you to use an item
                     print("\n")
                     print(supplies)
