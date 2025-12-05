@@ -598,6 +598,8 @@ def find_passengers():
   car.add_passenger(Passenger(passenger2))
   passenger3 = input("Enter first name of third passenger: ")
   car.add_passenger(Passenger(passenger3))
+while ready != 'y':
+    ready = input("Are you ready to continue? (y/n): ")
 if ready == 'y':
   find_passengers()
 car.show_passengers()
