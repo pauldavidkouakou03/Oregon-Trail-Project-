@@ -8,8 +8,8 @@ PASSENGER STATS
 ================================================================================
 Name         Status          Hunger        Phone Battery        Final Condition
 ================================================================================
-a            DEAD             50                25                 Succumbed
-b            Healthy          50                5                  Survived
-c            Healthy          50                25                 Survived
+a            Healthy          50                25                 Survived
+b            Healthy          50                25                 Survived
+c            Car Sick         10                25                 Recovered
 d            Healthy          50                25                 Survived
 ================================================================================
