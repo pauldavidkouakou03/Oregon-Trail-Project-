@@ -127,7 +127,7 @@ class Events:
 
     def one_person_useless_events():
         living = get_living_passengers()
-        passenger = random.sample(living)
+        passenger = random.sample(living, 1)
         one_person_events = (
             f"{passenger[0].get_name()} is wondering why ranch dressing isn't its own food group...",
             f"{passenger[0].get_name()} is wondering if a straw has only one hole or two...",
@@ -228,7 +228,7 @@ class Events:
             
 #Event Testing
 #event_list = [Events.flat_tire, Events.object_in_road, Events.car_sick, Events.fever, Events.use_phone, Events.storm_event, Events.random_useless_events]
-event_list = [Events.random_useless_events, Events.two_person_useless_events]
+event_list = [Events.random_useless_events,Events.one_person_useless_events, Events.two_person_useless_events]
 def run_event():
     chosen_event = random.choice(event_list)
     chosen_event()
