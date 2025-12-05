@@ -1,15 +1,15 @@
 =============== OREGON TRAIL MODERN ROAD TRIP - LAST TRIP REPORT ===============
-Miles Driven: 0/1000
+Miles Driven: 125/1000
 Outcome: Sorry you were unsuccessful to make it all the way to Bend, Oregon
-End Fuel: 5/20    End Car Health: 25/100
-Money Left: 500
+End Fuel: 0/20    End Car Health: 25/100
+Money Left: 1000
 
 PASSENGER STATS
 ================================================================================
 Name         Status          Hunger        Phone Battery        Final Condition
 ================================================================================
-Bob          Healthy          100               25                 Survived
-Bob          Healthy          100               25                 Survived
-Bob          Healthy          100               25                 Survived
-Bob          Healthy          100               25                 Survived
+a            DEAD             50                25                 Succumbed
+b            Healthy          50                5                  Survived
+c            Healthy          50                25                 Survived
+d            Healthy          50                25                 Survived
 ================================================================================
